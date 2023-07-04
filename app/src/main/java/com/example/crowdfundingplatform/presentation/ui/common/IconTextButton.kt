@@ -40,10 +40,14 @@ fun IconTextButton(
         contentPadding = buttonContentPadding,
         shape = buttonShape,
         colors = ButtonDefaults.buttonColors(
-            containerColor = buttonColor, contentColor = buttonContentColor
+            containerColor = buttonColor,
+            contentColor = buttonContentColor
         )
     ) {
-        Text(text = text, style = buttonTextStyle)
+        Text(
+            text = text,
+            style = buttonTextStyle
+        )
         Icon(
             painter = icon,
             contentDescription = iconContentDescription,

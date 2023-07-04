@@ -16,8 +16,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.common.IconTextButton
+import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingButtonWeight
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingIconSize
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingIconSpacing
+import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingTitleWeight
 import com.example.crowdfundingplatform.presentation.ui.theme.Title
 
 @Composable
@@ -28,7 +30,7 @@ fun OnboardingScreen() {
         verticalArrangement = Arrangement.Center
     ) {
         Column(
-            modifier = Modifier.weight(2f),
+            modifier = Modifier.weight(OnboardingTitleWeight),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -46,7 +48,7 @@ fun OnboardingScreen() {
             )
         }
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(OnboardingButtonWeight),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {

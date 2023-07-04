@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.ui.theme
+package com.example.crowdfundingplatform.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

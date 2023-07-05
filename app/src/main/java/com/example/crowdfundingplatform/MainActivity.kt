@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.crowdfundingplatform.presentation.ui.navigation.Navigation
 import com.example.crowdfundingplatform.presentation.ui.screen.LoginScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.OnboardingScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.ProfileInfoScreen
@@ -18,9 +20,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CrowdfundingPlatformTheme {
+                val navController = rememberNavController()
                 val uiController = rememberSystemUiController()
                 uiController.setSystemBarsColor(MaterialTheme.colorScheme.background)
-                RegistrationCredentialsScreen()
+
+                Navigation(navController = navController)
             }
         }
     }
@@ -28,9 +32,9 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
+private fun LoginScreenPreview() {
     CrowdfundingPlatformTheme {
-        LoginScreen()
+        LoginScreen({}, {}, {})
     }
 }
 
@@ -40,7 +44,7 @@ private fun OnboardingPreview() {
     CrowdfundingPlatformTheme {
         val uiController = rememberSystemUiController()
         uiController.setSystemBarsColor(MaterialTheme.colorScheme.background)
-        OnboardingScreen()
+        OnboardingScreen {}        
     }
 }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="appName">CrowdfundingPlatform</string>
+    <string name="appName">Crowdfunding Platform</string>
     <string name="backButton">Back</string>
     <string name="registrationTitle">Create an Account</string>
     <string name="nameReq">Name*</string>

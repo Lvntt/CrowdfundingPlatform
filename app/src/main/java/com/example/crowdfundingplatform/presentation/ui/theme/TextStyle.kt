@@ -13,6 +13,12 @@ val Title = TextStyle(
     lineHeight = 64.sp
 )
 
+val Subtitle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 24.sp
+)
+
 val TextButtonMediumStyle = TextStyle(
     fontFamily = Ubuntu,
     fontWeight = FontWeight.Bold,
@@ -40,5 +46,11 @@ val LabelLightStyle = TextStyle(
 val LabelRegularStyle = TextStyle(
     fontFamily = Ubuntu,
     fontWeight = FontWeight.Normal,
+    fontSize = 16.sp
+)
+
+val LabelBoldStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
     fontSize = 16.sp
 )

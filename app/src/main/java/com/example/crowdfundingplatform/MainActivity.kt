@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.crowdfundingplatform.presentation.ui.screen.LoginScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.OnboardingScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.ProfileInfoScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.RegistrationCredentialsScreen
@@ -22,6 +23,14 @@ class MainActivity : ComponentActivity() {
                 RegistrationCredentialsScreen()
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    CrowdfundingPlatformTheme {
+        LoginScreen()
     }
 }
 

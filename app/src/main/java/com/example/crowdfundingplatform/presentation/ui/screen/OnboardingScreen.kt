@@ -23,7 +23,9 @@ import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingTitleWei
 import com.example.crowdfundingplatform.presentation.ui.theme.Title
 
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(
+    onContinueClick: () -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -54,7 +56,8 @@ fun OnboardingScreen() {
         ) {
             TextButton(
                 text = stringResource(id = R.string.onboardingButton),
-                icon = painterResource(id = R.drawable.double_arrow_right)
+                icon = painterResource(id = R.drawable.double_arrow_right),
+                onClick = onContinueClick
             )
         }
     }

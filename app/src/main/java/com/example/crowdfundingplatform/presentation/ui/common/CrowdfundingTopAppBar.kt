@@ -23,7 +23,7 @@ fun CrowdfundingTopAppBar(
     canNavigateBack: Boolean,
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateUp: () -> Unit = {}
+    onNavigateUp: () -> Unit = {}
 ) {
     TopAppBar(
         title = {
@@ -36,7 +36,7 @@ fun CrowdfundingTopAppBar(
         scrollBehavior = scrollBehavior,
         navigationIcon = {
             if (canNavigateBack) {
-                IconButton(onClick = navigateUp) {
+                IconButton(onClick = onNavigateUp) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.backButton)

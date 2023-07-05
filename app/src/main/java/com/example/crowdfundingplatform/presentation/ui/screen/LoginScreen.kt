@@ -33,25 +33,36 @@ import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumSt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onSignInClick: () -> Unit,
+    onSignUpClick: () -> Unit,
+    onNavigateUp: () -> Unit
+) {
     Scaffold(
         topBar = {
             CrowdfundingTopAppBar(
                 title = stringResource(id = R.string.signIn),
-                canNavigateBack = true
+                canNavigateBack = true,
+                onNavigateUp = onNavigateUp
             )
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier.padding(vertical = RegistrationFormVerticalPadding)
         ) {
-            LoginBody(modifier = Modifier.padding(innerPadding))
+            LoginBody(
+                onSignInClick = onSignInClick,
+                onSignUpClick = onSignUpClick,
+                modifier = Modifier.padding(innerPadding)
+            )
         }
     }
 }
 
 @Composable
-fun LoginBody(
+private fun LoginBody(
+    onSignInClick: () -> Unit,
+    onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -83,7 +94,8 @@ fun LoginBody(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(PaddingMedium),
-                    buttonShape = RoundedCornerShape(RoundedCornerShapePercent)
+                    buttonShape = RoundedCornerShape(RoundedCornerShapePercent),
+                    onClick = onSignInClick
                 )
             }
         }
@@ -102,7 +114,7 @@ fun LoginBody(
                 text = stringResource(id = R.string.signUp),
                 style = LabelBoldStyle,
                 modifier = Modifier.clickable {
-                    // TODO
+                    onSignUpClick()
                 }
             )
         }

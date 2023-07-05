@@ -27,25 +27,33 @@ import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumSt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegistrationPersonalInfoScreen() {
+fun RegistrationPersonalInfoScreen(
+    onContinueClick: () -> Unit,
+    onNavigateUp: () -> Unit
+) {
     Scaffold(
         topBar = {
             CrowdfundingTopAppBar(
                 title = stringResource(id = R.string.registrationTitle),
-                canNavigateBack = true
+                canNavigateBack = true,
+                onNavigateUp = onNavigateUp
             )
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier.padding(vertical = RegistrationFormVerticalPadding)
         ) {
-            RegistrationPersonalInfoBody(modifier = Modifier.padding(innerPadding))
+            RegistrationPersonalInfoBody(
+                onContinueClick = onContinueClick,
+                modifier = Modifier.padding(innerPadding)
+            )
         }
     }
 }
 
 @Composable
-fun RegistrationPersonalInfoBody(
+private fun RegistrationPersonalInfoBody(
+    onContinueClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -82,7 +90,8 @@ fun RegistrationPersonalInfoBody(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(PaddingMedium),
-                buttonShape = RoundedCornerShape(RoundedCornerShapePercent)
+                buttonShape = RoundedCornerShape(RoundedCornerShapePercent),
+                onClick = onContinueClick
             )
         }
     }

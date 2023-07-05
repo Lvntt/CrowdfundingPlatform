@@ -5,9 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.crowdfundingplatform.presentation.ui.navigation.Navigation
 import com.example.crowdfundingplatform.presentation.ui.screen.LoginScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.OnboardingScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.RegistrationCredentialsScreen
 import com.example.crowdfundingplatform.presentation.ui.theme.CrowdfundingPlatformTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,7 +16,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CrowdfundingPlatformTheme {
-                RegistrationCredentialsScreen()
+                val navController = rememberNavController()
+
+                Navigation(navController = navController)
             }
         }
     }
@@ -23,16 +26,16 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
+private fun LoginScreenPreview() {
     CrowdfundingPlatformTheme {
-        LoginScreen()
+        LoginScreen({}, {}, {})
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun OnboardingPreview() {
+private fun OnboardingPreview() {
     CrowdfundingPlatformTheme {
-        OnboardingScreen()
+        OnboardingScreen {}
     }
 }

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.presentation.ui.theme.TopAppBarStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.TopBarElevation
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,7 +27,10 @@ fun CrowdfundingTopAppBar(
 ) {
     TopAppBar(
         title = {
-            Text(title)
+            Text(
+                text = title,
+                style = TopAppBarStyle
+            )
         },
         modifier = modifier.shadow(TopBarElevation),
         scrollBehavior = scrollBehavior,

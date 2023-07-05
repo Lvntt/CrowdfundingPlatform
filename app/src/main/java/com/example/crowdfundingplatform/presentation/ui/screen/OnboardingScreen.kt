@@ -15,9 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.presentation.ui.common.IconTextButton
+import com.example.crowdfundingplatform.presentation.ui.common.TextButton
+import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingButtonWeight
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingIconSize
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingIconSpacing
+import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingTitleWeight
 import com.example.crowdfundingplatform.presentation.ui.theme.Title
 
 @Composable
@@ -28,30 +30,30 @@ fun OnboardingScreen() {
         verticalArrangement = Arrangement.Center
     ) {
         Column(
-            modifier = Modifier.weight(2f),
+            modifier = Modifier.weight(OnboardingTitleWeight),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.logo_stub),
-                contentDescription = "",
+                contentDescription = null,
                 tint = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.size(OnboardingIconSize)
             )
             Spacer(modifier = Modifier.height(OnboardingIconSpacing))
             Text(
-                text = stringResource(id = R.string.app_name),
+                text = stringResource(id = R.string.appName),
                 color = MaterialTheme.colorScheme.onBackground,
                 style = Title
             )
         }
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(OnboardingButtonWeight),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            IconTextButton(
-                text = stringResource(id = R.string.onboarding_button),
+            TextButton(
+                text = stringResource(id = R.string.onboardingButton),
                 icon = painterResource(id = R.drawable.double_arrow_right)
             )
         }

@@ -15,23 +15,23 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import com.example.crowdfundingplatform.presentation.ui.theme.IconTextButtonContentPadding
-import com.example.crowdfundingplatform.presentation.ui.theme.IconTextButtonCornerRadius
-import com.example.crowdfundingplatform.presentation.ui.theme.IconTextButtonIconSize
-import com.example.crowdfundingplatform.presentation.ui.theme.IconTextButtonStyle
+import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonContentPadding
+import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonLargeCornerRadius
+import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonIconSize
+import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonLargeStyle
 
 @Composable
-fun IconTextButton(
+fun TextButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     text: String,
-    icon: Painter,
+    icon: Painter? = null,
     buttonColor: Color = MaterialTheme.colorScheme.primary,
     buttonContentColor: Color = MaterialTheme.colorScheme.onPrimary,
-    buttonContentPadding: PaddingValues = PaddingValues(IconTextButtonContentPadding),
-    buttonShape: Shape = RoundedCornerShape(IconTextButtonCornerRadius),
-    buttonTextStyle: TextStyle = IconTextButtonStyle,
-    buttonIconSize: Dp = IconTextButtonIconSize,
+    buttonContentPadding: PaddingValues = PaddingValues(TextButtonContentPadding),
+    buttonShape: Shape = RoundedCornerShape(TextButtonLargeCornerRadius),
+    buttonTextStyle: TextStyle = TextButtonLargeStyle,
+    buttonIconSize: Dp = TextButtonIconSize,
     iconContentDescription: String = ""
 ) {
     Button(
@@ -40,14 +40,20 @@ fun IconTextButton(
         contentPadding = buttonContentPadding,
         shape = buttonShape,
         colors = ButtonDefaults.buttonColors(
-            containerColor = buttonColor, contentColor = buttonContentColor
+            containerColor = buttonColor,
+            contentColor = buttonContentColor
         )
     ) {
-        Text(text = text, style = buttonTextStyle)
-        Icon(
-            painter = icon,
-            contentDescription = iconContentDescription,
-            modifier = Modifier.size(buttonIconSize)
+        Text(
+            text = text,
+            style = buttonTextStyle
         )
+        if (icon != null) {
+            Icon(
+                painter = icon,
+                contentDescription = iconContentDescription,
+                modifier = Modifier.size(buttonIconSize)
+            )
+        }
     }
 }

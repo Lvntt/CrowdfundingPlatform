@@ -27,7 +27,7 @@ import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumSt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegistrationCredentialsScreen() {
+fun RegistrationPersonalInfoScreen() {
     Scaffold(
         topBar = {
             CrowdfundingTopAppBar(
@@ -39,13 +39,13 @@ fun RegistrationCredentialsScreen() {
         Column(
             modifier = Modifier.padding(vertical = RegistrationFormVerticalPadding)
         ) {
-            RegistrationCredentialsBody(modifier = Modifier.padding(innerPadding))
+            RegistrationPersonalInfoBody(modifier = Modifier.padding(innerPadding))
         }
     }
 }
 
 @Composable
-fun RegistrationCredentialsBody(
+fun RegistrationPersonalInfoBody(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -53,18 +53,18 @@ fun RegistrationCredentialsBody(
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
         LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.email),
-            label = stringResource(id = R.string.emailReq),
+            icon = ImageVector.vectorResource(id = R.drawable.person_outline),
+            label = stringResource(id = R.string.nameReq),
             onValueChange = {}
         )
         LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.lock),
-            label = stringResource(id = R.string.passwordReq),
+            icon = ImageVector.vectorResource(id = R.drawable.person_outline),
+            label = stringResource(id = R.string.surnameReq),
             onValueChange = {}
         )
         LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.lock),
-            label = stringResource(id = R.string.confirmPasswordReq),
+            icon = ImageVector.vectorResource(id = R.drawable.person_outline),
+            label = stringResource(id = R.string.patronymicReq),
             onValueChange = {}
         )
         Text(
@@ -77,7 +77,7 @@ fun RegistrationCredentialsBody(
             modifier = Modifier.fillMaxWidth()
         ) {
             TextButton(
-                text = stringResource(id = R.string.signUp),
+                text = stringResource(id = R.string.continueRegistration),
                 buttonTextStyle = TextButtonMediumStyle,
                 modifier = Modifier
                     .fillMaxWidth()

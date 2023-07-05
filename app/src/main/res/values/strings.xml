@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">CrowdfundingPlatform</string>
+    <string name="appName">CrowdfundingPlatform</string>
+    <string name="backButton">Back</string>
+    <string name="registrationTitle">Create an Account</string>
+    <string name="nameReq">Name*</string>
+    <string name="surnameReq">Surname*</string>
+    <string name="patronymicReq">Patronymic*</string>
+    <string name="requiredFields">*required fields</string>
 </resources>

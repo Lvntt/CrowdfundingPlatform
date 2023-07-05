@@ -1,0 +1,13 @@
+package com.example.crowdfundingplatform.presentation.ui.theme
+
+import androidx.compose.ui.unit.dp
+
+val PaddingSmall = 8.dp
+val PaddingMedium = 16.dp
+val PaddingLarge = 32.dp
+val PaddingExtraLarge = 64.dp
+
+val TopBarElevation = 4.dp
+val LoginItemEndPadding = 24.dp
+val RegistrationFormVerticalPadding = 28.dp
+val RoundedCornerShapePercent = 15

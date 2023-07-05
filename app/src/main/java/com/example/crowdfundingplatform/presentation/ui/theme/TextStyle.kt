@@ -13,8 +13,32 @@ val Title = TextStyle(
     lineHeight = 64.sp
 )
 
-val IconTextButtonStyle = TextStyle(
+val TextButtonMediumStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 21.sp
+)
+
+val TextButtonLargeStyle = TextStyle(
     fontFamily = Ubuntu,
     fontWeight = FontWeight.Bold,
     fontSize = 24.sp
+)
+
+val TopAppBarStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Normal,
+    fontSize = 24.sp
+)
+
+val LabelLightStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Light,
+    fontSize = 16.sp
+)
+
+val LabelRegularStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Normal,
+    fontSize = 16.sp
 )

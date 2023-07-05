@@ -7,4 +7,9 @@
     <string name="patronymicReq">Patronymic*</string>
     <string name="requiredFields">*required fields</string>
     <string name="onboardingButton">Let\'s get started</string>
+    <string name="signUp">Sign Up</string>
+    <string name="continueRegistration">Continue</string>
+    <string name="emailReq">Email*</string>
+    <string name="passwordReq">Password*</string>
+    <string name="confirmPasswordReq">Confirm password*</string>
 </resources>

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">CrowdfundingPlatform</string>
+    <string name="app_name">Crowdfunding Platform</string>
+    <string name="onboarding_button">Let\'s get started</string>
 </resources>

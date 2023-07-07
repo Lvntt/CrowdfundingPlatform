@@ -10,8 +10,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.crowdfundingplatform.presentation.ui.navigation.Navigation
 import com.example.crowdfundingplatform.presentation.ui.screen.LoginScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.OnboardingScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.ProfileInfoScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.RegistrationCredentialsScreen
 import com.example.crowdfundingplatform.presentation.ui.theme.CrowdfundingPlatformTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -45,18 +43,5 @@ private fun OnboardingPreview() {
         val uiController = rememberSystemUiController()
         uiController.setSystemBarsColor(MaterialTheme.colorScheme.background)
         OnboardingScreen {}        
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun ProfilePreview() {
-    CrowdfundingPlatformTheme {
-        val uiController = rememberSystemUiController()
-        uiController.setSystemBarsColor(MaterialTheme.colorScheme.background)
-        ProfileInfoScreen(
-            name = "Placeholder name",
-            email = "xdxdxdxdxd@xdxdxd.xd"
-        )
     }
 }

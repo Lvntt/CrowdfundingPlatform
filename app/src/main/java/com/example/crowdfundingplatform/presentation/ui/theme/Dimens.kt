@@ -6,6 +6,7 @@ const val RoundedCornerShapePercent = 15
 const val OnboardingTitleWeight = 2f
 const val OnboardingButtonWeight = 1f
 
+val PaddingVerySmall = 4.dp
 val PaddingSmall = 8.dp
 val PaddingMedium = 16.dp
 val PaddingLarge = 32.dp
@@ -20,3 +21,6 @@ val OnboardingIconSpacing = 10.dp
 val TextButtonLargeCornerRadius = 25.dp
 val TextButtonContentPadding = 25.dp
 val TextButtonIconSize = 36.dp
+val ProfilePhotoSize = 250.dp
+val ProfilePhotoBorderSize = 12.dp
+val ProfilePhotoBackgroundSize = ProfilePhotoSize * 8 / 9

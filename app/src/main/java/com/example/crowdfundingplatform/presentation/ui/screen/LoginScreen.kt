@@ -1,6 +1,5 @@
 package com.example.crowdfundingplatform.presentation.ui.screen
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
@@ -113,7 +113,7 @@ private fun LoginBody(
             Text(
                 text = stringResource(id = R.string.signUp),
                 style = LabelBoldStyle,
-                modifier = Modifier.clickable {
+                modifier = Modifier.noRippleClickable {
                     onSignUpClick()
                 }
             )

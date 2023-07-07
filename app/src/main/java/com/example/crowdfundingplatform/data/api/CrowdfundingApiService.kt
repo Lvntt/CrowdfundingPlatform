@@ -19,7 +19,7 @@ interface CrowdfundingApiService {
     suspend fun login(@Body body: LoginRequest): TokenResponse
 
     @POST(Constants.LOGOUT_URL)
-    suspend fun logout(@Body refreshToken: String)
+    suspend fun logout(@Header("Authorization") accessToken: String, @Body refreshToken: String)
 
     @POST(Constants.REFRESH_URL)
     suspend fun refresh(@Body refreshToken: String): TokenResponse

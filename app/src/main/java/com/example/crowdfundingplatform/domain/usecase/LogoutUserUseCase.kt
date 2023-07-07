@@ -6,8 +6,8 @@ class LogoutUserUseCase(
     private val authRepository: AuthRepository
 ) {
 
-    suspend fun execute(refreshToken: String) {
-        authRepository.logout(refreshToken)
+    suspend fun execute() {
+        authRepository.logout()
     }
 
 }

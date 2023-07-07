@@ -27,8 +27,9 @@ private fun provideAuthRepository(
 ): AuthRepository = AuthRepositoryImpl(crowdfundingApiService, tokenDataSource)
 
 private fun provideUserRepository(
-    crowdfundingApiService: CrowdfundingApiService
-): UserRepository = UserRepositoryImpl(crowdfundingApiService)
+    crowdfundingApiService: CrowdfundingApiService,
+    tokenDataSource: TokenDataSource
+): UserRepository = UserRepositoryImpl(crowdfundingApiService, tokenDataSource)
 
 fun provideDomainModule(): Module = module {
 
@@ -41,7 +42,7 @@ fun provideDomainModule(): Module = module {
     }
 
     single {
-        provideUserRepository(get())
+        provideUserRepository(get(), get())
     }
 
     factory {

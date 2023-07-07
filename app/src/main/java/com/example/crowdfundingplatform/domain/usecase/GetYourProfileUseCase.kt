@@ -7,8 +7,8 @@ class GetYourProfileUseCase(
     private val userRepository: UserRepository
 ) {
 
-    suspend fun execute(accessToken: String): User {
-        return userRepository.getYourProfile(accessToken)
+    suspend fun execute(): User {
+        return userRepository.getYourProfile()
     }
 
 }

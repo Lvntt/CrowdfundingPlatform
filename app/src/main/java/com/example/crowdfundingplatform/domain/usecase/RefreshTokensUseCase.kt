@@ -6,8 +6,8 @@ class RefreshTokensUseCase(
     private val authRepository: AuthRepository
 ) {
 
-    suspend fun execute(refreshToken: String) {
-        authRepository.refresh(refreshToken)
+    suspend fun execute() {
+        authRepository.refresh()
     }
 
 }

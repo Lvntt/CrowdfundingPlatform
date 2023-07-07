@@ -24,14 +24,17 @@ class AuthRepositoryImpl(
         tokenDataSource.saveToken(tokenResponse.refreshToken, TokenType.Refresh)
     }
 
-    override suspend fun refresh(refreshToken: String) {
+    override suspend fun refresh() {
+        val refreshToken = tokenDataSource.fetchToken(TokenType.Refresh)!!
         val tokenResponse = crowdfundingApiService.refresh(refreshToken)
         tokenDataSource.saveToken(tokenResponse.accessToken, TokenType.Access)
         tokenDataSource.saveToken(tokenResponse.refreshToken, TokenType.Refresh)
     }
 
-    override suspend fun logout(refreshToken: String) {
-        crowdfundingApiService.logout(refreshToken)
+    override suspend fun logout() {
+        val accessToken = tokenDataSource.fetchToken(TokenType.Access)!!
+        val refreshToken = tokenDataSource.fetchToken(TokenType.Refresh)!!
+        crowdfundingApiService.logout("Bearer $accessToken", refreshToken)
     }
 
 }

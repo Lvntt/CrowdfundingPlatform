@@ -17,4 +17,10 @@
     <string name="password">Password</string>
     <string name="welcomeBack">Welcome back!</string>
     <string name="noAccount">No account?</string>
+    <string name="invalidForm">Invalid credentials or/and name</string>
+    <string name="invalidCredentials">Invalid login and/or password</string>
+    <string name="userExists">User with the same email already exists</string>
+    <string name="unknownError">Unknown error</string>
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.ui.theme
+package com.example.crowdfundingplatform.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -32,3 +32,4 @@ val Typography = Typography(
     )
     */
 )
+

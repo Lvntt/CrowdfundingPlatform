@@ -140,27 +140,27 @@ fun ProfileInfoItems(
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
         ProfileInfoItem(
-            label = "Email",
+            label = stringResource(id = R.string.email),
             fieldValue = email,
             onEditClick = onEditEmailClick
         )
         ProfileInfoItem(
-            label = "Password",
+            label = stringResource(id = R.string.password),
             fieldValue = null,
             onEditClick = onEditPasswordClick
         )
         ProfileInfoItem(
-            label = "Name",
+            label = stringResource(id = R.string.name),
             fieldValue = name,
             onEditClick = onEditPersonalInfoClick
         )
         ProfileInfoItem(
-            label = "Surname",
+            label = stringResource(id = R.string.surname),
             fieldValue = surname,
             onEditClick = onEditPersonalInfoClick
         )
         ProfileInfoItem(
-            label = "Patronymic",
+            label = stringResource(id = R.string.patronymic),
             fieldValue = patronymic,
             onEditClick = onEditPersonalInfoClick
         )

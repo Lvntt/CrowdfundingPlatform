@@ -86,8 +86,8 @@ fun Navigation(
                 onNavigateUp = { navController.navigate(CrowdfundingDestinations.PROFILE_INFO_ROUTE) }
             )
             BackHandler {
-            navController.navigate(CrowdfundingDestinations.PROFILE_INFO_ROUTE)
-        }
+                navController.navigate(CrowdfundingDestinations.PROFILE_INFO_ROUTE)
+            }
         }
         composable(CrowdfundingDestinations.EDIT_PASSWORD_ROUTE) {
             EditPasswordScreen(

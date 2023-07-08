@@ -104,8 +104,7 @@ private fun LoginBody(
     onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val email by remember { authViewModel.loginEmail }
-    val password by remember { authViewModel.loginPassword }
+    val loginState by remember { authViewModel.loginContent }
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
@@ -119,13 +118,13 @@ private fun LoginBody(
             icon = ImageVector.vectorResource(id = R.drawable.email),
             label = stringResource(id = R.string.email),
             onValueChange = authViewModel::setLoginEmail,
-            textFieldValue = email
+            textFieldValue = loginState.email
         )
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.lock),
             label = stringResource(id = R.string.password),
             onValueChange = authViewModel::setLoginPassword,
-            textFieldValue = password
+            textFieldValue = loginState.password
         )
         Box(
             modifier = Modifier.fillMaxWidth()

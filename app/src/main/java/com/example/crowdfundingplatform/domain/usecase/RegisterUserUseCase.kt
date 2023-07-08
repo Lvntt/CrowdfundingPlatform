@@ -7,7 +7,7 @@ class RegisterUserUseCase(
     private val authRepository: AuthRepository
 ) {
 
-    suspend fun execute(body: RegisterRequest) {
+    suspend operator fun invoke(body: RegisterRequest) {
         authRepository.register(body)
     }
 

@@ -7,7 +7,7 @@ class GetYourProfileUseCase(
     private val userRepository: UserRepository
 ) {
 
-    suspend fun execute(): User {
+    suspend operator fun invoke(): User {
         return userRepository.getYourProfile()
     }
 

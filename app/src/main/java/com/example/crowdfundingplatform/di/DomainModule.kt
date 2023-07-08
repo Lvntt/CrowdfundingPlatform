@@ -8,6 +8,7 @@ import com.example.crowdfundingplatform.data.repository.AuthRepositoryImpl
 import com.example.crowdfundingplatform.data.repository.UserRepositoryImpl
 import com.example.crowdfundingplatform.domain.repository.AuthRepository
 import com.example.crowdfundingplatform.domain.repository.UserRepository
+import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.LogoutUserUseCase
@@ -63,6 +64,10 @@ fun provideDomainModule(): Module = module {
 
     factory {
         GetYourProfileUseCase(get())
+    }
+
+    factory {
+        CheckTokenExistenceUseCase(get())
     }
 
 }

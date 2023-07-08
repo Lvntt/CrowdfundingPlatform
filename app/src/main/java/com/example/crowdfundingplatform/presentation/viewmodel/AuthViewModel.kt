@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.domain.entity.LoginRequest
 import com.example.crowdfundingplatform.domain.entity.RegisterRequest
+import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.RegisterUserUseCase
 import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
@@ -16,15 +17,17 @@ import com.example.crowdfundingplatform.presentation.uistate.RegistrationContent
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class AuthViewModel(
     private val loginUserUseCase: LoginUserUseCase,
-    private val registerUserUseCase: RegisterUserUseCase
+    private val registerUserUseCase: RegisterUserUseCase,
+    private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase
 ) : ViewModel() {
     val authState: State<AuthUiState>
         get() = _authState
-    private val _authState: MutableState<AuthUiState> = mutableStateOf(AuthUiState.Input)
+    private val _authState: MutableState<AuthUiState> = mutableStateOf(AuthUiState.Initial)
 
     val loginContent: State<LoginContent>
         get() = _loginContent
@@ -45,6 +48,7 @@ class AuthViewModel(
             else -> _authState.value = AuthUiState.Error(R.string.unknownError)
         }
     }
+
     private val loginExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
@@ -53,6 +57,20 @@ class AuthViewModel(
             }
 
             else -> _authState.value = AuthUiState.Error(R.string.unknownError)
+        }
+    }
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (checkTokenExistenceUseCase()) {
+                withContext(Dispatchers.Main) {
+                    _authState.value = AuthUiState.Success
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    _authState.value = AuthUiState.Input
+                }
+            }
         }
     }
 
@@ -92,7 +110,7 @@ class AuthViewModel(
     fun signUp() {
         _authState.value = AuthUiState.Loading
         viewModelScope.launch(Dispatchers.IO + signupExceptionHandler) {
-            registerUserUseCase.execute(
+            registerUserUseCase(
                 RegisterRequest(
                     _registrationContent.value.name,
                     _registrationContent.value.surname,
@@ -108,7 +126,7 @@ class AuthViewModel(
     fun logIn() {
         _authState.value = AuthUiState.Loading
         viewModelScope.launch(Dispatchers.IO + loginExceptionHandler) {
-            loginUserUseCase.execute(
+            loginUserUseCase(
                 LoginRequest(
                     _loginContent.value.email, _loginContent.value.password
                 )

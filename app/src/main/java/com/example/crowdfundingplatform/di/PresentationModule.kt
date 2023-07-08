@@ -8,7 +8,7 @@ import org.koin.dsl.module
 fun providePresentationModule(): Module = module {
     viewModel {
         AuthViewModel(
-            get(), get()
+            get(), get(), get()
         )
     }
 }

@@ -1,5 +1,6 @@
 package com.example.crowdfundingplatform.presentation.ui.screen
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,55 +11,83 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingButtonWeight
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingIconSize
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingIconSpacing
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingTitleWeight
 import com.example.crowdfundingplatform.presentation.ui.theme.Title
+import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
+import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
 @Composable
 fun OnboardingScreen(
-    onContinueClick: () -> Unit,
+    authViewModel: AuthViewModel, onContinueClick: () -> Unit, onSignedInCheckSuccess: () -> Unit
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Column(
-            modifier = Modifier.weight(OnboardingTitleWeight),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.logo_stub),
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.size(OnboardingIconSize)
-            )
-            Spacer(modifier = Modifier.height(OnboardingIconSpacing))
-            Text(
-                text = stringResource(id = R.string.appName),
-                color = MaterialTheme.colorScheme.onBackground,
-                style = Title
-            )
+    val state by remember { authViewModel.authState }
+    if (state == AuthUiState.Success) {
+        LaunchedEffect(Unit) {
+            onSignedInCheckSuccess()
         }
-        Column(
-            modifier = Modifier.weight(OnboardingButtonWeight),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            TextButton(
-                text = stringResource(id = R.string.onboardingButton),
-                icon = painterResource(id = R.drawable.double_arrow_right),
-                onClick = onContinueClick
-            )
+    }
+    Crossfade(targetState = state) {
+        when (it) {
+            AuthUiState.Initial -> {
+                LoadingProgress()
+            }
+
+            AuthUiState.Success -> {
+                LaunchedEffect(Unit) {
+                    onSignedInCheckSuccess()
+                }
+            }
+
+            else -> {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Column(
+                        modifier = Modifier.weight(OnboardingTitleWeight),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.logo_stub),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.size(OnboardingIconSize)
+                        )
+                        Spacer(modifier = Modifier.height(OnboardingIconSpacing))
+                        Text(
+                            text = stringResource(id = R.string.appName),
+                            color = MaterialTheme.colorScheme.onBackground,
+                            style = Title
+                        )
+                    }
+                    Column(
+                        modifier = Modifier.weight(OnboardingButtonWeight),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        TextButton(
+                            text = stringResource(id = R.string.onboardingButton),
+                            icon = painterResource(id = R.drawable.double_arrow_right),
+                            onClick = onContinueClick
+                        )
+                    }
+                }
+            }
         }
     }
 }

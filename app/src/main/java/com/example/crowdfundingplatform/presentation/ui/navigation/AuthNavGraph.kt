@@ -9,6 +9,7 @@ import com.example.crowdfundingplatform.presentation.ui.screen.LoginScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.OnboardingScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.RegistrationCredentialsScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.RegistrationPersonalInfoScreen
+import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
 object AuthGraphDestinations {
@@ -20,43 +21,40 @@ object AuthGraphDestinations {
 
 fun NavGraphBuilder.authNavGraph(navController: NavHostController, viewModel: AuthViewModel) {
     navigation(
-        route = CrowdfundingGraphs.AUTH,
-        startDestination = AuthGraphDestinations.ONBOARDING_ROUTE
+        route = CrowdfundingGraphs.AUTH, startDestination = AuthGraphDestinations.ONBOARDING_ROUTE
     ) {
         composable(AuthGraphDestinations.ONBOARDING_ROUTE) {
-            OnboardingScreen(
-                onContinueClick = { navController.navigate(AuthGraphDestinations.LOGIN_ROUTE) }
-            )
+            OnboardingScreen(onContinueClick = {
+                if (viewModel.authState.value == AuthUiState.Input) {
+                    navController.navigate(AuthGraphDestinations.LOGIN_ROUTE)
+                }
+            }, authViewModel = viewModel, onSignedInCheckSuccess = {
+                navController.navigate(CrowdfundingGraphs.MAIN)
+            })
         }
         composable(AuthGraphDestinations.LOGIN_ROUTE) {
-            LoginScreen(
-                authViewModel = viewModel,
+            LoginScreen(authViewModel = viewModel,
                 onSignUpClick = { navController.navigate(AuthGraphDestinations.REGISTRATION_PERSONAL_INFO_ROUTE) },
                 onNavigateUp = { navController.navigate(AuthGraphDestinations.ONBOARDING_ROUTE) },
-                onSignInSuccess = { navController.navigate(CrowdfundingGraphs.MAIN) }
-            )
+                onSignInSuccess = { navController.navigate(CrowdfundingGraphs.MAIN) })
             BackHandler {
                 navController.navigate(AuthGraphDestinations.ONBOARDING_ROUTE)
             }
         }
         composable(AuthGraphDestinations.REGISTRATION_PERSONAL_INFO_ROUTE) {
-            RegistrationPersonalInfoScreen(
-                authViewModel = viewModel,
+            RegistrationPersonalInfoScreen(authViewModel = viewModel,
                 onContinueClick = { navController.navigate(AuthGraphDestinations.REGISTRATION_CREDENTIALS_ROUTE) },
                 onNavigateUp = {
                     navController.navigate(AuthGraphDestinations.LOGIN_ROUTE)
-                }
-            )
+                })
             BackHandler {
                 navController.navigate(AuthGraphDestinations.LOGIN_ROUTE)
             }
         }
         composable(AuthGraphDestinations.REGISTRATION_CREDENTIALS_ROUTE) {
-            RegistrationCredentialsScreen(
-                authViewModel = viewModel,
+            RegistrationCredentialsScreen(authViewModel = viewModel,
                 onNavigateUp = { navController.navigate(AuthGraphDestinations.LOGIN_ROUTE) },
-                onSignUpSuccess = { navController.navigate(CrowdfundingGraphs.MAIN) }
-            )
+                onSignUpSuccess = { navController.navigate(CrowdfundingGraphs.MAIN) })
             BackHandler {
                 navController.navigate(AuthGraphDestinations.LOGIN_ROUTE)
             }

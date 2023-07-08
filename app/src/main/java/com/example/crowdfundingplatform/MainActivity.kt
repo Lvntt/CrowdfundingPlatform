@@ -8,10 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.crowdfundingplatform.presentation.ui.navigation.Navigation
-import com.example.crowdfundingplatform.presentation.ui.screen.LoginScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.OnboardingScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.ProfileInfoScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.RegistrationCredentialsScreen
 import com.example.crowdfundingplatform.presentation.ui.theme.CrowdfundingPlatformTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -27,14 +25,6 @@ class MainActivity : ComponentActivity() {
                 Navigation(navController = navController)
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun LoginScreenPreview() {
-    CrowdfundingPlatformTheme {
-        LoginScreen({}, {}, {})
     }
 }
 

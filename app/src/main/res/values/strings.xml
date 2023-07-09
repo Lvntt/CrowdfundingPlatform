@@ -17,4 +17,8 @@
     <string name="password">Password</string>
     <string name="welcomeBack">Welcome back!</string>
     <string name="noAccount">No account?</string>
+    <string name="raisedOf">Raised of</string>
+    <string name="raiseGoal">Raise Goal</string>
+    <string name="viewDetails">View details</string>
+    <string name="dashboard">Dashboard</string>
 </resources>

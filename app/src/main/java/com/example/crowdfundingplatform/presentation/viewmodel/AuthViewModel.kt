@@ -105,7 +105,7 @@ class AuthViewModel(
     fun signUp() {
         _authState.value = AuthUiState.Loading
         viewModelScope.launch(Dispatchers.IO + signupExceptionHandler) {
-            registerUserUseCase.execute(
+            registerUserUseCase(
                 RegisterRequest(
                     _name.value,
                     _surname.value,
@@ -121,7 +121,7 @@ class AuthViewModel(
     fun logIn() {
         _authState.value = AuthUiState.Loading
         viewModelScope.launch(Dispatchers.IO + loginExceptionHandler) {
-            loginUserUseCase.execute(
+            loginUserUseCase(
                 LoginRequest(
                     _loginEmail.value,
                     _loginPassword.value

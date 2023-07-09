@@ -21,3 +21,4 @@ val TextButtonLargeCornerRadius = 25.dp
 val TextButtonContentPadding = 25.dp
 val TextButtonIconSize = 36.dp
 val ProgressIndicatorSize = 150.dp
+val ProgressDialogSize = 200.dp

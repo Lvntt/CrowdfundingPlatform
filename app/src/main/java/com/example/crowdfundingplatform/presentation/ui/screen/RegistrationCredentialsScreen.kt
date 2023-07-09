@@ -101,9 +101,7 @@ private fun RegistrationCredentialsBody(
     onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val email by remember { authViewModel.email }
-    val password by remember { authViewModel.password }
-    val confirmPassword by remember { authViewModel.confirmPassword }
+    val registrationState by remember { authViewModel.registrationContent }
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
@@ -112,19 +110,19 @@ private fun RegistrationCredentialsBody(
             icon = ImageVector.vectorResource(id = R.drawable.email),
             label = stringResource(id = R.string.emailReq),
             onValueChange = authViewModel::setEmail,
-            textFieldValue = email
+            textFieldValue = registrationState.email
         )
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.lock),
             label = stringResource(id = R.string.passwordReq),
             onValueChange = authViewModel::setPassword,
-            textFieldValue = password
+            textFieldValue = registrationState.password
         )
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.lock),
             label = stringResource(id = R.string.confirmPasswordReq),
             onValueChange = authViewModel::setConfirmPassword,
-            textFieldValue = confirmPassword
+            textFieldValue = registrationState.confirmPassword
         )
         Text(
             text = stringResource(id = R.string.requiredFields),

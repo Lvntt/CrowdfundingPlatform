@@ -8,98 +8,103 @@ import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.domain.entity.LoginRequest
 import com.example.crowdfundingplatform.domain.entity.RegisterRequest
+import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.RegisterUserUseCase
 import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
+import com.example.crowdfundingplatform.presentation.uistate.LoginContent
+import com.example.crowdfundingplatform.presentation.uistate.RegistrationContent
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class AuthViewModel(
     private val loginUserUseCase: LoginUserUseCase,
-    private val registerUserUseCase: RegisterUserUseCase
+    private val registerUserUseCase: RegisterUserUseCase,
+    private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase
 ) : ViewModel() {
     val authState: State<AuthUiState>
         get() = _authState
-    private val _authState: MutableState<AuthUiState> = mutableStateOf(AuthUiState.Input)
+    private val _authState: MutableState<AuthUiState> = mutableStateOf(AuthUiState.Initial)
 
-    val loginEmail: State<String>
-        get() = _loginEmail
-    private val _loginEmail = mutableStateOf("")
-    val loginPassword: State<String>
-        get() = _loginPassword
-    private val _loginPassword = mutableStateOf("")
+    val loginContent: State<LoginContent>
+        get() = _loginContent
+    private val _loginContent = mutableStateOf(LoginContent("", ""))
 
-    val name: State<String>
-        get() = _name
-    private val _name = mutableStateOf("")
-    val surname: State<String>
-        get() = _surname
-    private val _surname = mutableStateOf("")
-    val patronymic: State<String>
-        get() = _patronymic
-    private val _patronymic = mutableStateOf("")
-    val email: State<String>
-        get() = _email
-    private val _email = mutableStateOf("")
-    val password: State<String>
-        get() = _password
-    private val _password = mutableStateOf("")
-    val confirmPassword: State<String>
-        get() = _confirmPassword
-    private val _confirmPassword = mutableStateOf("")
+    val registrationContent: State<RegistrationContent>
+        get() = _registrationContent
+    private val _registrationContent = mutableStateOf(RegistrationContent("", "", "", "", "", ""))
 
     private val signupExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        when(exception) {
-            is HttpException ->
-                when(exception.code()) {
-                    400 -> _authState.value = AuthUiState.Error(R.string.invalidForm)
-                    409 -> _authState.value = AuthUiState.Error(R.string.userExists)
-                }
+        when (exception) {
+            is HttpException -> when (exception.code()) {
+                400 -> _authState.value = AuthUiState.Error(R.string.invalidForm)
+                409 -> _authState.value = AuthUiState.Error(R.string.userExists)
+                else -> _authState.value = AuthUiState.Error(R.string.unknownError)
+            }
+
             else -> _authState.value = AuthUiState.Error(R.string.unknownError)
         }
     }
+
     private val loginExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        when(exception) {
-            is HttpException ->
-                when(exception.code()) {
-                    401 -> _authState.value = AuthUiState.Error(R.string.invalidCredentials)
-                }
+        when (exception) {
+            is HttpException -> when (exception.code()) {
+                401 -> _authState.value = AuthUiState.Error(R.string.invalidCredentials)
+                else -> _authState.value = AuthUiState.Error(R.string.unknownError)
+            }
+
             else -> _authState.value = AuthUiState.Error(R.string.unknownError)
+        }
+    }
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (checkTokenExistenceUseCase()) {
+                withContext(Dispatchers.Main) {
+                    _authState.value = AuthUiState.Success
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    _authState.value = AuthUiState.Input
+                }
+            }
         }
     }
 
     fun setName(name: String) {
-        _name.value = name
+        _registrationContent.value = _registrationContent.value.copy(name = name)
     }
 
     fun setSurname(surname: String) {
-        _surname.value = surname
+        _registrationContent.value = _registrationContent.value.copy(surname = surname)
     }
 
     fun setPatronymic(patronymic: String) {
-        _patronymic.value = patronymic
+        _registrationContent.value = _registrationContent.value.copy(patronymic = patronymic)
     }
 
     fun setEmail(email: String) {
-        _email.value = email
+        _registrationContent.value = _registrationContent.value.copy(email = email)
     }
 
     fun setPassword(password: String) {
-        _password.value = password
+        _registrationContent.value = _registrationContent.value.copy(password = password)
     }
 
     fun setConfirmPassword(confirmPassword: String) {
-        _confirmPassword.value = confirmPassword
+        _registrationContent.value =
+            _registrationContent.value.copy(confirmPassword = confirmPassword)
     }
 
     fun setLoginEmail(email: String) {
-        _loginEmail.value = email
+        _loginContent.value = _loginContent.value.copy(email = email)
     }
 
     fun setLoginPassword(password: String) {
-        _loginPassword.value = password
+        _loginContent.value = _loginContent.value.copy(password = password)
     }
 
     fun signUp() {
@@ -107,11 +112,11 @@ class AuthViewModel(
         viewModelScope.launch(Dispatchers.IO + signupExceptionHandler) {
             registerUserUseCase(
                 RegisterRequest(
-                    _name.value,
-                    _surname.value,
-                    _patronymic.value,
-                    _password.value,
-                    _email.value
+                    _registrationContent.value.name,
+                    _registrationContent.value.surname,
+                    _registrationContent.value.patronymic,
+                    _registrationContent.value.password,
+                    _registrationContent.value.email
                 )
             )
             _authState.value = AuthUiState.Success
@@ -123,8 +128,7 @@ class AuthViewModel(
         viewModelScope.launch(Dispatchers.IO + loginExceptionHandler) {
             loginUserUseCase(
                 LoginRequest(
-                    _loginEmail.value,
-                    _loginPassword.value
+                    _loginContent.value.email, _loginContent.value.password
                 )
             )
             _authState.value = AuthUiState.Success

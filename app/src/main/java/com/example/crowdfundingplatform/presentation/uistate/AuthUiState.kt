@@ -3,6 +3,8 @@ package com.example.crowdfundingplatform.presentation.uistate
 import androidx.annotation.StringRes
 
 sealed interface AuthUiState {
+    object Initial : AuthUiState
+
     object Input : AuthUiState
 
     object Loading : AuthUiState

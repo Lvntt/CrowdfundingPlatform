@@ -37,4 +37,10 @@ class AuthRepositoryImpl(
         crowdfundingApiService.logout("Bearer $accessToken", refreshToken)
     }
 
+    override suspend fun hasTokens(): Boolean {
+        val accessToken = tokenDataSource.fetchToken(TokenType.Access)
+        val refreshToken = tokenDataSource.fetchToken(TokenType.Refresh)
+        return accessToken != null && refreshToken != null
+    }
+
 }

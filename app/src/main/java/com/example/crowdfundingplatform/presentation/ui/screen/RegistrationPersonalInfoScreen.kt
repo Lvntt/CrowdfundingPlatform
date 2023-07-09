@@ -93,9 +93,7 @@ private fun RegistrationPersonalInfoBody(
     onContinueClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val name by remember { authViewModel.name }
-    val surname by remember { authViewModel.surname }
-    val patronymic by remember { authViewModel.patronymic }
+    val registrationState by remember { authViewModel.registrationContent }
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
@@ -104,19 +102,19 @@ private fun RegistrationPersonalInfoBody(
             icon = ImageVector.vectorResource(id = R.drawable.person_outline),
             label = stringResource(id = R.string.nameReq),
             onValueChange = authViewModel::setName,
-            textFieldValue = name
+            textFieldValue = registrationState.name
         )
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.person_outline),
             label = stringResource(id = R.string.surnameReq),
             onValueChange = authViewModel::setSurname,
-            textFieldValue = surname
+            textFieldValue = registrationState.surname
         )
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.person_outline),
             label = stringResource(id = R.string.patronymicReq),
             onValueChange = authViewModel::setPatronymic,
-            textFieldValue = patronymic
+            textFieldValue = registrationState.patronymic
         )
         Text(
             text = stringResource(id = R.string.requiredFields),

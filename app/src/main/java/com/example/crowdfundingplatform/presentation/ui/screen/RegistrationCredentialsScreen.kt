@@ -3,7 +3,9 @@ package com.example.crowdfundingplatform.presentation.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,7 +35,6 @@ fun RegistrationCredentialsScreen(
 ) {
     Column(
         modifier = Modifier
-            .padding(vertical = RegistrationFormVerticalPadding)
             .verticalScroll(
                 rememberScrollState()
             )
@@ -54,6 +55,7 @@ private fun RegistrationCredentialsBody(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
+        Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.email),
             label = stringResource(id = R.string.emailReq),
@@ -91,5 +93,6 @@ private fun RegistrationCredentialsBody(
                 onClick = authViewModel::signUp
             )
         }
+        Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))
     }
 }

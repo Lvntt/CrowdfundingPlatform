@@ -16,7 +16,7 @@ val PaddingExtraLarge = 64.dp
 
 val ElevationMedium = 4.dp
 val LoginItemEndPadding = 24.dp
-val RegistrationFormVerticalPadding = 28.dp
+val RegistrationFormVerticalPadding = 12.dp
 
 val OnboardingIconSize = 100.dp
 val OnboardingIconSpacing = 10.dp

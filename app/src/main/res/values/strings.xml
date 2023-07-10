@@ -40,4 +40,5 @@
     <string name="raiseGoal">Raise Goal</string>
     <string name="viewDetails">View details</string>
     <string name="dashboard">Dashboard</string>
+    <string name="profile">Profile</string>
 </resources>

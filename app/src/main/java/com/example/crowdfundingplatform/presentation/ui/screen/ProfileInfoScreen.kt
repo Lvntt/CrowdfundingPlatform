@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,45 +50,50 @@ fun ProfileInfoScreen(
     onEditPersonalInfoClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(ProfilePhotoBackgroundSize)
-            .background(PrimaryColorLight)
-    )
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(PaddingMedium),
-        verticalArrangement = Arrangement.spacedBy(PaddingMedium)
-    ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
-            Image(
-                painter = painterResource(id = photoId),
-                contentDescription = stringResource(id = R.string.profilePhoto),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .padding(top = PaddingMedium)
-                    .size(ProfilePhotoSize)
-                    .clip(CircleShape)
-                    .align(Alignment.BottomCenter)
-                    .border(
-                        ProfilePhotoBorderSize,
-                        MaterialTheme.colorScheme.background,
-                        CircleShape
-                    )
+    Box(modifier = modifier
+        .fillMaxSize().verticalScroll(
+            rememberScrollState()
+        )) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(ProfilePhotoBackgroundSize)
+                .background(PrimaryColorLight)
+        )
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(PaddingMedium),
+            verticalArrangement = Arrangement.spacedBy(PaddingMedium)
+        ) {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Image(
+                    painter = painterResource(id = photoId),
+                    contentDescription = stringResource(id = R.string.profilePhoto),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .padding(top = PaddingMedium)
+                        .size(ProfilePhotoSize)
+                        .clip(CircleShape)
+                        .align(Alignment.BottomCenter)
+                        .border(
+                            ProfilePhotoBorderSize,
+                            MaterialTheme.colorScheme.background,
+                            CircleShape
+                        )
+                )
+            }
+            ProfileInfoBody(
+                email = email,
+                name = name,
+                surname = surname,
+                patronymic = patronymic,
+                onEditEmailClick = onEditEmailClick,
+                onEditPasswordClick = onEditPasswordClick,
+                onEditPersonalInfoClick = onEditPersonalInfoClick,
+                modifier = modifier
             )
         }
-        ProfileInfoBody(
-            email = email,
-            name = name,
-            surname = surname,
-            patronymic = patronymic,
-            onEditEmailClick = onEditEmailClick,
-            onEditPasswordClick = onEditPasswordClick,
-            onEditPersonalInfoClick = onEditPersonalInfoClick,
-            modifier = modifier
-        )
     }
 }
 

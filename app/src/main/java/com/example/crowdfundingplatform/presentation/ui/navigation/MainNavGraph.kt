@@ -65,7 +65,7 @@ object MainGraphTopBarInfo {
 
 fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
     navigation(
-        route = CrowdfundingGraphs.MAIN, startDestination = MainGraphDestinations.PROFILE
+        route = CrowdfundingGraphs.MAIN, startDestination = MainGraphDestinations.DASHBOARD
     ) {
         composable(MainGraphDestinations.PROFILE) {
             ProfileInfoScreen(

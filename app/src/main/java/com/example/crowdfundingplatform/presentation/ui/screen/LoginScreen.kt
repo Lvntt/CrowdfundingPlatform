@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -20,7 +21,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.extension.noRippleClickable
+import com.example.crowdfundingplatform.presentation.ui.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
@@ -40,7 +41,6 @@ fun LoginScreen(
 ) {
     Column(
         modifier = Modifier
-            .padding(vertical = RegistrationFormVerticalPadding)
             .verticalScroll(
                 rememberScrollState()
             )
@@ -62,6 +62,7 @@ private fun LoginBody(
     Column(
         modifier = modifier, verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
+        Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))
         Text(
             text = stringResource(id = R.string.welcomeBack),
             style = Subtitle,
@@ -109,5 +110,6 @@ private fun LoginBody(
                     onSignUpClick()
                 })
         }
+        Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))
     }
 }

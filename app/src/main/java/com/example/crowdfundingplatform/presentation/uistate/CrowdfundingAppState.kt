@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.presentation.ui.navigation.BottomNavItems
 import com.example.crowdfundingplatform.presentation.ui.navigation.CrowdfundingGraphs
 import com.example.crowdfundingplatform.presentation.ui.navigation.CrowdfundingTopBarInfo
 
@@ -23,9 +24,8 @@ fun rememberCrowdfundingAppState(
 class CrowdfundingAppState(
     val navController: NavHostController
 ) {
-    //TODO add bottom bar routes
     val shouldShowBottomBar: Boolean
-        @Composable get() = false
+        @Composable get() = navController.currentBackStackEntryAsState().value?.destination?.route in BottomNavItems.bottomNavItems.map { it.route }
 
     val shouldShowTopBar: Boolean
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination?.route in CrowdfundingTopBarInfo.TOP_BAR_DESTINATIONS

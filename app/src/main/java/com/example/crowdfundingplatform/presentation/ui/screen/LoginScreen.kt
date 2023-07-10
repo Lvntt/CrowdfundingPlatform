@@ -27,7 +27,7 @@ import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingSmall
 import com.example.crowdfundingplatform.presentation.ui.theme.RegistrationFormVerticalPadding
-import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercent
+import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.Subtitle
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumStyle
 
@@ -94,7 +94,7 @@ private fun LoginBody(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(PaddingMedium),
-                    buttonShape = RoundedCornerShape(RoundedCornerShapePercent),
+                    buttonShape = RoundedCornerShape(RoundedCornerShapePercentMedium),
                     onClick = onSignInClick
                 )
             }

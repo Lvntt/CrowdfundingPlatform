@@ -30,4 +30,8 @@
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="patronymic">Patronymic</string>
+    <string name="raisedOf">Raised of</string>
+    <string name="raiseGoal">Raise Goal</string>
+    <string name="viewDetails">View details</string>
+    <string name="dashboard">Dashboard</string>
 </resources>

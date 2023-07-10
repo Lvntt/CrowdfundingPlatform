@@ -18,11 +18,11 @@ import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
-import com.example.crowdfundingplatform.presentation.ui.theme.DefaultTextColor
+import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.RegistrationFormVerticalPadding
-import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercent
+import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumStyle
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,7 +77,7 @@ private fun RegistrationCredentialsBody(
         )
         Text(
             text = stringResource(id = R.string.requiredFields),
-            color = DefaultTextColor,
+            color = PrimaryTextColor,
             style = LabelLightStyle,
             modifier = Modifier.padding(start = PaddingMedium)
         )
@@ -90,7 +90,7 @@ private fun RegistrationCredentialsBody(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(PaddingMedium),
-                buttonShape = RoundedCornerShape(RoundedCornerShapePercent),
+                buttonShape = RoundedCornerShape(RoundedCornerShapePercentMedium),
                 onClick = onSignUpClick
             )
         }

@@ -19,6 +19,11 @@ val Subtitle = TextStyle(
     fontSize = 24.sp
 )
 
+val TextButtonSmallStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 14.sp
+  
 val Headline = TextStyle(
     fontFamily = Ubuntu,
     fontWeight = FontWeight.Bold,

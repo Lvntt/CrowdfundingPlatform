@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.presentation.ui.theme.DefaultTextColor
+import com.example.crowdfundingplatform.presentation.ui.theme.TopBarElevation
 import com.example.crowdfundingplatform.presentation.ui.theme.TopAppBarStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.ElevationMedium
 
@@ -31,7 +33,7 @@ fun CrowdfundingTopAppBar(
         title = {
             Text(
                 text = title,
-                style = TopAppBarStyle
+                color = DefaultTextColor,
             )
         },
         modifier = modifier.shadow(ElevationMedium),

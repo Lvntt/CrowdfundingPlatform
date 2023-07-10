@@ -1,6 +1,5 @@
 package com.example.crowdfundingplatform.presentation.ui.screen
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
@@ -28,7 +28,7 @@ import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingSmall
 import com.example.crowdfundingplatform.presentation.ui.theme.RegistrationFormVerticalPadding
-import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercent
+import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.Subtitle
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumStyle
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
@@ -89,7 +89,7 @@ private fun LoginBody(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(PaddingMedium),
-                    buttonShape = RoundedCornerShape(RoundedCornerShapePercent),
+                    buttonShape = RoundedCornerShape(RoundedCornerShapePercentMedium),
                     onClick = authViewModel::logIn
                 )
             }
@@ -105,7 +105,7 @@ private fun LoginBody(
 
             Text(text = stringResource(id = R.string.signUp),
                 style = LabelBoldStyle,
-                modifier = Modifier.clickable {
+                modifier = Modifier.noRippleClickable {
                     onSignUpClick()
                 })
         }

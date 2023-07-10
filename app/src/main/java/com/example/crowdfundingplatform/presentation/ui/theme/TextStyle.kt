@@ -19,6 +19,17 @@ val Subtitle = TextStyle(
     fontSize = 24.sp
 )
 
+val TextButtonSmallStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 14.sp
+  
+val Headline = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 21.sp
+)
+
 val TextButtonMediumStyle = TextStyle(
     fontFamily = Ubuntu,
     fontWeight = FontWeight.Bold,
@@ -51,6 +62,30 @@ val LabelRegularStyle = TextStyle(
 
 val LabelBoldStyle = TextStyle(
     fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp
+)
+
+val ExtraSmallLabelRegularStyleAlternative = TextStyle(
+    fontFamily = Roboto,
+    fontWeight = FontWeight.Normal,
+    fontSize = 12.sp
+)
+
+val SmallLabelRegularStyleAlternative = TextStyle(
+    fontFamily = Roboto,
+    fontWeight = FontWeight.Normal,
+    fontSize = 14.sp
+)
+
+val LabelRegularStyleAlternative = TextStyle(
+    fontFamily = Roboto,
+    fontWeight = FontWeight.Normal,
+    fontSize = 16.sp
+)
+
+val LabelBoldStyleAlternative = TextStyle(
+    fontFamily = Roboto,
     fontWeight = FontWeight.Bold,
     fontSize = 16.sp
 )

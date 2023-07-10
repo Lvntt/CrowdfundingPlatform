@@ -17,7 +17,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonContentPadding
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonLargeCornerRadius
-import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonIconSize
+import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonIconSizeLarge
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonLargeStyle
 
 @Composable
@@ -31,7 +31,7 @@ fun TextButton(
     buttonContentPadding: PaddingValues = PaddingValues(TextButtonContentPadding),
     buttonShape: Shape = RoundedCornerShape(TextButtonLargeCornerRadius),
     buttonTextStyle: TextStyle = TextButtonLargeStyle,
-    buttonIconSize: Dp = TextButtonIconSize,
+    buttonIconSize: Dp = TextButtonIconSizeLarge,
     iconContentDescription: String = ""
 ) {
     Button(

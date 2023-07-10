@@ -14,15 +14,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.presentation.ui.theme.DefaultTextColor
+import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelRegularStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemBorderColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemBorderErrorColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemContainerColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemEndPadding
-import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemIconColor
+import com.example.crowdfundingplatform.presentation.ui.theme.IconDefaultTintColor
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
-import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercent
+import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +39,7 @@ fun LoginItem(
     ) {
         Icon(
             imageVector = icon,
-            tint = LoginItemIconColor,
+            tint = IconDefaultTintColor,
             contentDescription = null,
             modifier = Modifier.padding(PaddingMedium)
         )
@@ -49,13 +49,13 @@ fun LoginItem(
             label = {
                 Text(
                     text = label,
-                    color = DefaultTextColor,
+                    color = PrimaryTextColor,
                     style = LabelRegularStyle
                 )
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 containerColor = LoginItemContainerColor,
-                textColor = DefaultTextColor,
+                textColor = PrimaryTextColor,
                 unfocusedBorderColor = LoginItemBorderColor,
                 focusedBorderColor = LoginItemBorderColor,
                 errorBorderColor = LoginItemBorderErrorColor
@@ -63,7 +63,7 @@ fun LoginItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(end = LoginItemEndPadding),
-            shape = RoundedCornerShape(percent = RoundedCornerShapePercent),
+            shape = RoundedCornerShape(percent = RoundedCornerShapePercentMedium),
             enabled = enabled,
             singleLine = true
         )

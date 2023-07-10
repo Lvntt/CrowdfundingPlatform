@@ -12,7 +12,7 @@ class UserRepositoryImpl(
 ) : UserRepository {
 
     override suspend fun getYourProfile(): User {
-        val accessToken = tokenDataSource.fetchToken(TokenType.Access)!!
+        val accessToken = tokenDataSource.fetchToken(TokenType.ACCESS)!!
         return crowdfundingApiService.getYourProfile("Bearer $accessToken")
     }
 

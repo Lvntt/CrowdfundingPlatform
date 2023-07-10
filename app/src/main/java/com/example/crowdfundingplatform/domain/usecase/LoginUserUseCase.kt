@@ -7,7 +7,7 @@ class LoginUserUseCase(
     private val authRepository: AuthRepository
 ) {
 
-    suspend fun execute(body: LoginRequest) {
+    suspend operator fun invoke(body: LoginRequest) {
         authRepository.login(body)
     }
 

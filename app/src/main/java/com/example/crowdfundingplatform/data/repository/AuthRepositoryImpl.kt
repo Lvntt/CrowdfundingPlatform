@@ -14,27 +14,33 @@ class AuthRepositoryImpl(
 
     override suspend fun register(body: RegisterRequest) {
         val tokenResponse = crowdfundingApiService.register(body)
-        tokenDataSource.saveToken(tokenResponse.accessToken, TokenType.Access)
-        tokenDataSource.saveToken(tokenResponse.refreshToken, TokenType.Refresh)
+        tokenDataSource.saveToken(tokenResponse.accessToken, TokenType.ACCESS)
+        tokenDataSource.saveToken(tokenResponse.refreshToken, TokenType.REFRESH)
     }
 
     override suspend fun login(body: LoginRequest) {
         val tokenResponse = crowdfundingApiService.login(body)
-        tokenDataSource.saveToken(tokenResponse.accessToken, TokenType.Access)
-        tokenDataSource.saveToken(tokenResponse.refreshToken, TokenType.Refresh)
+        tokenDataSource.saveToken(tokenResponse.accessToken, TokenType.ACCESS)
+        tokenDataSource.saveToken(tokenResponse.refreshToken, TokenType.REFRESH)
     }
 
     override suspend fun refresh() {
-        val refreshToken = tokenDataSource.fetchToken(TokenType.Refresh)!!
+        val refreshToken = tokenDataSource.fetchToken(TokenType.REFRESH)!!
         val tokenResponse = crowdfundingApiService.refresh(refreshToken)
-        tokenDataSource.saveToken(tokenResponse.accessToken, TokenType.Access)
-        tokenDataSource.saveToken(tokenResponse.refreshToken, TokenType.Refresh)
+        tokenDataSource.saveToken(tokenResponse.accessToken, TokenType.ACCESS)
+        tokenDataSource.saveToken(tokenResponse.refreshToken, TokenType.REFRESH)
     }
 
     override suspend fun logout() {
-        val accessToken = tokenDataSource.fetchToken(TokenType.Access)!!
-        val refreshToken = tokenDataSource.fetchToken(TokenType.Refresh)!!
+        val accessToken = tokenDataSource.fetchToken(TokenType.ACCESS)!!
+        val refreshToken = tokenDataSource.fetchToken(TokenType.REFRESH)!!
         crowdfundingApiService.logout("Bearer $accessToken", refreshToken)
+    }
+
+    override suspend fun hasTokens(): Boolean {
+        val accessToken = tokenDataSource.fetchToken(TokenType.Access)
+        val refreshToken = tokenDataSource.fetchToken(TokenType.Refresh)
+        return accessToken != null && refreshToken != null
     }
 
 }

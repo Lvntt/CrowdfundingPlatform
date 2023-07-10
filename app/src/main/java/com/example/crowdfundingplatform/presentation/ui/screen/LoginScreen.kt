@@ -8,18 +8,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.extension.noRippleClickable
-import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
@@ -30,44 +31,36 @@ import com.example.crowdfundingplatform.presentation.ui.theme.RegistrationFormVe
 import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.Subtitle
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumStyle
+import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onSignInClick: () -> Unit,
-    onSignUpClick: () -> Unit,
-    onNavigateUp: () -> Unit
+    authViewModel: AuthViewModel,
+    onSignUpClick: () -> Unit
 ) {
-    Scaffold(
-        topBar = {
-            CrowdfundingTopAppBar(
-                title = stringResource(id = R.string.signIn),
-                canNavigateBack = true,
-                onNavigateUp = onNavigateUp
+    Column(
+        modifier = Modifier
+            .padding(vertical = RegistrationFormVerticalPadding)
+            .verticalScroll(
+                rememberScrollState()
             )
-        }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier.padding(vertical = RegistrationFormVerticalPadding)
-        ) {
-            LoginBody(
-                onSignInClick = onSignInClick,
-                onSignUpClick = onSignUpClick,
-                modifier = Modifier.padding(innerPadding)
-            )
-        }
+    ) {
+        LoginBody(
+            authViewModel = authViewModel,
+            onSignUpClick = onSignUpClick
+        )
     }
 }
 
 @Composable
 private fun LoginBody(
-    onSignInClick: () -> Unit,
+    authViewModel: AuthViewModel,
     onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val loginState by remember { authViewModel.loginContent }
     Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(PaddingMedium)
+        modifier = modifier, verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
         Text(
             text = stringResource(id = R.string.welcomeBack),
@@ -77,12 +70,14 @@ private fun LoginBody(
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.email),
             label = stringResource(id = R.string.email),
-            onValueChange = {}
+            onValueChange = authViewModel::setLoginEmail,
+            textFieldValue = loginState.email
         )
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.lock),
             label = stringResource(id = R.string.password),
-            onValueChange = {}
+            onValueChange = authViewModel::setLoginPassword,
+            textFieldValue = loginState.password
         )
         Box(
             modifier = Modifier.fillMaxWidth()
@@ -95,28 +90,24 @@ private fun LoginBody(
                         .fillMaxWidth()
                         .padding(PaddingMedium),
                     buttonShape = RoundedCornerShape(RoundedCornerShapePercentMedium),
-                    onClick = onSignInClick
+                    onClick = authViewModel::logIn
                 )
             }
         }
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = stringResource(id = R.string.noAccount),
-                style = LabelLightStyle
+                text = stringResource(id = R.string.noAccount), style = LabelLightStyle
             )
 
             Spacer(modifier = Modifier.width(PaddingSmall))
 
-            Text(
-                text = stringResource(id = R.string.signUp),
+            Text(text = stringResource(id = R.string.signUp),
                 style = LabelBoldStyle,
                 modifier = Modifier.noRippleClickable {
                     onSignUpClick()
-                }
-            )
+                })
         }
     }
 }

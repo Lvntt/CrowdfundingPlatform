@@ -14,8 +14,8 @@ object CrowdfundingGraphs {
 }
 
 object CrowdfundingTopBarInfo {
-    val TOP_BAR_DESTINATIONS = AuthGraphTopBarInfo.TOP_BAR_DESTINATIONS
-    val TOP_BAR_DATA: Map<String, @Composable (NavHostController) -> Unit> = AuthGraphTopBarInfo.TOP_BAR_DATA
+    val TOP_BAR_DESTINATIONS = AuthGraphTopBarInfo.TOP_BAR_DESTINATIONS + MainGraphTopBarInfo.TOP_BAR_DESTINATIONS
+    val TOP_BAR_DATA: Map<String, @Composable (NavHostController) -> Unit> = AuthGraphTopBarInfo.TOP_BAR_DATA + MainGraphTopBarInfo.TOP_BAR_DATA
 }
 
 @Composable

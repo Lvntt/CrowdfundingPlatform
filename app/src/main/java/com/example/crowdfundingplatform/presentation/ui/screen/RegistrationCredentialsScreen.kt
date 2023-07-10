@@ -87,7 +87,7 @@ private fun RegistrationCredentialsBody(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(PaddingMedium),
-                buttonShape = RoundedCornerShape(RoundedCornerShapePercent),
+                buttonShape = RoundedCornerShape(RoundedCornerShapePercentMedium),
                 onClick = authViewModel::signUp
             )
         }

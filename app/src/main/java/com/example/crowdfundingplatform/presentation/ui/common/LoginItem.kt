@@ -14,10 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.presentation.ui.theme.DefaultTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryTextColor
-import com.example.crowdfundingplatform.presentation.ui.theme.LabelRegularStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemBorderColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemBorderErrorColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemContainerColor
@@ -51,7 +49,7 @@ fun LoginItem(
             label = {
                 Text(
                     text = label,
-                    color = DefaultTextColor,
+                    color = PrimaryTextColor,
                     style = LabelBoldStyle
                 )
             },

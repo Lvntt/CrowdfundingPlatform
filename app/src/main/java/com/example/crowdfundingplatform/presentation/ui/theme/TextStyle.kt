@@ -23,6 +23,7 @@ val TextButtonSmallStyle = TextStyle(
     fontFamily = Ubuntu,
     fontWeight = FontWeight.Bold,
     fontSize = 14.sp
+)
   
 val Headline = TextStyle(
     fontFamily = Ubuntu,

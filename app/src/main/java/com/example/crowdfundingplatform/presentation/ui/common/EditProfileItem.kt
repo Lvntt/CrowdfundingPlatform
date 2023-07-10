@@ -10,13 +10,13 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.presentation.ui.theme.DefaultTextColor
+import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemBorderColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemBorderErrorColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemContainerColor
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
-import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercent
+import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,13 +32,13 @@ fun EditFieldItem(
         label = {
             Text(
                 text = label,
-                color = DefaultTextColor,
+                color = PrimaryTextColor,
                 style = LabelBoldStyle
             )
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             containerColor = LoginItemContainerColor,
-            textColor = DefaultTextColor,
+            textColor = PrimaryTextColor,
             unfocusedBorderColor = LoginItemBorderColor,
             focusedBorderColor = LoginItemBorderColor,
             errorBorderColor = LoginItemBorderErrorColor
@@ -46,7 +46,7 @@ fun EditFieldItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = PaddingMedium),
-        shape = RoundedCornerShape(percent = RoundedCornerShapePercent),
+        shape = RoundedCornerShape(percent = RoundedCornerShapePercentMedium),
         enabled = enabled,
         singleLine = true
     )

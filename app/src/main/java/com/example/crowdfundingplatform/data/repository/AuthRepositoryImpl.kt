@@ -38,8 +38,8 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun hasTokens(): Boolean {
-        val accessToken = tokenDataSource.fetchToken(TokenType.Access)
-        val refreshToken = tokenDataSource.fetchToken(TokenType.Refresh)
+        val accessToken = tokenDataSource.fetchToken(TokenType.ACCESS)
+        val refreshToken = tokenDataSource.fetchToken(TokenType.REFRESH)
         return accessToken != null && refreshToken != null
     }
 

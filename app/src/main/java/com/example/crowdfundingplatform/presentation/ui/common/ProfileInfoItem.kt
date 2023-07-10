@@ -17,8 +17,8 @@ import com.example.crowdfundingplatform.common.Constants
 import com.example.crowdfundingplatform.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
+import com.example.crowdfundingplatform.presentation.ui.theme.PaddingExtraSmall
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingSmall
-import com.example.crowdfundingplatform.presentation.ui.theme.PaddingVerySmall
 
 @Composable
 fun ProfileInfoItem(
@@ -42,7 +42,7 @@ fun ProfileInfoItem(
             color = MaterialTheme.colorScheme.onBackground
         )
         Row(
-            horizontalArrangement = Arrangement.spacedBy(PaddingVerySmall),
+            horizontalArrangement = Arrangement.spacedBy(PaddingExtraSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

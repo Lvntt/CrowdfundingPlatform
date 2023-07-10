@@ -42,15 +42,15 @@ class CrowdfundingAppState(
         get() = _alertDialogData
     private var _alertDialogData = AlertDialogData(0, 0, 0, null, {}, {})
 
-    val topBarData: TopBarData
+    val topBarData: @Composable (NavHostController) -> Unit
         get() {
-            val topBarData = CrowdfundingTopBarInfo.TOP_BAR_DATA[navController.currentDestination?.route]
+            val topBarData: (@Composable (NavHostController) -> Unit)? = CrowdfundingTopBarInfo.TOP_BAR_DATA[navController.currentDestination?.route]
             if (topBarData != null) {
                 prevTopBarData = topBarData
             }
             return topBarData ?: prevTopBarData
         }
-    private var prevTopBarData = TopBarData(0, false) {}
+    private var prevTopBarData: @Composable (NavHostController) -> Unit = {}
 
     fun showAlertDialog(dialogData: AlertDialogData) {
         if (_shouldShowAlertDialog.value) {

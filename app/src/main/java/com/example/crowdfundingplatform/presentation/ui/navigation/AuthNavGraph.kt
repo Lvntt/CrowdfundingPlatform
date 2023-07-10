@@ -1,17 +1,21 @@
 package com.example.crowdfundingplatform.presentation.ui.navigation
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.screen.LoginScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.OnboardingScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.RegistrationCredentialsScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.RegistrationPersonalInfoScreen
 import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
 import com.example.crowdfundingplatform.presentation.uistate.CrowdfundingAppState
-import com.example.crowdfundingplatform.presentation.uistate.TopBarData
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
 object AuthGraphDestinations {
@@ -21,26 +25,40 @@ object AuthGraphDestinations {
     const val LOGIN_ROUTE = "login"
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 object AuthGraphTopBarInfo {
     val TOP_BAR_DESTINATIONS = arrayOf(
         AuthGraphDestinations.REGISTRATION_CREDENTIALS_ROUTE,
         AuthGraphDestinations.REGISTRATION_PERSONAL_INFO_ROUTE,
         AuthGraphDestinations.LOGIN_ROUTE
     )
-    val TOP_BAR_DATA = mapOf(
-        AuthGraphDestinations.REGISTRATION_CREDENTIALS_ROUTE to TopBarData(titleId = R.string.registrationTitle,
-            canNavigateUp = true,
-            onNavigateUp = { it.navigate(AuthGraphDestinations.LOGIN_ROUTE) }),
-        AuthGraphDestinations.REGISTRATION_PERSONAL_INFO_ROUTE to TopBarData(titleId = R.string.registrationTitle,
-            canNavigateUp = true,
-            onNavigateUp = { it.navigate(AuthGraphDestinations.LOGIN_ROUTE) }),
-        AuthGraphDestinations.LOGIN_ROUTE to TopBarData(titleId = R.string.signIn,
-            canNavigateUp = true,
-            onNavigateUp = { it.navigate(AuthGraphDestinations.ONBOARDING_ROUTE) })
+    val TOP_BAR_DATA = mapOf<String, @Composable (NavHostController) -> Unit>(
+        AuthGraphDestinations.REGISTRATION_CREDENTIALS_ROUTE to @Composable { navController ->
+            CrowdfundingTopAppBar(
+                title = stringResource(id = R.string.registrationTitle),
+                canNavigateBack = true,
+                onNavigateUp = { navController.navigate(AuthGraphDestinations.LOGIN_ROUTE) }
+            )
+        },
+        AuthGraphDestinations.REGISTRATION_PERSONAL_INFO_ROUTE to @Composable { navController ->
+            CrowdfundingTopAppBar(
+                title = stringResource(id = R.string.registrationTitle),
+                canNavigateBack = true,
+                onNavigateUp = { navController.navigate(AuthGraphDestinations.LOGIN_ROUTE) }
+            )
+        },
+        AuthGraphDestinations.LOGIN_ROUTE to @Composable { navController ->
+            CrowdfundingTopAppBar(
+                title = stringResource(id = R.string.signIn),
+                canNavigateBack = true,
+                onNavigateUp = { navController.navigate(AuthGraphDestinations.ONBOARDING_ROUTE) }
+            )
+        }
     )
 }
 
 fun NavGraphBuilder.authNavGraph(appState: CrowdfundingAppState, viewModel: AuthViewModel) {
+    viewModel.setAppState(appState)
     navigation(
         route = CrowdfundingGraphs.AUTH, startDestination = AuthGraphDestinations.ONBOARDING_ROUTE
     ) {

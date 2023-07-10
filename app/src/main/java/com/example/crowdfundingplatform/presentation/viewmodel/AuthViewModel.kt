@@ -25,7 +25,7 @@ class AuthViewModel(
     private val loginUserUseCase: LoginUserUseCase,
     private val registerUserUseCase: RegisterUserUseCase,
     private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase,
-    private val appState: CrowdfundingAppState
+    private var appState: CrowdfundingAppState
 ) : ViewModel() {
     val authState: State<AuthUiState>
         get() = _authState
@@ -76,6 +76,10 @@ class AuthViewModel(
                 }
             }
         }
+    }
+
+    fun setAppState(appState: CrowdfundingAppState) {
+        this.appState = appState
     }
 
     fun setName(name: String) {

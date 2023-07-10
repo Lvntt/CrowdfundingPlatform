@@ -14,7 +14,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.TextAlertDialog
 import com.example.crowdfundingplatform.presentation.ui.navigation.CrowdfundingNavigation
@@ -35,9 +34,7 @@ fun CrowdfundingApp() {
                 enter = fadeIn() + expandVertically(),
                 exit = shrinkVertically() + fadeOut()
             ) {
-                CrowdfundingTopAppBar(title = stringResource(id = appState.topBarData.titleId),
-                    canNavigateBack = appState.topBarData.canNavigateUp,
-                    onNavigateUp = { appState.topBarData.onNavigateUp(appState.navController) })
+                appState.topBarData(appState.navController)
             }
         }, bottomBar = {
             if (appState.shouldShowBottomBar) {

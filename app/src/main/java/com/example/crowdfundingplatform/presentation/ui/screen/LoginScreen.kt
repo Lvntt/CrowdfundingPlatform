@@ -1,6 +1,5 @@
 package com.example.crowdfundingplatform.presentation.ui.screen
 
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,22 +12,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
-import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
-import com.example.crowdfundingplatform.presentation.ui.common.TextAlertDialog
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
@@ -38,82 +31,36 @@ import com.example.crowdfundingplatform.presentation.ui.theme.RegistrationFormVe
 import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercent
 import com.example.crowdfundingplatform.presentation.ui.theme.Subtitle
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumStyle
-import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     authViewModel: AuthViewModel,
-    onSignInClick: () -> Unit = authViewModel::logIn,
-    onSignUpClick: () -> Unit,
-    onNavigateUp: () -> Unit,
-    onSignInSuccess: () -> Unit
+    onSignUpClick: () -> Unit
 ) {
-    val state by remember { authViewModel.authState }
-    Crossfade(targetState = state) {
-        when (it) {
-            AuthUiState.Loading -> {
-                LoadingProgress()
-            }
-
-            AuthUiState.Success -> {
-                LaunchedEffect(Unit) {
-                    onSignInSuccess()
-                }
-            }
-
-            else -> {
-                if (state is AuthUiState.Error) {
-                    TextAlertDialog(
-                        title = stringResource(id = R.string.error),
-                        text = stringResource(
-                            id = (state as AuthUiState.Error).messageId
-                        ),
-                        dismissText = stringResource(id = R.string.ok),
-                        onDismiss = authViewModel::resetErrorState
-                    )
-                }
-                Scaffold(
-                    topBar = {
-                        CrowdfundingTopAppBar(
-                            title = stringResource(id = R.string.signIn),
-                            canNavigateBack = true,
-                            onNavigateUp = onNavigateUp
-                        )
-                    }
-                ) { innerPadding ->
-                    Column(
-                        modifier = Modifier
-                            .padding(vertical = RegistrationFormVerticalPadding)
-                            .verticalScroll(
-                                rememberScrollState()
-                            )
-                    ) {
-                        LoginBody(
-                            authViewModel = authViewModel,
-                            onSignInClick = onSignInClick,
-                            onSignUpClick = onSignUpClick,
-                            modifier = Modifier.padding(innerPadding)
-                        )
-                    }
-                }
-            }
-        }
+    Column(
+        modifier = Modifier
+            .padding(vertical = RegistrationFormVerticalPadding)
+            .verticalScroll(
+                rememberScrollState()
+            )
+    ) {
+        LoginBody(
+            authViewModel = authViewModel,
+            onSignUpClick = onSignUpClick
+        )
     }
 }
 
 @Composable
 private fun LoginBody(
     authViewModel: AuthViewModel,
-    onSignInClick: () -> Unit,
     onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val loginState by remember { authViewModel.loginContent }
     Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(PaddingMedium)
+        modifier = modifier, verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
         Text(
             text = stringResource(id = R.string.welcomeBack),
@@ -143,28 +90,24 @@ private fun LoginBody(
                         .fillMaxWidth()
                         .padding(PaddingMedium),
                     buttonShape = RoundedCornerShape(RoundedCornerShapePercent),
-                    onClick = onSignInClick
+                    onClick = authViewModel::logIn
                 )
             }
         }
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = stringResource(id = R.string.noAccount),
-                style = LabelLightStyle
+                text = stringResource(id = R.string.noAccount), style = LabelLightStyle
             )
 
             Spacer(modifier = Modifier.width(PaddingSmall))
 
-            Text(
-                text = stringResource(id = R.string.signUp),
+            Text(text = stringResource(id = R.string.signUp),
                 style = LabelBoldStyle,
                 modifier = Modifier.clickable {
                     onSignUpClick()
-                }
-            )
+                })
         }
     }
 }

@@ -12,6 +12,7 @@ import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCas
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.RegisterUserUseCase
 import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
+import com.example.crowdfundingplatform.presentation.uistate.CrowdfundingAppState
 import com.example.crowdfundingplatform.presentation.uistate.LoginContent
 import com.example.crowdfundingplatform.presentation.uistate.RegistrationContent
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -23,7 +24,8 @@ import retrofit2.HttpException
 class AuthViewModel(
     private val loginUserUseCase: LoginUserUseCase,
     private val registerUserUseCase: RegisterUserUseCase,
-    private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase
+    private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase,
+    private var appState: CrowdfundingAppState
 ) : ViewModel() {
     val authState: State<AuthUiState>
         get() = _authState
@@ -40,31 +42,33 @@ class AuthViewModel(
     private val signupExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                400 -> _authState.value = AuthUiState.Error(R.string.invalidForm)
-                409 -> _authState.value = AuthUiState.Error(R.string.userExists)
-                else -> _authState.value = AuthUiState.Error(R.string.unknownError)
+                400 -> appState.showErrorDialog(R.string.invalidForm)
+                409 -> appState.showErrorDialog(R.string.userExists)
+                else -> appState.showErrorDialog(R.string.unknownError)
             }
 
-            else -> _authState.value = AuthUiState.Error(R.string.unknownError)
+            else -> appState.showErrorDialog(R.string.unknownError)
         }
+        appState.hideLoadingProgress()
     }
 
     private val loginExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> _authState.value = AuthUiState.Error(R.string.invalidCredentials)
-                else -> _authState.value = AuthUiState.Error(R.string.unknownError)
+                401 -> appState.showErrorDialog(R.string.invalidCredentials)
+                else -> appState.showErrorDialog(R.string.unknownError)
             }
 
-            else -> _authState.value = AuthUiState.Error(R.string.unknownError)
+            else -> appState.showErrorDialog(R.string.unknownError)
         }
+        appState.hideLoadingProgress()
     }
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             if (checkTokenExistenceUseCase()) {
                 withContext(Dispatchers.Main) {
-                    _authState.value = AuthUiState.Success
+                    appState.navigateToHome()
                 }
             } else {
                 withContext(Dispatchers.Main) {
@@ -72,6 +76,10 @@ class AuthViewModel(
                 }
             }
         }
+    }
+
+    fun setAppState(appState: CrowdfundingAppState) {
+        this.appState = appState
     }
 
     fun setName(name: String) {
@@ -108,7 +116,7 @@ class AuthViewModel(
     }
 
     fun signUp() {
-        _authState.value = AuthUiState.Loading
+        appState.showLoadingProgress()
         viewModelScope.launch(Dispatchers.IO + signupExceptionHandler) {
             registerUserUseCase(
                 RegisterRequest(
@@ -119,25 +127,26 @@ class AuthViewModel(
                     _registrationContent.value.email
                 )
             )
-            _authState.value = AuthUiState.Success
+            appState.hideLoadingProgress()
+            withContext(Dispatchers.Main) {
+                appState.navigateToHome()
+            }
         }
     }
 
     fun logIn() {
-        _authState.value = AuthUiState.Loading
+        appState.showLoadingProgress()
         viewModelScope.launch(Dispatchers.IO + loginExceptionHandler) {
             loginUserUseCase(
                 LoginRequest(
                     _loginContent.value.email, _loginContent.value.password
                 )
             )
-            _authState.value = AuthUiState.Success
+            appState.hideLoadingProgress()
+            withContext(Dispatchers.Main) {
+                appState.navigateToHome()
+            }
         }
     }
 
-    fun resetErrorState() {
-        if (_authState.value is AuthUiState.Error) {
-            _authState.value = AuthUiState.Input
-        }
-    }
 }

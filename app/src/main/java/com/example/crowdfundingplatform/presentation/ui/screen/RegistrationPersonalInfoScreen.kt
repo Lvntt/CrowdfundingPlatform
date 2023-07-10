@@ -1,6 +1,5 @@
 package com.example.crowdfundingplatform.presentation.ui.screen
 
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,8 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,10 +17,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
-import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
-import com.example.crowdfundingplatform.presentation.ui.common.TextAlertDialog
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.DefaultTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
@@ -31,59 +25,24 @@ import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.RegistrationFormVerticalPadding
 import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercent
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumStyle
-import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegistrationPersonalInfoScreen(
     authViewModel: AuthViewModel,
-    onContinueClick: () -> Unit,
-    onNavigateUp: () -> Unit
+    onContinueClick: () -> Unit
 ) {
-    val state by remember { authViewModel.authState }
-    Crossfade(targetState = state) {
-        when (it) {
-            AuthUiState.Loading -> {
-                LoadingProgress()
-            }
-
-            else -> {
-                if (state is AuthUiState.Error) {
-                    TextAlertDialog(
-                        title = stringResource(id = R.string.error),
-                        text = stringResource(
-                            id = (state as AuthUiState.Error).messageId
-                        ),
-                        dismissText = stringResource(id = R.string.ok),
-                        onDismiss = authViewModel::resetErrorState
-                    )
-                }
-                Scaffold(
-                    topBar = {
-                        CrowdfundingTopAppBar(
-                            title = stringResource(id = R.string.registrationTitle),
-                            canNavigateBack = true,
-                            onNavigateUp = onNavigateUp
-                        )
-                    }
-                ) { innerPadding ->
-                    Column(
-                        modifier = Modifier
-                            .padding(vertical = RegistrationFormVerticalPadding)
-                            .verticalScroll(
-                                rememberScrollState()
-                            )
-                    ) {
-                        RegistrationPersonalInfoBody(
-                            authViewModel = authViewModel,
-                            onContinueClick = onContinueClick,
-                            modifier = Modifier.padding(innerPadding)
-                        )
-                    }
-                }
-            }
-        }
+    Column(
+        modifier = Modifier
+            .padding(vertical = RegistrationFormVerticalPadding)
+            .verticalScroll(
+                rememberScrollState()
+            )
+    ) {
+        RegistrationPersonalInfoBody(
+            authViewModel = authViewModel,
+            onContinueClick = onContinueClick,
+        )
     }
 }
 

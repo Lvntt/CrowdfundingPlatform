@@ -5,6 +5,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelRegularStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.Subtitle
 
@@ -12,7 +13,9 @@ import com.example.crowdfundingplatform.presentation.ui.theme.Subtitle
 fun TextAlertDialog(
     title: String,
     text: String,
-    dismissText: String,
+    confirmText: String,
+    dismissText: String?,
+    onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
     AlertDialog(onDismissRequest = onDismiss, title = {
@@ -21,11 +24,21 @@ fun TextAlertDialog(
         Text(text = text, style = LabelRegularStyle, color = MaterialTheme.colorScheme.onBackground)
     }, confirmButton = {
         Button(
-            onClick = onDismiss
+            onClick = onConfirm
         ) {
             Text(
-                text = dismissText, style = LabelRegularStyle, color = MaterialTheme.colorScheme.onBackground
+                text = confirmText, style = LabelBoldStyle, color = MaterialTheme.colorScheme.onBackground
             )
+        }
+    }, dismissButton = {
+        if (dismissText != null) {
+            Button(
+                onClick = onDismiss
+            ) {
+                Text(
+                    text = dismissText, style = LabelBoldStyle, color = MaterialTheme.colorScheme.onBackground
+                )
+            }
         }
     })
 }

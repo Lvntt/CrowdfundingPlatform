@@ -8,6 +8,7 @@ object Constants {
     const val REFRESH_URL = "auth/refresh"
     const val LOGOUT_URL = "auth/logout"
     const val YOUR_PROFILE_URL = "persons"
+    const val ALL_PROJECTS_URL = "projects"
     const val TOKEN_PREFERENCES = "token_preferences"
     const val USER_ACCESS_TOKEN = "access_token"
     const val USER_REFRESH_TOKEN = "refresh_token"

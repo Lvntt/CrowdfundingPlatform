@@ -13,9 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
-import com.example.crowdfundingplatform.presentation.ui.common.TextAlertDialog
 import com.example.crowdfundingplatform.presentation.ui.navigation.BottomNavItems
 import com.example.crowdfundingplatform.presentation.ui.navigation.BottomNavigationBar
 import com.example.crowdfundingplatform.presentation.ui.navigation.CrowdfundingNavigation
@@ -58,22 +55,6 @@ fun CrowdfundingApp() {
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                if (appState.shouldShowLoadingProgress) {
-                    LoadingProgress()
-                }
-                if (appState.shouldShowAlertDialog) {
-                    val dismissText = appState.alertDialogData.dismissText
-                    TextAlertDialog(
-                        title = stringResource(id = appState.alertDialogData.title),
-                        text = stringResource(id = appState.alertDialogData.text),
-                        confirmText = stringResource(id = appState.alertDialogData.confirmText),
-                        dismissText = if (dismissText != null) stringResource(
-                            id = dismissText
-                        ) else null,
-                        onConfirm = appState.alertDialogData.onConfirm,
-                        onDismiss = appState.alertDialogData.onDismiss
-                    )
-                }
                 CrowdfundingNavigation(appState)
             }
         }

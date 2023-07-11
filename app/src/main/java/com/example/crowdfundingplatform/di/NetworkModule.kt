@@ -1,7 +1,8 @@
 package com.example.crowdfundingplatform.di
 
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.data.api.CrowdfundingApiService
+import com.example.crowdfundingplatform.data.api.AuthApiService
+import com.example.crowdfundingplatform.data.api.ProfileApiService
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -14,13 +15,20 @@ private fun provideRetrofit(
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 
-private fun provideCrowdfundingApiService(): CrowdfundingApiService =
-    provideRetrofit(Constants.BASE_URL).create(CrowdfundingApiService::class.java)
+private fun provideAuthApiService(): AuthApiService =
+    provideRetrofit(Constants.BASE_URL).create(AuthApiService::class.java)
+
+private fun provideProfileApiService(): ProfileApiService =
+    provideRetrofit(Constants.BASE_URL).create(ProfileApiService::class.java)
 
 fun provideNetworkModule(): Module = module {
 
     single {
-        provideCrowdfundingApiService()
+        provideAuthApiService()
+    }
+
+    single {
+        provideProfileApiService()
     }
 
 }

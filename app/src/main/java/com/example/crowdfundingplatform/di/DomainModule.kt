@@ -1,7 +1,8 @@
 package com.example.crowdfundingplatform.di
 
 import android.content.Context
-import com.example.crowdfundingplatform.data.api.CrowdfundingApiService
+import com.example.crowdfundingplatform.data.api.AuthApiService
+import com.example.crowdfundingplatform.data.api.ProfileApiService
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.datasource.TokenDataSourceImpl
 import com.example.crowdfundingplatform.data.repository.AuthRepositoryImpl
@@ -23,14 +24,14 @@ private fun provideTokenDataSource(
 ): TokenDataSource = TokenDataSourceImpl(context)
 
 private fun provideAuthRepository(
-    crowdfundingApiService: CrowdfundingApiService,
+    authApiService: AuthApiService,
     tokenDataSource: TokenDataSource
-): AuthRepository = AuthRepositoryImpl(crowdfundingApiService, tokenDataSource)
+): AuthRepository = AuthRepositoryImpl(authApiService, tokenDataSource)
 
 private fun provideUserRepository(
-    crowdfundingApiService: CrowdfundingApiService,
+    profileApiService: ProfileApiService,
     tokenDataSource: TokenDataSource
-): UserRepository = UserRepositoryImpl(crowdfundingApiService, tokenDataSource)
+): UserRepository = UserRepositoryImpl(profileApiService, tokenDataSource)
 
 fun provideDomainModule(): Module = module {
 

@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.domain.entity
+package com.example.crowdfundingplatform.data.model
 
 data class TokenResponse(
     val accessToken: String,

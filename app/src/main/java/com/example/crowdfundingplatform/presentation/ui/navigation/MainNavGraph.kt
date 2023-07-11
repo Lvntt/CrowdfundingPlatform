@@ -69,14 +69,11 @@ fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
     ) {
         composable(MainGraphDestinations.PROFILE) {
             ProfileInfoScreen(
-                email = "cat@xddd.com",
-                name = "Cat",
-                surname = "Based",
-                patronymic = "Super-based",
                 photoId = R.drawable.cat_image,
                 onEditEmailClick = { appState.navController.navigate(MainGraphDestinations.EDIT_EMAIL) },
                 onEditPasswordClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PASSWORD) },
-                onEditPersonalInfoClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PERSONAL_INFO) }
+                onEditPersonalInfoClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PERSONAL_INFO) },
+                onSignOut = { appState.navController.navigate(AuthGraphDestinations.AUTHORIZATION_ROUTE) }
             )
         }
         composable(MainGraphDestinations.DASHBOARD) {

@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.ui.screen
+package com.example.crowdfundingplatform.presentation.ui.screen.auth
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,9 +19,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.presentation.ui.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
+import com.example.crowdfundingplatform.presentation.ui.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
@@ -35,27 +33,8 @@ import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumSt
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
 @Composable
-fun LoginScreen(
+fun LoginBody(
     authViewModel: AuthViewModel,
-    onSignUpClick: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .verticalScroll(
-                rememberScrollState()
-            )
-    ) {
-        LoginBody(
-            authViewModel = authViewModel,
-            onSignUpClick = onSignUpClick
-        )
-    }
-}
-
-@Composable
-private fun LoginBody(
-    authViewModel: AuthViewModel,
-    onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val loginState by remember { authViewModel.loginContent }
@@ -107,7 +86,7 @@ private fun LoginBody(
             Text(text = stringResource(id = R.string.signUp),
                 style = LabelBoldStyle,
                 modifier = Modifier.noRippleClickable {
-                    onSignUpClick()
+                    authViewModel.openRegistrationPersonalInfo()
                 })
         }
         Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))

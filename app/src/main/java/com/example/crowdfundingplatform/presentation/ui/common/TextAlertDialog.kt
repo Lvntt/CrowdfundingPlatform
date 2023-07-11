@@ -14,7 +14,7 @@ fun TextAlertDialog(
     title: String,
     text: String,
     confirmText: String,
-    dismissText: String?,
+    dismissText: String? = null,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -27,7 +27,9 @@ fun TextAlertDialog(
             onClick = onConfirm
         ) {
             Text(
-                text = confirmText, style = LabelBoldStyle, color = MaterialTheme.colorScheme.onBackground
+                text = confirmText,
+                style = LabelBoldStyle,
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }, dismissButton = {
@@ -36,7 +38,9 @@ fun TextAlertDialog(
                 onClick = onDismiss
             ) {
                 Text(
-                    text = dismissText, style = LabelBoldStyle, color = MaterialTheme.colorScheme.onBackground
+                    text = dismissText,
+                    style = LabelBoldStyle,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
         }

@@ -11,8 +11,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -24,18 +25,19 @@ import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingIconSize
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingIconSpacing
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingTitleWeight
 import com.example.crowdfundingplatform.presentation.ui.theme.Title
-import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
-import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
+import com.example.crowdfundingplatform.presentation.uistate.OnboardingState
+import com.example.crowdfundingplatform.presentation.viewmodel.OnboardingViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun OnboardingScreen(
-    authViewModel: AuthViewModel,
-    onContinueClick: () -> Unit
+    onContinueClick: () -> Unit, onLoginCheckPassed: () -> Unit
 ) {
-    val state by remember { authViewModel.authState }
-    Crossfade(targetState = state) {
-        if (it == AuthUiState.Input) {
-            Column(
+    val viewModel: OnboardingViewModel = koinViewModel()
+    val state by remember { viewModel.onboardingState }
+    Crossfade(targetState = state, label = "") {
+        when (it) {
+            OnboardingState.Content -> Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
@@ -70,6 +72,14 @@ fun OnboardingScreen(
                     )
                 }
             }
+
+            OnboardingState.Success -> {
+                LaunchedEffect(Unit) {
+                    onLoginCheckPassed()
+                }
+            }
+
+            OnboardingState.Initial -> Unit
         }
     }
 }

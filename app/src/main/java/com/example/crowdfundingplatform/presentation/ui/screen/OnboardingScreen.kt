@@ -37,41 +37,7 @@ fun OnboardingScreen(
     val state by remember { viewModel.onboardingState }
     Crossfade(targetState = state, label = "") {
         when (it) {
-            OnboardingState.Content -> Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Column(
-                    modifier = Modifier.weight(OnboardingTitleWeight),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.logo_stub),
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.size(OnboardingIconSize)
-                    )
-                    Spacer(modifier = Modifier.height(OnboardingIconSpacing))
-                    Text(
-                        text = stringResource(id = R.string.appName),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = Title
-                    )
-                }
-                Column(
-                    modifier = Modifier.weight(OnboardingButtonWeight),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    TextButton(
-                        text = stringResource(id = R.string.onboardingButton),
-                        icon = painterResource(id = R.drawable.double_arrow_right),
-                        onClick = onContinueClick
-                    )
-                }
-            }
+            OnboardingState.Content -> OnboardingBody(onContinueClick)
 
             OnboardingState.Success -> {
                 LaunchedEffect(Unit) {
@@ -80,6 +46,45 @@ fun OnboardingScreen(
             }
 
             OnboardingState.Initial -> Unit
+        }
+    }
+}
+
+@Composable
+private fun OnboardingBody(onContinueClick: () -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Column(
+            modifier = Modifier.weight(OnboardingTitleWeight),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.logo_stub),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(OnboardingIconSize)
+            )
+            Spacer(modifier = Modifier.height(OnboardingIconSpacing))
+            Text(
+                text = stringResource(id = R.string.appName),
+                color = MaterialTheme.colorScheme.onBackground,
+                style = Title
+            )
+        }
+        Column(
+            modifier = Modifier.weight(OnboardingButtonWeight),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            TextButton(
+                text = stringResource(id = R.string.onboardingButton),
+                icon = painterResource(id = R.drawable.double_arrow_right),
+                onClick = onContinueClick
+            )
         }
     }
 }

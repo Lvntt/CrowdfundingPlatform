@@ -33,6 +33,8 @@ import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.common.ErrorScreen
 import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.ProfileInfoItem
+import com.example.crowdfundingplatform.presentation.ui.common.WarningItem
+import com.example.crowdfundingplatform.presentation.ui.theme.LabelRegularStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingLarge
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryColorLight
@@ -57,13 +59,15 @@ fun ProfileInfoScreen(
     val viewModel: ProfileInfoViewModel = koinViewModel()
     val profileInfoState by remember { viewModel.profileInfoState }
     Crossfade(targetState = profileInfoState, label = "") { state ->
-        when(state) {
+        when (state) {
             is ProfileInfoState.Content ->
-                Box(modifier = modifier
-                    .fillMaxSize()
-                    .verticalScroll(
-                        rememberScrollState()
-                    )) {
+                Box(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .verticalScroll(
+                            rememberScrollState()
+                        )
+                ) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -98,6 +102,8 @@ fun ProfileInfoScreen(
                             name = state.user.name,
                             surname = state.user.surname,
                             patronymic = state.user.patronymic,
+                            bio = state.user.bio,
+                            emailIsConfirmed = state.user.emailIsConfirmed,
                             onEditEmailClick = onEditEmailClick,
                             onEditPasswordClick = onEditPasswordClick,
                             onEditPersonalInfoClick = onEditPersonalInfoClick,
@@ -105,7 +111,12 @@ fun ProfileInfoScreen(
                         )
                     }
                 }
-            is ProfileInfoState.Error -> ErrorScreen(messageId = state.messageId, onRetryClick = viewModel::getProfile)
+
+            is ProfileInfoState.Error -> ErrorScreen(
+                messageId = state.messageId,
+                onRetryClick = viewModel::getProfile
+            )
+
             ProfileInfoState.Loading -> LoadingProgress()
             ProfileInfoState.SignedOut -> LaunchedEffect(Unit) {
                 onSignOut()
@@ -120,6 +131,8 @@ fun ProfileInfoBody(
     name: String,
     surname: String,
     patronymic: String,
+    bio: String,
+    emailIsConfirmed: Boolean,
     onEditEmailClick: () -> Unit,
     onEditPasswordClick: () -> Unit,
     onEditPersonalInfoClick: () -> Unit,
@@ -136,11 +149,19 @@ fun ProfileInfoBody(
             style = TopAppBarStyle,
             textAlign = TextAlign.Center
         )
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = bio.ifEmpty { stringResource(id = R.string.noBio) },
+            color = MaterialTheme.colorScheme.onBackground,
+            style = LabelRegularStyle,
+            textAlign = TextAlign.Center
+        )
         ProfileInfoItems(
             email = email,
             name = name,
             surname = surname,
             patronymic = patronymic,
+            emailIsConfirmed = emailIsConfirmed,
             onEditEmailClick = onEditEmailClick,
             onEditPasswordClick = onEditPasswordClick,
             onEditPersonalInfoClick = onEditPersonalInfoClick
@@ -154,6 +175,7 @@ fun ProfileInfoItems(
     name: String,
     surname: String,
     patronymic: String,
+    emailIsConfirmed: Boolean,
     onEditEmailClick: () -> Unit,
     onEditPasswordClick: () -> Unit,
     onEditPersonalInfoClick: () -> Unit,
@@ -163,6 +185,9 @@ fun ProfileInfoItems(
         modifier = modifier.padding(vertical = PaddingLarge),
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
+        if (!emailIsConfirmed) {
+            WarningItem(warningText = stringResource(id = R.string.emailNotConfirmed))
+        }
         ProfileInfoItem(
             label = stringResource(id = R.string.email),
             fieldValue = email,
@@ -186,6 +211,11 @@ fun ProfileInfoItems(
         ProfileInfoItem(
             label = stringResource(id = R.string.patronymic),
             fieldValue = patronymic,
+            onEditClick = onEditPersonalInfoClick
+        )
+        ProfileInfoItem(
+            label = stringResource(id = R.string.bio),
+            fieldValue = null,
             onEditClick = onEditPersonalInfoClick
         )
     }

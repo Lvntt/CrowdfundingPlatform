@@ -1,14 +1,19 @@
 package com.example.crowdfundingplatform.di
 
 import android.content.Context
-import com.example.crowdfundingplatform.data.api.CrowdfundingApiService
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.datasource.TokenDataSourceImpl
+import com.example.crowdfundingplatform.data.remote.api.AuthApiService
+import com.example.crowdfundingplatform.data.remote.api.ProjectApiService
+import com.example.crowdfundingplatform.data.remote.api.UserApiService
 import com.example.crowdfundingplatform.data.repository.AuthRepositoryImpl
+import com.example.crowdfundingplatform.data.repository.ProjectRepositoryImpl
 import com.example.crowdfundingplatform.data.repository.UserRepositoryImpl
 import com.example.crowdfundingplatform.domain.repository.AuthRepository
+import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import com.example.crowdfundingplatform.domain.repository.UserRepository
 import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
+import com.example.crowdfundingplatform.domain.usecase.GetAllProjectsUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.LogoutUserUseCase
@@ -23,14 +28,18 @@ private fun provideTokenDataSource(
 ): TokenDataSource = TokenDataSourceImpl(context)
 
 private fun provideAuthRepository(
-    crowdfundingApiService: CrowdfundingApiService,
+    authApiService: AuthApiService,
     tokenDataSource: TokenDataSource
-): AuthRepository = AuthRepositoryImpl(crowdfundingApiService, tokenDataSource)
+): AuthRepository = AuthRepositoryImpl(authApiService, tokenDataSource)
 
 private fun provideUserRepository(
-    crowdfundingApiService: CrowdfundingApiService,
+    userApiService: UserApiService,
     tokenDataSource: TokenDataSource
-): UserRepository = UserRepositoryImpl(crowdfundingApiService, tokenDataSource)
+): UserRepository = UserRepositoryImpl(userApiService, tokenDataSource)
+
+private fun provideProjectRepository(
+    projectApiService: ProjectApiService
+): ProjectRepository = ProjectRepositoryImpl(projectApiService)
 
 fun provideDomainModule(): Module = module {
 
@@ -44,6 +53,10 @@ fun provideDomainModule(): Module = module {
 
     single {
         provideUserRepository(get(), get())
+    }
+
+    single {
+        provideProjectRepository(get())
     }
 
     factory {
@@ -68,6 +81,10 @@ fun provideDomainModule(): Module = module {
 
     factory {
         CheckTokenExistenceUseCase(get())
+    }
+
+    factory {
+        GetAllProjectsUseCase(get())
     }
 
 }

@@ -9,7 +9,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.data.mock.MockProjectSource
 import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.common.DashboardTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.screen.DashboardScreen
@@ -80,7 +79,7 @@ fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
             )
         }
         composable(MainGraphDestinations.DASHBOARD) {
-            DashboardScreen(projects = MockProjectSource.projects)
+            DashboardScreen()
         }
         composable(MainGraphDestinations.EDIT_EMAIL) {
             EditEmailScreen()

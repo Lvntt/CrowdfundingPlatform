@@ -1,16 +1,14 @@
-package com.example.crowdfundingplatform.data.api
+package com.example.crowdfundingplatform.data.remote.api
 
 import com.example.crowdfundingplatform.common.Constants
 import com.example.crowdfundingplatform.domain.entity.LoginRequest
 import com.example.crowdfundingplatform.domain.entity.RegisterRequest
 import com.example.crowdfundingplatform.domain.entity.TokenResponse
-import com.example.crowdfundingplatform.domain.entity.User
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
-interface CrowdfundingApiService {
+interface AuthApiService {
 
     @POST(Constants.REGISTER_URL)
     suspend fun register(@Body body: RegisterRequest): TokenResponse
@@ -23,8 +21,5 @@ interface CrowdfundingApiService {
 
     @POST(Constants.REFRESH_URL)
     suspend fun refresh(@Body refreshToken: String): TokenResponse
-
-    @GET(Constants.YOUR_PROFILE_URL)
-    suspend fun getYourProfile(@Header("Authorization") accessToken: String): User
 
 }

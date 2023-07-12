@@ -5,7 +5,6 @@ import com.example.crowdfundingplatform.domain.entity.User
 import retrofit2.http.GET
 import retrofit2.http.Header
 
-// TODO di
 interface UserApiService {
 
     @GET(Constants.YOUR_PROFILE_URL)

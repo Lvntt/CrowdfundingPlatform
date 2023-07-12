@@ -4,12 +4,15 @@ import android.content.Context
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.datasource.TokenDataSourceImpl
 import com.example.crowdfundingplatform.data.remote.api.AuthApiService
+import com.example.crowdfundingplatform.data.remote.api.FileApiService
 import com.example.crowdfundingplatform.data.remote.api.ProjectApiService
 import com.example.crowdfundingplatform.data.remote.api.UserApiService
 import com.example.crowdfundingplatform.data.repository.AuthRepositoryImpl
+import com.example.crowdfundingplatform.data.repository.FileRepositoryImpl
 import com.example.crowdfundingplatform.data.repository.ProjectRepositoryImpl
 import com.example.crowdfundingplatform.data.repository.UserRepositoryImpl
 import com.example.crowdfundingplatform.domain.repository.AuthRepository
+import com.example.crowdfundingplatform.domain.repository.FileRepository
 import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import com.example.crowdfundingplatform.domain.repository.UserRepository
 import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
@@ -19,6 +22,7 @@ import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.LogoutUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
 import com.example.crowdfundingplatform.domain.usecase.RegisterUserUseCase
+import com.example.crowdfundingplatform.domain.usecase.UploadFileAndGetIdUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -41,6 +45,11 @@ private fun provideProjectRepository(
     projectApiService: ProjectApiService
 ): ProjectRepository = ProjectRepositoryImpl(projectApiService)
 
+private fun provideFileRepository(
+    fileApiService: FileApiService,
+    context: Context
+): FileRepository = FileRepositoryImpl(fileApiService, context.contentResolver)
+
 fun provideDomainModule(): Module = module {
 
     single {
@@ -57,6 +66,10 @@ fun provideDomainModule(): Module = module {
 
     single {
         provideProjectRepository(get())
+    }
+
+    single {
+        provideFileRepository(get(), androidContext().applicationContext)
     }
 
     factory {
@@ -85,6 +98,10 @@ fun provideDomainModule(): Module = module {
 
     factory {
         GetAllProjectsUseCase(get())
+    }
+
+    factory {
+        UploadFileAndGetIdUseCase(get())
     }
 
 }

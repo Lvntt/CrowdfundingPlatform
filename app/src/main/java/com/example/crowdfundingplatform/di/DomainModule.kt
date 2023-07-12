@@ -16,6 +16,7 @@ import com.example.crowdfundingplatform.domain.repository.FileRepository
 import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import com.example.crowdfundingplatform.domain.repository.UserRepository
 import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
+import com.example.crowdfundingplatform.domain.usecase.EditYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetAllProjectsUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
@@ -102,6 +103,10 @@ fun provideDomainModule(): Module = module {
 
     factory {
         UploadFileAndGetIdUseCase(get())
+    }
+
+    factory {
+        EditYourProfileUseCase(get())
     }
 
 }

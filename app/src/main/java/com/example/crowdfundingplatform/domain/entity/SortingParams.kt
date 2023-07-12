@@ -5,5 +5,5 @@ data class SortingParams(
     val creationDate: SortingType,
     val targetAmount: SortingType,
     val category: SortingType,
-    val status: SortingType,
+    val status: SortingType
 )

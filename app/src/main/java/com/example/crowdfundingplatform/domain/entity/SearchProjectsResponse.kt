@@ -1,6 +1,6 @@
 package com.example.crowdfundingplatform.domain.entity
 
-data class AllProjectsResponse(
+data class SearchProjectsResponse(
     val pagingParams: PagingParams,
     val content: List<ProjectSummary>
 )

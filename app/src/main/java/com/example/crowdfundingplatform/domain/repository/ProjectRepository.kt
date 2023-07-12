@@ -1,10 +1,10 @@
 package com.example.crowdfundingplatform.domain.repository
 
-import com.example.crowdfundingplatform.domain.entity.AllProjectsRequest
-import com.example.crowdfundingplatform.domain.entity.AllProjectsResponse
+import com.example.crowdfundingplatform.domain.entity.SearchProjectsRequest
+import com.example.crowdfundingplatform.domain.entity.SearchProjectsResponse
 
 interface ProjectRepository {
 
-    suspend fun getAllProjects(body: AllProjectsRequest): AllProjectsResponse
+    suspend fun getAllProjects(body: SearchProjectsRequest): SearchProjectsResponse
 
 }

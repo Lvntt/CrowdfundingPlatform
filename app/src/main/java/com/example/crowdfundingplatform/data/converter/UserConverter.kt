@@ -10,13 +10,14 @@ class UserConverter {
         with(from) {
             User(
                 id = id,
-                userRole = if(personRole != null) UserRole.valueOf(personRole.name) else UserRole.NOT_VERIFIED,
+                userRole = if(personRole != null) UserRole.valueOf(personRole.name) else UserRole.NONE,
                 name = name ?: Constants.EMPTY_STRING,
                 surname = surname ?: Constants.EMPTY_STRING,
                 patronymic = patronymic ?: Constants.EMPTY_STRING,
                 email = email ?: Constants.EMPTY_STRING,
                 money = money ?: 0,
-                bio = bio ?: Constants.EMPTY_STRING
+                bio = bio ?: Constants.EMPTY_STRING,
+                emailIsConfirmed = emailIsConfirm ?: false
             )
         }
 }

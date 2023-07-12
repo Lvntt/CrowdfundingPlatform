@@ -8,5 +8,6 @@ data class User(
     val patronymic: String,
     val email: String,
     val money: Int,
-    val bio: String
+    val bio: String,
+    val emailIsConfirmed: Boolean
 )

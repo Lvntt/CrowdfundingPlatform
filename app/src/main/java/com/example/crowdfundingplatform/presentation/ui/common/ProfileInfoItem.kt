@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.extension.noRippleClickable
+import com.example.crowdfundingplatform.presentation.ui.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingExtraSmall

@@ -1,6 +1,7 @@
 package com.example.crowdfundingplatform.data.repository
 
 import com.example.crowdfundingplatform.data.remote.api.UserApiService
+import com.example.crowdfundingplatform.data.converter.UserConverter
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.remote.model.TokenType
 import com.example.crowdfundingplatform.domain.entity.User
@@ -10,10 +11,11 @@ class UserRepositoryImpl(
     private val userApiService: UserApiService,
     private val tokenDataSource: TokenDataSource
 ) : UserRepository {
+    private val userConverter = UserConverter()
 
     override suspend fun getYourProfile(): User {
         val accessToken = tokenDataSource.fetchToken(TokenType.ACCESS)!!
-        return userApiService.getYourProfile("Bearer $accessToken")
+        return userConverter.convert(userApiService.getYourProfile("Bearer $accessToken"))
     }
 
 }

@@ -8,28 +8,35 @@ import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.domain.entity.LoginRequest
 import com.example.crowdfundingplatform.domain.entity.RegisterRequest
-import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.RegisterUserUseCase
-import com.example.crowdfundingplatform.presentation.uistate.AuthUiState
-import com.example.crowdfundingplatform.presentation.uistate.CrowdfundingAppState
+import com.example.crowdfundingplatform.presentation.uistate.AuthState
+import com.example.crowdfundingplatform.presentation.uistate.AuthType
 import com.example.crowdfundingplatform.presentation.uistate.LoginContent
 import com.example.crowdfundingplatform.presentation.uistate.RegistrationContent
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class AuthViewModel(
     private val loginUserUseCase: LoginUserUseCase,
-    private val registerUserUseCase: RegisterUserUseCase,
-    private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase,
-    private var appState: CrowdfundingAppState
+    private val registerUserUseCase: RegisterUserUseCase
 ) : ViewModel() {
-    val authState: State<AuthUiState>
+    val authState: State<AuthState>
         get() = _authState
-    private val _authState: MutableState<AuthUiState> = mutableStateOf(AuthUiState.Initial)
+    private val _authState: MutableState<AuthState> = mutableStateOf(AuthState.Input)
+
+    val errorMessageFlow: SharedFlow<Int>
+        get() = _errorMessageFlow
+    private val _errorMessageFlow = MutableSharedFlow<Int>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+
+    val authType: State<AuthType>
+        get() = _authType
+    private val _authType = mutableStateOf(AuthType.LOG_IN)
 
     val loginContent: State<LoginContent>
         get() = _loginContent
@@ -42,44 +49,26 @@ class AuthViewModel(
     private val signupExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                400 -> appState.showErrorDialog(R.string.invalidForm)
-                409 -> appState.showErrorDialog(R.string.userExists)
-                else -> appState.showErrorDialog(R.string.unknownError)
+                400 -> _errorMessageFlow.tryEmit(R.string.invalidForm)
+                409 -> _errorMessageFlow.tryEmit(R.string.userExists)
+                else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
 
-            else -> appState.showErrorDialog(R.string.unknownError)
+            else -> _errorMessageFlow.tryEmit(R.string.unknownError)
         }
-        appState.hideLoadingProgress()
+        _authState.value = AuthState.Input
     }
 
     private val loginExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> appState.showErrorDialog(R.string.invalidCredentials)
-                else -> appState.showErrorDialog(R.string.unknownError)
+                401 -> _errorMessageFlow.tryEmit(R.string.invalidCredentials)
+                else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
 
-            else -> appState.showErrorDialog(R.string.unknownError)
+            else -> _errorMessageFlow.tryEmit(R.string.unknownError)
         }
-        appState.hideLoadingProgress()
-    }
-
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (checkTokenExistenceUseCase()) {
-                withContext(Dispatchers.Main) {
-                    appState.navigateToHome()
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    _authState.value = AuthUiState.Input
-                }
-            }
-        }
-    }
-
-    fun setAppState(appState: CrowdfundingAppState) {
-        this.appState = appState
+        _authState.value = AuthState.Input
     }
 
     fun setName(name: String) {
@@ -116,7 +105,7 @@ class AuthViewModel(
     }
 
     fun signUp() {
-        appState.showLoadingProgress()
+        _authState.value = AuthState.Loading
         viewModelScope.launch(Dispatchers.IO + signupExceptionHandler) {
             registerUserUseCase(
                 RegisterRequest(
@@ -127,26 +116,32 @@ class AuthViewModel(
                     _registrationContent.value.email
                 )
             )
-            appState.hideLoadingProgress()
-            withContext(Dispatchers.Main) {
-                appState.navigateToHome()
-            }
+            _authState.value = AuthState.Success
         }
     }
 
     fun logIn() {
-        appState.showLoadingProgress()
+        _authState.value = AuthState.Loading
         viewModelScope.launch(Dispatchers.IO + loginExceptionHandler) {
             loginUserUseCase(
                 LoginRequest(
                     _loginContent.value.email, _loginContent.value.password
                 )
             )
-            appState.hideLoadingProgress()
-            withContext(Dispatchers.Main) {
-                appState.navigateToHome()
-            }
+            _authState.value = AuthState.Success
         }
+    }
+
+    fun openRegistrationPersonalInfo() {
+        _authType.value = AuthType.REGISTER_PERSONAL_INFO
+    }
+
+    fun openRegistrationCredentials() {
+        _authType.value = AuthType.REGISTER_CREDENTIALS
+    }
+
+    fun openLogin() {
+        _authType.value = AuthType.LOG_IN
     }
 
 }

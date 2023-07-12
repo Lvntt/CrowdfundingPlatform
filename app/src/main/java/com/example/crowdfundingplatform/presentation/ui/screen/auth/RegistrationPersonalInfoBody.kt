@@ -1,13 +1,13 @@
-package com.example.crowdfundingplatform.presentation.ui.screen
+package com.example.crowdfundingplatform.presentation.ui.screen.auth
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,37 +19,17 @@ import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
-import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
+import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.RegistrationFormVerticalPadding
 import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumStyle
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
 @Composable
-fun RegistrationPersonalInfoScreen(
+fun RegistrationPersonalInfoBody(
     authViewModel: AuthViewModel,
-    onContinueClick: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .padding(vertical = RegistrationFormVerticalPadding)
-            .verticalScroll(
-                rememberScrollState()
-            )
-    ) {
-        RegistrationPersonalInfoBody(
-            authViewModel = authViewModel,
-            onContinueClick = onContinueClick,
-        )
-    }
-}
-
-@Composable
-private fun RegistrationPersonalInfoBody(
-    authViewModel: AuthViewModel,
-    onContinueClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val registrationState by remember { authViewModel.registrationContent }
@@ -57,6 +37,7 @@ private fun RegistrationPersonalInfoBody(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
+        Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))
         LoginItem(
             icon = ImageVector.vectorResource(id = R.drawable.person_outline),
             label = stringResource(id = R.string.nameReq),
@@ -91,8 +72,9 @@ private fun RegistrationPersonalInfoBody(
                     .fillMaxWidth()
                     .padding(PaddingMedium),
                 buttonShape = RoundedCornerShape(RoundedCornerShapePercentMedium),
-                onClick = onContinueClick
+                onClick = authViewModel::openRegistrationCredentials
             )
         }
+        Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))
     }
 }

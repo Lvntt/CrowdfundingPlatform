@@ -22,7 +22,10 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Pink40,
     onPrimary = OnPrimaryColorLight,
     onBackground = OnBackgroundColorLight,
-    background = BackgroundColorLight
+    background = BackgroundColorLight,
+    surfaceVariant = SurfaceVariantLight,
+    onSurface = OnSurfaceLight,
+    onSurfaceVariant = OnSurfaceVariantLight
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

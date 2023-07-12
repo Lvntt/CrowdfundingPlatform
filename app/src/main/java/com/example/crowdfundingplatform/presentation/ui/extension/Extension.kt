@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.extension
+package com.example.crowdfundingplatform.presentation.ui.extension
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

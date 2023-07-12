@@ -1,7 +1,7 @@
 <resources>
     <string name="appName">Crowdfunding Platform</string>
     <string name="backButton">Back</string>
-    <string name="registrationTitle">Create an Account</string>
+    <string name="authTitle">Authorization</string>
     <string name="nameReq">Name*</string>
     <string name="surnameReq">Surname*</string>
     <string name="patronymicReq">Patronymic*</string>
@@ -43,4 +43,5 @@
     <string name="anErrorOccurred">An error occurred.</string>
     <string name="errorWithDesc">An error occurred. Check your internet connection</string>
     <string name="retry">Retry</string>
+    <string name="profile">Profile</string>
 </resources>

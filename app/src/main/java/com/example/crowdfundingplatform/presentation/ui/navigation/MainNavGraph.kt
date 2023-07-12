@@ -64,18 +64,15 @@ object MainGraphTopBarInfo {
 
 fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
     navigation(
-        route = CrowdfundingGraphs.MAIN, startDestination = MainGraphDestinations.PROFILE
+        route = CrowdfundingGraphs.MAIN, startDestination = MainGraphDestinations.DASHBOARD
     ) {
         composable(MainGraphDestinations.PROFILE) {
             ProfileInfoScreen(
-                email = "cat@xddd.com",
-                name = "Cat",
-                surname = "Based",
-                patronymic = "Super-based",
                 photoId = R.drawable.cat_image,
                 onEditEmailClick = { appState.navController.navigate(MainGraphDestinations.EDIT_EMAIL) },
                 onEditPasswordClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PASSWORD) },
-                onEditPersonalInfoClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PERSONAL_INFO) }
+                onEditPersonalInfoClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PERSONAL_INFO) },
+                onSignOut = { appState.navController.navigate(AuthGraphDestinations.AUTHORIZATION_ROUTE) }
             )
         }
         composable(MainGraphDestinations.DASHBOARD) {

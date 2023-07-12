@@ -1,14 +1,14 @@
 package com.example.crowdfundingplatform.data.remote.api
 
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.domain.entity.AllProjectsRequest
-import com.example.crowdfundingplatform.domain.entity.AllProjectsResponse
+import com.example.crowdfundingplatform.domain.entity.SearchProjectsRequest
+import com.example.crowdfundingplatform.domain.entity.SearchProjectsResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ProjectApiService {
 
-    @POST(Constants.ALL_PROJECTS_URL)
-    suspend fun getAllProjects(@Body body: AllProjectsRequest): AllProjectsResponse
+    @POST(Constants.PROJECTS_SEARCH_URL)
+    suspend fun searchProjects(@Body body: SearchProjectsRequest): SearchProjectsResponse
 
 }

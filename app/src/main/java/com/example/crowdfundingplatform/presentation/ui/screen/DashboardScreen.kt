@@ -144,7 +144,7 @@ private fun ProjectImage(
             .fillMaxWidth()
             .height(ProjectSummaryImageHeight)
     ) {
-        val imageLink = "${Constants.BASE_URL}/files/$imageId"
+        val imageLink = "${Constants.BASE_URL}${Constants.FILE_URL}$imageId"
 
         AsyncImage(
             model = ImageRequest.Builder(context = LocalContext.current)

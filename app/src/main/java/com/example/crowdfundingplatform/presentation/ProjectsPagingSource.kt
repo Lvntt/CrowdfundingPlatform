@@ -2,7 +2,7 @@ package com.example.crowdfundingplatform.presentation
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.crowdfundingplatform.domain.entity.AllProjectsRequest
+import com.example.crowdfundingplatform.domain.entity.SearchProjectsRequest
 import com.example.crowdfundingplatform.domain.entity.FilteringParams
 import com.example.crowdfundingplatform.domain.entity.PagingParams
 import com.example.crowdfundingplatform.domain.entity.ProjectSummary
@@ -46,13 +46,13 @@ class ProjectsPagingSource(
         return try {
             val page = params.key ?: 0
 
-            val allProjectsRequest = AllProjectsRequest(
+            val searchProjectsRequest = SearchProjectsRequest(
                 pagingParams = PagingParams(page = page),
                 filteringParams = _filteringParams,
                 sorting = _sortingParams
             )
 
-            val response = getAllProjectsUseCase(allProjectsRequest)
+            val response = getAllProjectsUseCase(searchProjectsRequest)
             val projects = response.content
 
             val prevKey = if (page > 0) page - 1 else null

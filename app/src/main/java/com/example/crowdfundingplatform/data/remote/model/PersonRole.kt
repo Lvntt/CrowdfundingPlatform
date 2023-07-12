@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.data.model
+package com.example.crowdfundingplatform.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 

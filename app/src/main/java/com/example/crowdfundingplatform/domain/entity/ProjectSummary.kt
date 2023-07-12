@@ -4,13 +4,13 @@ data class ProjectSummary(
     val id: String,
     val title: String,
     val summary: String,
-    val collectedAmount: Int,
-    val targetAmount: Int,
-    val category: ProjectCategory,
-    val imageId: String,
-    val status: ProjectStatus,
+    val targetAmount: String,
+    val collectedAmount: String,
+    val avatarId: String,
     val creationDate: String,
+    val finishDate: String,
+    val category: ProjectCategory,
+    val status: ProjectStatus,
     val authorId: String,
-    // TODO TEMPORARY FOR MOCKING
-    val imageDrawableId: Int
+    val isApproved: Boolean
 )

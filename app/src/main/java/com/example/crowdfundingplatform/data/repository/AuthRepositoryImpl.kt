@@ -1,9 +1,12 @@
 package com.example.crowdfundingplatform.data.repository
 
-import com.example.crowdfundingplatform.data.api.AuthApiService
+import com.example.crowdfundingplatform.data.remote.api.AuthApiService
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
+import com.example.crowdfundingplatform.data.remote.model.TokenType
+import com.example.crowdfundingplatform.data.remote.api.AuthApiService
+import com.example.crowdfundingplatform.data.remote.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.model.RefreshRequest
-import com.example.crowdfundingplatform.data.model.TokenType
+import com.example.crowdfundingplatform.data.remote.model.TokenType
 import com.example.crowdfundingplatform.domain.entity.LoginRequest
 import com.example.crowdfundingplatform.domain.entity.RegisterRequest
 import com.example.crowdfundingplatform.domain.repository.AuthRepository

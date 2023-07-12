@@ -40,5 +40,8 @@
     <string name="raiseGoal">Raise Goal</string>
     <string name="viewDetails">View details</string>
     <string name="dashboard">Dashboard</string>
+    <string name="anErrorOccurred">An error occurred.</string>
+    <string name="errorWithDesc">An error occurred. Check your internet connection</string>
+    <string name="retry">Retry</string>
     <string name="profile">Profile</string>
 </resources>

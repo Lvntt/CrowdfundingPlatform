@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.data.model.TokenType
+import com.example.crowdfundingplatform.data.remote.model.TokenType
 
 class TokenDataSourceImpl(context: Context) : TokenDataSource {
 

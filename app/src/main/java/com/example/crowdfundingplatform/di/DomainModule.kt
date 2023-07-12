@@ -1,15 +1,19 @@
 package com.example.crowdfundingplatform.di
 
 import android.content.Context
-import com.example.crowdfundingplatform.data.api.AuthApiService
-import com.example.crowdfundingplatform.data.api.ProfileApiService
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.datasource.TokenDataSourceImpl
+import com.example.crowdfundingplatform.data.remote.api.AuthApiService
+import com.example.crowdfundingplatform.data.remote.api.ProjectApiService
+import com.example.crowdfundingplatform.data.remote.api.UserApiService
 import com.example.crowdfundingplatform.data.repository.AuthRepositoryImpl
+import com.example.crowdfundingplatform.data.repository.ProjectRepositoryImpl
 import com.example.crowdfundingplatform.data.repository.UserRepositoryImpl
 import com.example.crowdfundingplatform.domain.repository.AuthRepository
+import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import com.example.crowdfundingplatform.domain.repository.UserRepository
 import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
+import com.example.crowdfundingplatform.domain.usecase.GetAllProjectsUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.LogoutUserUseCase
@@ -29,9 +33,13 @@ private fun provideAuthRepository(
 ): AuthRepository = AuthRepositoryImpl(authApiService, tokenDataSource)
 
 private fun provideUserRepository(
-    profileApiService: ProfileApiService,
+    userApiService: UserApiService,
     tokenDataSource: TokenDataSource
-): UserRepository = UserRepositoryImpl(profileApiService, tokenDataSource)
+): UserRepository = UserRepositoryImpl(userApiService, tokenDataSource)
+
+private fun provideProjectRepository(
+    projectApiService: ProjectApiService
+): ProjectRepository = ProjectRepositoryImpl(projectApiService)
 
 fun provideDomainModule(): Module = module {
 
@@ -45,6 +53,10 @@ fun provideDomainModule(): Module = module {
 
     single {
         provideUserRepository(get(), get())
+    }
+
+    single {
+        provideProjectRepository(get())
     }
 
     factory {
@@ -69,6 +81,10 @@ fun provideDomainModule(): Module = module {
 
     factory {
         CheckTokenExistenceUseCase(get())
+    }
+
+    factory {
+        GetAllProjectsUseCase(get())
     }
 
 }

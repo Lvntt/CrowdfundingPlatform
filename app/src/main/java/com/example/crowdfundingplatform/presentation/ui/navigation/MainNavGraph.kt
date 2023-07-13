@@ -100,9 +100,8 @@ fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
         }
         composable(MainGraphDestinations.EDIT_PERSONAL_INFO) {
             EditPersonalInfoScreen(
-                name = "Cat",
-                surname = "Based",
-                patronymic = "Super-based"
+                onSignedOut = { appState.navController.navigate(AuthGraphDestinations.AUTHORIZATION_ROUTE) },
+                onSuccess = { appState.navController.navigate(MainGraphDestinations.PROFILE) }
             )
             BackHandler {
                 appState.navController.navigate(MainGraphDestinations.PROFILE)

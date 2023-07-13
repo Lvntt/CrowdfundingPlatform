@@ -85,4 +85,5 @@
     <string name="publicInitiativesCategory">Public initiatives</string>
     <string name="charityCategory">Charity</string>
     <string name="allCategory">All</string>
+    <string name="invalidPersonalInfo">Invalid name, surname or patronymic</string>
 </resources>

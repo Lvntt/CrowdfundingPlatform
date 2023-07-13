@@ -2,6 +2,7 @@ package com.example.crowdfundingplatform.di
 
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 import com.example.crowdfundingplatform.presentation.viewmodel.DashboardViewModel
+import com.example.crowdfundingplatform.presentation.viewmodel.EditPersonalInfoViewModel
 import com.example.crowdfundingplatform.presentation.viewmodel.OnboardingViewModel
 import com.example.crowdfundingplatform.presentation.viewmodel.ProfileInfoViewModel
 import com.example.crowdfundingplatform.presentation.viewmodel.ProjectCreationViewModel
@@ -37,6 +38,12 @@ fun providePresentationModule(): Module = module {
 
     viewModel {
         ProjectCreationViewModel(
+            get(), get(), get()
+        )
+    }
+    
+    viewModel {
+        EditPersonalInfoViewModel(
             get(), get(), get()
         )
     }

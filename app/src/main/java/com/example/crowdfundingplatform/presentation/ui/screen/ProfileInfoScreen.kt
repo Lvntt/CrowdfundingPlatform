@@ -8,6 +8,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -33,14 +36,17 @@ import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.common.ErrorScreen
 import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.ProfileInfoItem
+import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.common.WarningItem
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelRegularStyle
+import com.example.crowdfundingplatform.presentation.ui.theme.NextButtonHeight
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingLarge
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryColorLight
 import com.example.crowdfundingplatform.presentation.ui.theme.ProfilePhotoBackgroundSize
 import com.example.crowdfundingplatform.presentation.ui.theme.ProfilePhotoBorderSize
 import com.example.crowdfundingplatform.presentation.ui.theme.ProfilePhotoSize
+import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.TopAppBarStyle
 import com.example.crowdfundingplatform.presentation.uistate.ProfileInfoState
 import com.example.crowdfundingplatform.presentation.viewmodel.ProfileInfoViewModel
@@ -53,6 +59,7 @@ fun ProfileInfoScreen(
     onEditEmailClick: () -> Unit,
     onEditPasswordClick: () -> Unit,
     onEditPersonalInfoClick: () -> Unit,
+    onCreateProjectClick: () -> Unit,
     onSignOut: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -107,6 +114,7 @@ fun ProfileInfoScreen(
                             onEditEmailClick = onEditEmailClick,
                             onEditPasswordClick = onEditPasswordClick,
                             onEditPersonalInfoClick = onEditPersonalInfoClick,
+                            onCreateProjectClick = onCreateProjectClick,
                             modifier = modifier
                         )
                     }
@@ -136,6 +144,7 @@ fun ProfileInfoBody(
     onEditEmailClick: () -> Unit,
     onEditPasswordClick: () -> Unit,
     onEditPersonalInfoClick: () -> Unit,
+    onCreateProjectClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -164,7 +173,8 @@ fun ProfileInfoBody(
             emailIsConfirmed = emailIsConfirmed,
             onEditEmailClick = onEditEmailClick,
             onEditPasswordClick = onEditPasswordClick,
-            onEditPersonalInfoClick = onEditPersonalInfoClick
+            onEditPersonalInfoClick = onEditPersonalInfoClick,
+            onCreateProjectClick = onCreateProjectClick
         )
     }
 }
@@ -179,15 +189,30 @@ fun ProfileInfoItems(
     onEditEmailClick: () -> Unit,
     onEditPasswordClick: () -> Unit,
     onEditPersonalInfoClick: () -> Unit,
+    onCreateProjectClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier.padding(vertical = PaddingLarge),
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
+        TextButton(
+            text = stringResource(id = R.string.createProject),
+            onClick = onCreateProjectClick,
+            buttonContentPadding = PaddingValues(start = PaddingMedium),
+            buttonShape = RoundedCornerShape(RoundedCornerShapePercentMedium),
+            modifier = Modifier
+                .height(NextButtonHeight)
+                .align(Alignment.CenterHorizontally),
+            icon = painterResource(id = R.drawable.add),
+        )
+
+        Spacer(modifier = Modifier.height(PaddingMedium))
+
         if (!emailIsConfirmed) {
             WarningItem(warningText = stringResource(id = R.string.emailNotConfirmed))
         }
+        
         ProfileInfoItem(
             label = stringResource(id = R.string.email),
             fieldValue = email,

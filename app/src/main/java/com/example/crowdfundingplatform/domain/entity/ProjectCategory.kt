@@ -10,5 +10,6 @@ enum class ProjectCategory {
     TRAVEL,
     ECOLOGY_AND_NATURE,
     PUBLIC_INITIATIVES,
-    CHARITY
+    CHARITY,
+    ALL
 }

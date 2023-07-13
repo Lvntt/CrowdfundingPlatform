@@ -31,7 +31,7 @@ fun ErrorScreen(@StringRes messageId: Int, onRetryClick: () -> Unit) {
         modifier = Modifier.fillMaxSize()
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.refresh),
+            painter = painterResource(id = R.drawable.refresh_icon),
             contentDescription = Constants.EMPTY_STRING,
             modifier = Modifier
                 .size(ProgressIndicatorSize)

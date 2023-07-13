@@ -86,4 +86,8 @@
     <string name="charityCategory">Charity</string>
     <string name="allCategory">All</string>
     <string name="invalidPersonalInfo">Invalid name, surname or patronymic</string>
+    <string name="uploadAvatar">Upload avatar</string>
+    <string name="deleteAvatar">Delete avatar</string>
+    <string name="avatarSuccess">Avatar was uploaded successfully</string>
+    <string name="uploadingAvatar">Uploading avatar...</string>
 </resources>

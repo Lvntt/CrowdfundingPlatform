@@ -37,7 +37,7 @@ fun OnboardingScreen(
     val state by remember { viewModel.onboardingState }
     Crossfade(targetState = state, label = "") {
         when (it) {
-            OnboardingState.Content -> OnboardingBody(onContinueClick)
+            OnboardingState.Content -> OnboardingContent(onContinueClick)
 
             OnboardingState.Success -> {
                 LaunchedEffect(Unit) {
@@ -51,7 +51,7 @@ fun OnboardingScreen(
 }
 
 @Composable
-private fun OnboardingBody(onContinueClick: () -> Unit) {
+private fun OnboardingContent(onContinueClick: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

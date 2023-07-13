@@ -28,7 +28,7 @@ import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumSt
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
 @Composable
-fun RegistrationCredentialsBody(
+fun RegistrationPersonalInfoContent(
     authViewModel: AuthViewModel,
     modifier: Modifier = Modifier
 ) {
@@ -39,22 +39,22 @@ fun RegistrationCredentialsBody(
     ) {
         Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))
         LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.email),
-            label = stringResource(id = R.string.emailReq),
-            onValueChange = authViewModel::setEmail,
-            textFieldValue = registrationState.email
+            icon = ImageVector.vectorResource(id = R.drawable.person_outline_icon),
+            label = stringResource(id = R.string.nameReq),
+            onValueChange = authViewModel::setName,
+            textFieldValue = registrationState.name
         )
         LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.lock),
-            label = stringResource(id = R.string.passwordReq),
-            onValueChange = authViewModel::setPassword,
-            textFieldValue = registrationState.password
+            icon = ImageVector.vectorResource(id = R.drawable.person_outline_icon),
+            label = stringResource(id = R.string.surnameReq),
+            onValueChange = authViewModel::setSurname,
+            textFieldValue = registrationState.surname
         )
         LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.lock),
-            label = stringResource(id = R.string.confirmPasswordReq),
-            onValueChange = authViewModel::setConfirmPassword,
-            textFieldValue = registrationState.confirmPassword
+            icon = ImageVector.vectorResource(id = R.drawable.person_outline_icon),
+            label = stringResource(id = R.string.patronymicReq),
+            onValueChange = authViewModel::setPatronymic,
+            textFieldValue = registrationState.patronymic
         )
         Text(
             text = stringResource(id = R.string.requiredFields),
@@ -66,13 +66,13 @@ fun RegistrationCredentialsBody(
             modifier = Modifier.fillMaxWidth()
         ) {
             TextButton(
-                text = stringResource(id = R.string.signUp),
+                text = stringResource(id = R.string.continueRegistration),
                 buttonTextStyle = TextButtonMediumStyle,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(PaddingMedium),
                 buttonShape = RoundedCornerShape(RoundedCornerShapePercentMedium),
-                onClick = authViewModel::signUp
+                onClick = authViewModel::openRegistrationCredentials
             )
         }
         Spacer(modifier = Modifier.height(RegistrationFormVerticalPadding))

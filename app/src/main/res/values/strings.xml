@@ -86,4 +86,12 @@
     <string name="charityCategory">Charity</string>
     <string name="allCategory">All</string>
     <string name="invalidPersonalInfo">Invalid name, surname or patronymic</string>
+    <string name="balance">Balance</string>
+    <string name="yourBalance">Your balance: </string>
+    <string name="addBalance">Add balance</string>
+    <string name="promoCode">Promo code</string>
+    <string name="activatePromoCode">Activate a promo code</string>
+    <string name="activate">Activate</string>
+    <string name="noSuchPromoCode">This promo code does not exist or it was already activated.</string>
+    <string name="promoCodeSuccessfullyActivated">The promo code was successfully activated.</string>
 </resources>

@@ -9,10 +9,13 @@ object Constants {
     const val LOGIN_URL = "auth/login"
     const val REFRESH_URL = "auth/tokens"
     const val LOGOUT_URL = "auth/logout"
+    const val CREATE_PROJECT_URL = "projects"
     const val PROJECTS_SEARCH_URL = "projects/search"
     const val YOUR_PROFILE_URL = "profiles"
     const val TOKEN_PREFERENCES = "token_preferences"
     const val USER_ACCESS_TOKEN = "access_token"
     const val USER_REFRESH_TOKEN = "refresh_token"
     const val DEFAULT_PAGE_SIZE = 5
+    const val DATETIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    const val EXPIRES_AFTER_MONTHS = 36
 }

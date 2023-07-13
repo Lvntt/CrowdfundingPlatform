@@ -16,6 +16,7 @@ import com.example.crowdfundingplatform.domain.repository.FileRepository
 import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import com.example.crowdfundingplatform.domain.repository.UserRepository
 import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
+import com.example.crowdfundingplatform.domain.usecase.CreateProjectUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetAllProjectsUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
@@ -42,8 +43,9 @@ private fun provideUserRepository(
 ): UserRepository = UserRepositoryImpl(userApiService, tokenDataSource)
 
 private fun provideProjectRepository(
-    projectApiService: ProjectApiService
-): ProjectRepository = ProjectRepositoryImpl(projectApiService)
+    projectApiService: ProjectApiService,
+    tokenDataSource: TokenDataSource,
+): ProjectRepository = ProjectRepositoryImpl(projectApiService, tokenDataSource)
 
 private fun provideFileRepository(
     fileApiService: FileApiService,
@@ -65,7 +67,7 @@ fun provideDomainModule(): Module = module {
     }
 
     single {
-        provideProjectRepository(get())
+        provideProjectRepository(get(), get())
     }
 
     single {
@@ -102,6 +104,10 @@ fun provideDomainModule(): Module = module {
 
     factory {
         UploadFileAndGetIdUseCase(get())
+    }
+
+    factory {
+        CreateProjectUseCase(get())
     }
 
 }

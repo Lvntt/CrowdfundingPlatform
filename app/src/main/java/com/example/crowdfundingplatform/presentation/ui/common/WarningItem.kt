@@ -36,7 +36,7 @@ fun WarningItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.warning),
+            painter = painterResource(id = R.drawable.warning_icon),
             tint = MaterialTheme.colorScheme.onBackground,
             contentDescription = stringResource(id = R.string.editField)
         )

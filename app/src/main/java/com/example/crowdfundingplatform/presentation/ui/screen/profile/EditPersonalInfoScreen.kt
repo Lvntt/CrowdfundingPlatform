@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.ui.screen
+package com.example.crowdfundingplatform.presentation.ui.screen.profile
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -54,7 +54,7 @@ fun EditPersonalInfoScreen(
                 messageId = it.messageId, onRetryClick = viewModel::getProfile
             )
 
-            EditProfileInfoState.Input -> EditPersonalInfoBody(
+            EditProfileInfoState.Input -> EditPersonalInfoContent(
                 editProfileRequest = editRequest,
                 onNameChange = viewModel::setName,
                 onSurnameChange = viewModel::setSurname,
@@ -74,7 +74,7 @@ fun EditPersonalInfoScreen(
 }
 
 @Composable
-fun EditPersonalInfoBody(
+fun EditPersonalInfoContent(
     editProfileRequest: EditProfileRequest,
     imageUploadState: AvatarUploadState,
     onNameChange: (String) -> Unit,

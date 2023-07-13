@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.ui.screen
+package com.example.crowdfundingplatform.presentation.ui.screen.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,11 +23,11 @@ import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonSmallSty
 fun EditEmailScreen(
     modifier: Modifier = Modifier
 ) {
-    EditEmailBody(modifier = modifier)
+    EditEmailContent(modifier = modifier)
 }
 
 @Composable
-private fun EditEmailBody(modifier: Modifier = Modifier) {
+private fun EditEmailContent(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.verticalScroll(
             rememberScrollState()

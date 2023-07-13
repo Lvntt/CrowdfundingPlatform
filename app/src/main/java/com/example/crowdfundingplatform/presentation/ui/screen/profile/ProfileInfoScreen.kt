@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.ui.screen
+package com.example.crowdfundingplatform.presentation.ui.screen.profile
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
@@ -254,7 +254,7 @@ fun ProfileInfoItems(
             modifier = Modifier
                 .height(NextButtonHeight)
                 .align(Alignment.CenterHorizontally),
-            icon = painterResource(id = R.drawable.add),
+            icon = painterResource(id = R.drawable.add_icon),
         )
 
         Spacer(modifier = Modifier.height(PaddingMedium))

@@ -25,7 +25,7 @@ import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonIconSize
 fun UploadButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    @DrawableRes iconId: Int = R.drawable.file_upload,
+    @DrawableRes iconId: Int = R.drawable.file_upload_icon,
     text: String = stringResource(id = R.string.upload),
     containerColor: Color = MaterialTheme.colorScheme.tertiaryContainer,
     contentColor: Color = MaterialTheme.colorScheme.onTertiaryContainer

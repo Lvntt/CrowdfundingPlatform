@@ -16,9 +16,9 @@ import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.TextAlertDialog
-import com.example.crowdfundingplatform.presentation.ui.screen.auth.LoginBody
-import com.example.crowdfundingplatform.presentation.ui.screen.auth.RegistrationCredentialsBody
-import com.example.crowdfundingplatform.presentation.ui.screen.auth.RegistrationPersonalInfoBody
+import com.example.crowdfundingplatform.presentation.ui.screen.auth.LoginContent
+import com.example.crowdfundingplatform.presentation.ui.screen.auth.RegistrationCredentialsContent
+import com.example.crowdfundingplatform.presentation.ui.screen.auth.RegistrationPersonalInfoContent
 import com.example.crowdfundingplatform.presentation.uistate.AuthType
 import com.example.crowdfundingplatform.presentation.uistate.AuthState
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
@@ -52,7 +52,7 @@ fun AuthScreen(
             }
 
             AuthState.Input -> {
-                AuthBody(authType, authViewModel)
+                AuthContent(authType, authViewModel)
             }
         }
     }
@@ -71,7 +71,7 @@ fun AuthScreen(
 }
 
 @Composable
-private fun AuthBody(
+private fun AuthContent(
     authType: AuthType,
     authViewModel: AuthViewModel
 ) {
@@ -83,21 +83,21 @@ private fun AuthBody(
         Crossfade(targetState = authType, label = "") { type ->
             when (type) {
                 AuthType.LOG_IN -> {
-                    LoginBody(
+                    LoginContent(
                         authViewModel = authViewModel
                     )
                 }
 
                 AuthType.REGISTER_PERSONAL_INFO -> {
                     BackHandler (onBack = authViewModel::openLogin)
-                    RegistrationPersonalInfoBody(
+                    RegistrationPersonalInfoContent(
                         authViewModel = authViewModel
                     )
                 }
 
                 AuthType.REGISTER_CREDENTIALS -> {
                     BackHandler (onBack = authViewModel::openRegistrationPersonalInfo)
-                    RegistrationCredentialsBody(authViewModel = authViewModel)
+                    RegistrationCredentialsContent(authViewModel = authViewModel)
                 }
             }
         }

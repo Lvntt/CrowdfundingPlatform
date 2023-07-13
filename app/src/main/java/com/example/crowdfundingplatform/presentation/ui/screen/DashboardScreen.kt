@@ -122,7 +122,7 @@ private fun ProjectCard(
             modifier = Modifier.fillMaxWidth()
         ) {
             ProjectImage(imageId = project.avatarId)
-            ProjectBody(
+            ProjectContent(
                 title = project.title,
                 summary = project.summary
             )
@@ -161,7 +161,7 @@ private fun ProjectImage(
 }
 
 @Composable
-private fun ProjectBody(
+private fun ProjectContent(
     title: String,
     summary: String
 ) {

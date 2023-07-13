@@ -42,17 +42,22 @@ class ProjectCreationViewModel(
 
     val errorMessageFlow: SharedFlow<Int>
         get() = _errorMessageFlow
-    private val _errorMessageFlow = MutableSharedFlow<Int>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private val _errorMessageFlow = MutableSharedFlow<Int>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
     private val _creationType = mutableStateOf(CreationType.SUMMARY)
     val creationType: State<CreationType>
         get() = _creationType
 
-    private val _imageUploadState: MutableState<ImageUploadState> = mutableStateOf(ImageUploadState.Initial)
+    private val _imageUploadState: MutableState<ImageUploadState> =
+        mutableStateOf(ImageUploadState.Initial)
     val imageUploadState: State<ImageUploadState>
         get() = _imageUploadState
 
-    private val _creationState: MutableState<ProjectCreationState> = mutableStateOf(ProjectCreationState.Input)
+    private val _creationState: MutableState<ProjectCreationState> =
+        mutableStateOf(ProjectCreationState.Input)
     val creationState: State<ProjectCreationState>
         get() = _creationState
 
@@ -79,10 +84,12 @@ class ProjectCreationViewModel(
                         _creationState.value = ProjectCreationState.Success
                     }
                 }
+
                 403 -> _errorMessageFlow.tryEmit(R.string.forbidden)
                 409 -> _errorMessageFlow.tryEmit(R.string.sameProjectExists)
                 else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
+
             else -> _errorMessageFlow.tryEmit(R.string.unknownError)
         }
         _creationState.value = ProjectCreationState.Input
@@ -96,6 +103,7 @@ class ProjectCreationViewModel(
                 409 -> _errorMessageFlow.tryEmit(R.string.sameProjectExists)
                 else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
+
             else -> _errorMessageFlow.tryEmit(R.string.unknownError)
         }
         _creationState.value = ProjectCreationState.Input

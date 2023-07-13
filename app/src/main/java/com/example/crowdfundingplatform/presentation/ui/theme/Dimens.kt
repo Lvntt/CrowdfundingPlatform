@@ -36,3 +36,4 @@ val UploadProjectAvatarSize = 400.dp
 val DropdownMenuItemHeight = 50.dp
 val SummaryTextFieldHeight = 150.dp
 val DescriptionTextFieldHeight = 300.dp
+val CardIconSize = 25.dp

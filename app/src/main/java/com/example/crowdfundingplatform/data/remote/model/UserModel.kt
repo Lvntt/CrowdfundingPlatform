@@ -9,5 +9,6 @@ data class UserModel(
     val email: String?,
     val money: Int?,
     val bio: String?,
-    val emailIsConfirm: Boolean?
+    val emailIsConfirm: Boolean?,
+    val avatarId: String?
 )

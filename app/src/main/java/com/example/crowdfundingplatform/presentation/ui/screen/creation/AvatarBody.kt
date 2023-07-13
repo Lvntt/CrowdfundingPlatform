@@ -9,18 +9,13 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,19 +27,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyleAlternative
+import com.example.crowdfundingplatform.presentation.ui.common.UploadButton
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelRegularStyle
-import com.example.crowdfundingplatform.presentation.ui.theme.OnTertiaryContainerLight
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingLarge
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingSmall
-import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentLarge
 import com.example.crowdfundingplatform.presentation.ui.theme.Subtitle
-import com.example.crowdfundingplatform.presentation.ui.theme.TertiaryContainerLight
-import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonIconSizeMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.UploadProjectAvatarSize
 import com.example.crowdfundingplatform.presentation.uistate.creation.ImageUploadState
 import com.example.crowdfundingplatform.presentation.viewmodel.ProjectCreationViewModel
@@ -89,28 +79,9 @@ fun AvatarBody(
 
         Spacer(modifier = Modifier.height(PaddingSmall))
 
-        Button(
-            modifier = modifier,
-            onClick = {
-                      launcher.launch("image/*")
-            },
-            contentPadding = PaddingValues(start = PaddingSmall, end = PaddingMedium),
-            shape = RoundedCornerShape(RoundedCornerShapePercentLarge),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = TertiaryContainerLight,
-                contentColor = OnTertiaryContainerLight
-            )
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.file_upload),
-                contentDescription = null,
-                modifier = Modifier.size(TextButtonIconSizeMedium)
-            )
-            Text(
-                text = stringResource(id = R.string.upload),
-                style = LabelBoldStyleAlternative
-            )
-        }
+        UploadButton(modifier = modifier, onClick = {
+            launcher.launch("image/*")
+        })
 
         when (imageUploadState) {
             ImageUploadState.Initial -> Unit

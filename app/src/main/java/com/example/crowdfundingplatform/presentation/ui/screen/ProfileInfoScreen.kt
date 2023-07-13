@@ -1,6 +1,5 @@
 package com.example.crowdfundingplatform.presentation.ui.screen
 
-import androidx.annotation.DrawableRes
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -28,11 +28,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.common.Constants
 import com.example.crowdfundingplatform.presentation.ui.common.ErrorScreen
 import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.ProfileInfoItem
@@ -54,8 +60,6 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ProfileInfoScreen(
-    @DrawableRes
-    photoId: Int,
     onEditEmailClick: () -> Unit,
     onEditPasswordClick: () -> Unit,
     onEditPersonalInfoClick: () -> Unit,
@@ -68,57 +72,14 @@ fun ProfileInfoScreen(
     Crossfade(targetState = profileInfoState, label = "") { state ->
         when (state) {
             is ProfileInfoState.Content ->
-                Box(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .verticalScroll(
-                            rememberScrollState()
-                        )
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(ProfilePhotoBackgroundSize)
-                            .background(PrimaryColorLight)
-                    )
-                    Column(
-                        modifier = modifier
-                            .fillMaxSize()
-                            .padding(PaddingMedium),
-                        verticalArrangement = Arrangement.spacedBy(PaddingMedium)
-                    ) {
-                        Box(modifier = Modifier.fillMaxWidth()) {
-                            Image(
-                                painter = painterResource(id = photoId),
-                                contentDescription = stringResource(id = R.string.profilePhoto),
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(top = PaddingMedium)
-                                    .size(ProfilePhotoSize)
-                                    .clip(CircleShape)
-                                    .align(Alignment.BottomCenter)
-                                    .border(
-                                        ProfilePhotoBorderSize,
-                                        MaterialTheme.colorScheme.background,
-                                        CircleShape
-                                    )
-                            )
-                        }
-                        ProfileInfoBody(
-                            email = state.user.email,
-                            name = state.user.name,
-                            surname = state.user.surname,
-                            patronymic = state.user.patronymic,
-                            bio = state.user.bio,
-                            emailIsConfirmed = state.user.emailIsConfirmed,
-                            onEditEmailClick = onEditEmailClick,
-                            onEditPasswordClick = onEditPasswordClick,
-                            onEditPersonalInfoClick = onEditPersonalInfoClick,
-                            onCreateProjectClick = onCreateProjectClick,
-                            modifier = modifier
-                        )
-                    }
-                }
+                ProfileInfoContent(
+                    modifier,
+                    state,
+                    onEditEmailClick,
+                    onEditPasswordClick,
+                    onEditPersonalInfoClick,
+                    onCreateProjectClick
+                )
 
             is ProfileInfoState.Error -> ErrorScreen(
                 messageId = state.messageId,
@@ -129,6 +90,95 @@ fun ProfileInfoScreen(
             ProfileInfoState.SignedOut -> LaunchedEffect(Unit) {
                 onSignOut()
             }
+        }
+    }
+}
+
+@Composable
+private fun ProfileInfoContent(
+    modifier: Modifier,
+    state: ProfileInfoState.Content,
+    onEditEmailClick: () -> Unit,
+    onEditPasswordClick: () -> Unit,
+    onEditPersonalInfoClick: () -> Unit,
+    onCreateProjectClick: () -> Unit
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(
+                rememberScrollState()
+            )
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(ProfilePhotoBackgroundSize)
+                .background(PrimaryColorLight)
+        )
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(PaddingMedium),
+            verticalArrangement = Arrangement.spacedBy(PaddingMedium)
+        ) {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                if (state.user.avatarId != null) {
+                    val imageLink =
+                        "${Constants.BASE_URL}${Constants.FILE_URL}${state.user.avatarId}"
+
+                    AsyncImage(
+                        model = ImageRequest.Builder(context = LocalContext.current)
+                            .data(imageLink)
+                            .crossfade(true)
+                            .build(),
+                        error = painterResource(id = R.drawable.ic_broken_image),
+                        placeholder = painterResource(R.drawable.loading_img),
+                        contentDescription = stringResource(id = R.string.profilePhoto),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(top = PaddingMedium)
+                            .size(ProfilePhotoSize)
+                            .clip(CircleShape)
+                            .align(Alignment.BottomCenter)
+                            .border(
+                                ProfilePhotoBorderSize,
+                                MaterialTheme.colorScheme.background,
+                                CircleShape
+                            )
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(id = R.drawable.account_photo_placeholder),
+                        contentDescription = stringResource(id = R.string.profilePhoto),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(top = PaddingMedium)
+                            .size(ProfilePhotoSize)
+                            .clip(CircleShape)
+                            .align(Alignment.BottomCenter)
+                            .border(
+                                ProfilePhotoBorderSize,
+                                MaterialTheme.colorScheme.background,
+                                CircleShape
+                            ).offset(y = 20.dp),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary)
+                    )
+                }
+            }
+            ProfileInfoBody(
+                email = state.user.email,
+                name = state.user.name,
+                surname = state.user.surname,
+                patronymic = state.user.patronymic,
+                bio = state.user.bio,
+                emailIsConfirmed = state.user.emailIsConfirmed,
+                onEditEmailClick = onEditEmailClick,
+                onEditPasswordClick = onEditPasswordClick,
+                onEditPersonalInfoClick = onEditPersonalInfoClick,
+                onCreateProjectClick = onCreateProjectClick,
+                modifier = modifier
+            )
         }
     }
 }

@@ -30,6 +30,8 @@ val OnTertiaryContainerLight = Color(0xFFFFFFFF)
 val SurfaceVariantLight = Color(0xFFF3F4F9)
 val OnSurfaceVariantLight = Color(0xFF999999)
 val OnSurfaceLight = Color(0xFF000000)
+val ErrorLight = Color(0xFFBA1A1A)
+val OnErrorLight = Color(0xFFFFFFFF)
 
 val SecondaryElementColorLight = Color(0xFFD2E892)
 val OnSecondaryElementColorLight = Color(0xFF8CAA34)

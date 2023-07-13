@@ -17,7 +17,8 @@ class UserConverter {
                 email = email ?: Constants.EMPTY_STRING,
                 money = money ?: 0,
                 bio = bio ?: Constants.EMPTY_STRING,
-                emailIsConfirmed = emailIsConfirm ?: false
+                emailIsConfirmed = emailIsConfirm ?: false,
+                avatarId = avatarId
             )
         }
 }

@@ -1,5 +1,6 @@
 package com.example.crowdfundingplatform.presentation.viewmodel
 
+import android.net.Uri
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -11,6 +12,8 @@ import com.example.crowdfundingplatform.domain.entity.EditProfileRequest
 import com.example.crowdfundingplatform.domain.usecase.EditYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
+import com.example.crowdfundingplatform.domain.usecase.UploadFileAndGetIdUseCase
+import com.example.crowdfundingplatform.presentation.uistate.AvatarUploadState
 import com.example.crowdfundingplatform.presentation.uistate.EditProfileInfoState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +23,7 @@ import retrofit2.HttpException
 class EditPersonalInfoViewModel(
     private val getYourProfileUseCase: GetYourProfileUseCase,
     private val editYourProfileUseCase: EditYourProfileUseCase,
+    private val uploadFileAndGetIdUseCase: UploadFileAndGetIdUseCase,
     private val refreshTokensUseCase: RefreshTokensUseCase
 ) : ViewModel() {
     val editInfoState: State<EditProfileInfoState>
@@ -34,9 +38,14 @@ class EditPersonalInfoViewModel(
             Constants.EMPTY_STRING,
             Constants.EMPTY_STRING,
             Constants.EMPTY_STRING,
-            Constants.EMPTY_STRING
+            Constants.EMPTY_STRING,
+            null
         )
     )
+
+    val avatarUploadState: State<AvatarUploadState>
+        get() = _avatarUploadState
+    private val _avatarUploadState: MutableState<AvatarUploadState> = mutableStateOf(AvatarUploadState.Initial)
 
     private val fetchProfileExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
@@ -46,7 +55,7 @@ class EditPersonalInfoViewModel(
                         refreshTokensUseCase()
                         val user = getYourProfileUseCase()
                         _editRequest.value = EditProfileRequest(
-                            user.name, user.surname, user.patronymic, user.bio
+                            user.name, user.surname, user.patronymic, user.bio, user.avatarId
                         )
                         _editInfoState.value = EditProfileInfoState.Input
                     }
@@ -112,22 +121,41 @@ class EditPersonalInfoViewModel(
         _editRequest.value = _editRequest.value.copy(bio = bio)
     }
 
+    fun uploadAvatar(uri: Uri) {
+        _avatarUploadState.value = AvatarUploadState.Loading
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val avatarId = uploadFileAndGetIdUseCase(uri)
+                _editRequest.value = _editRequest.value.copy(avatarId = avatarId)
+                _avatarUploadState.value = AvatarUploadState.Success
+            } catch (e: Exception) {
+                _avatarUploadState.value = AvatarUploadState.Error
+            }
+        }
+    }
+
+    fun removeAvatar() {
+        _editRequest.value = _editRequest.value.copy(avatarId = null)
+    }
+
     fun getProfile() {
         _editInfoState.value = EditProfileInfoState.Loading
         viewModelScope.launch(Dispatchers.IO + fetchProfileExceptionHandler) {
             val user = getYourProfileUseCase()
             _editRequest.value = EditProfileRequest(
-                user.name, user.surname, user.patronymic, user.bio
+                user.name, user.surname, user.patronymic, user.bio, user.avatarId
             )
             _editInfoState.value = EditProfileInfoState.Input
         }
     }
 
     fun applyEdit() {
-        _editInfoState.value = EditProfileInfoState.Loading
-        viewModelScope.launch(Dispatchers.IO + editProfileExceptionHandler) {
-            editYourProfileUseCase(_editRequest.value)
-            _editInfoState.value = EditProfileInfoState.Success
+        if (_avatarUploadState.value != AvatarUploadState.Loading) {
+            _editInfoState.value = EditProfileInfoState.Loading
+            viewModelScope.launch(Dispatchers.IO + editProfileExceptionHandler) {
+                editYourProfileUseCase(_editRequest.value)
+                _editInfoState.value = EditProfileInfoState.Success
+            }
         }
     }
 

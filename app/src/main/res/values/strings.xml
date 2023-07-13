@@ -90,4 +90,5 @@
     <string name="deleteAvatar">Delete avatar</string>
     <string name="avatarSuccess">Avatar was uploaded successfully</string>
     <string name="uploadingAvatar">Uploading avatar...</string>
+    <string name="projectInfo">Project info</string>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="appName">Crowdfunding Platform</string>
+    <string name="appName">DAIDENEG</string>
     <string name="backButton">Back</string>
     <string name="authTitle">Authorization</string>
     <string name="nameReq">Name*</string>
@@ -98,4 +98,6 @@
     <string name="deleteAvatar">Delete avatar</string>
     <string name="avatarSuccess">Avatar was uploaded successfully</string>
     <string name="uploadingAvatar">Uploading avatar...</string>
+    <string name="showPassword">Show password</string>
+    <string name="hidePassword">Hide password</string>
 </resources>

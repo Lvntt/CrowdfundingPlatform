@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
+import com.example.crowdfundingplatform.presentation.ui.common.PasswordTextField
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelLightStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
@@ -44,14 +45,12 @@ fun RegistrationCredentialsContent(
             onValueChange = authViewModel::setEmail,
             textFieldValue = registrationState.email
         )
-        LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.lock_icon),
+        PasswordTextField(
             label = stringResource(id = R.string.passwordReq),
             onValueChange = authViewModel::setPassword,
             textFieldValue = registrationState.password
         )
-        LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.lock_icon),
+        PasswordTextField(
             label = stringResource(id = R.string.confirmPasswordReq),
             onValueChange = authViewModel::setConfirmPassword,
             textFieldValue = registrationState.confirmPassword

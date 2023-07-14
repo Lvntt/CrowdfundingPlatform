@@ -10,12 +10,12 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryTextColor
-import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
+import com.example.crowdfundingplatform.presentation.ui.theme.LabelItalicStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemBorderColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemBorderErrorColor
 import com.example.crowdfundingplatform.presentation.ui.theme.LoginItemContainerColor
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
+import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,7 +33,7 @@ fun EditFieldItem(
             Text(
                 text = label,
                 color = PrimaryTextColor,
-                style = LabelBoldStyle
+                style = LabelItalicStyle
             )
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(

@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.presentation.ui.common.EditFieldItem
+import com.example.crowdfundingplatform.presentation.ui.common.PasswordTextField
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonSmallStyle
@@ -35,11 +35,11 @@ fun EditPasswordContent(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(PaddingMedium)
     ) {
         Spacer(modifier = Modifier.height(PaddingMedium))
-        EditFieldItem(
+        PasswordTextField(
             label = stringResource(id = R.string.newPassword),
             onValueChange = {}
         )
-        EditFieldItem(
+        PasswordTextField(
             label = stringResource(id = R.string.confirmNewPassword),
             onValueChange = {}
         )

@@ -19,8 +19,8 @@ val ElevationMedium = 4.dp
 val LoginItemEndPadding = 24.dp
 val RegistrationFormVerticalPadding = 12.dp
 
-val OnboardingIconSize = 100.dp
-val OnboardingIconSpacing = 10.dp
+val OnboardingLogoSize = 200.dp
+val OnboardingLogoSpacing = 10.dp
 val TextButtonLargeCornerRadius = 25.dp
 val TextButtonContentPadding = 25.dp
 val ProgressIndicatorSize = 150.dp

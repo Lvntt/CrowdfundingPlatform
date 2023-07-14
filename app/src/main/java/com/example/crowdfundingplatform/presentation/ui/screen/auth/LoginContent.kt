@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.common.LoginItem
+import com.example.crowdfundingplatform.presentation.ui.common.PasswordTextField
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
@@ -53,11 +54,10 @@ fun LoginContent(
             onValueChange = authViewModel::setLoginEmail,
             textFieldValue = loginState.email
         )
-        LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.lock_icon),
+        PasswordTextField(
             label = stringResource(id = R.string.password),
             onValueChange = authViewModel::setLoginPassword,
-            textFieldValue = loginState.password
+            textFieldValue = loginState.password,
         )
         Box(
             modifier = Modifier.fillMaxWidth()

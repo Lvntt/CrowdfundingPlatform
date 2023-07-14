@@ -10,8 +10,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
-import com.example.crowdfundingplatform.presentation.ui.common.TextAlertDialog
+import com.example.crowdfundingplatform.presentation.ui.common.state.LoadingProgress
+import com.example.crowdfundingplatform.presentation.ui.common.dialog.TextAlertDialog
+import com.example.crowdfundingplatform.presentation.ui.screen.creation.content.AvatarContent
+import com.example.crowdfundingplatform.presentation.ui.screen.creation.content.CategoryContent
+import com.example.crowdfundingplatform.presentation.ui.screen.creation.content.DescriptionContent
+import com.example.crowdfundingplatform.presentation.ui.screen.creation.content.SummaryContent
 import com.example.crowdfundingplatform.presentation.uistate.creation.CreationType
 import com.example.crowdfundingplatform.presentation.uistate.creation.ProjectCreationState
 import com.example.crowdfundingplatform.presentation.viewmodel.ProjectCreationViewModel

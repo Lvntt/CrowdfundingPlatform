@@ -5,7 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
+import com.example.crowdfundingplatform.domain.usecase.auth.CheckTokenExistenceUseCase
 import com.example.crowdfundingplatform.presentation.uistate.OnboardingState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

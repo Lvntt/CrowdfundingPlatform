@@ -1,7 +1,7 @@
 package com.example.crowdfundingplatform.presentation.uistate
 
 import androidx.annotation.StringRes
-import com.example.crowdfundingplatform.domain.entity.User
+import com.example.crowdfundingplatform.domain.entity.user.User
 
 sealed interface ProfileInfoState {
 

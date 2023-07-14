@@ -4,8 +4,8 @@ import com.example.crowdfundingplatform.data.remote.api.UserApiService
 import com.example.crowdfundingplatform.data.converter.UserConverter
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.remote.model.TokenType
-import com.example.crowdfundingplatform.domain.entity.EditProfileRequest
-import com.example.crowdfundingplatform.domain.entity.User
+import com.example.crowdfundingplatform.domain.entity.user.EditProfileRequest
+import com.example.crowdfundingplatform.domain.entity.user.User
 import com.example.crowdfundingplatform.domain.repository.UserRepository
 
 class UserRepositoryImpl(

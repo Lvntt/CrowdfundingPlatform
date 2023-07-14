@@ -1,7 +1,7 @@
 package com.example.crowdfundingplatform.domain.repository
 
-import com.example.crowdfundingplatform.domain.entity.EditProfileRequest
-import com.example.crowdfundingplatform.domain.entity.User
+import com.example.crowdfundingplatform.domain.entity.user.EditProfileRequest
+import com.example.crowdfundingplatform.domain.entity.user.User
 
 interface UserRepository {
 

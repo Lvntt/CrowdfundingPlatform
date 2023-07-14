@@ -6,10 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.domain.entity.LoginRequest
-import com.example.crowdfundingplatform.domain.entity.RegisterRequest
-import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
-import com.example.crowdfundingplatform.domain.usecase.RegisterUserUseCase
+import com.example.crowdfundingplatform.domain.entity.auth.LoginRequest
+import com.example.crowdfundingplatform.domain.entity.auth.RegisterRequest
+import com.example.crowdfundingplatform.domain.usecase.auth.LoginUserUseCase
+import com.example.crowdfundingplatform.domain.usecase.auth.RegisterUserUseCase
 import com.example.crowdfundingplatform.presentation.common.ErrorCodes
 import com.example.crowdfundingplatform.presentation.uistate.AuthState
 import com.example.crowdfundingplatform.presentation.uistate.AuthType

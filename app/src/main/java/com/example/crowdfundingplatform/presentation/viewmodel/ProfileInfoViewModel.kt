@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
-import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
+import com.example.crowdfundingplatform.domain.usecase.user.GetYourProfileUseCase
+import com.example.crowdfundingplatform.domain.usecase.auth.RefreshTokensUseCase
 import com.example.crowdfundingplatform.presentation.common.ErrorCodes
 import com.example.crowdfundingplatform.presentation.uistate.ProfileInfoState
 import kotlinx.coroutines.CoroutineExceptionHandler

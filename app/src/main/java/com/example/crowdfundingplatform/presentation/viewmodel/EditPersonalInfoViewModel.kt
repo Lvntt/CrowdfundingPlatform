@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.domain.entity.EditProfileRequest
-import com.example.crowdfundingplatform.domain.usecase.EditYourProfileUseCase
-import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
-import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
-import com.example.crowdfundingplatform.domain.usecase.UploadFileAndGetIdUseCase
+import com.example.crowdfundingplatform.domain.entity.user.EditProfileRequest
+import com.example.crowdfundingplatform.domain.usecase.user.EditYourProfileUseCase
+import com.example.crowdfundingplatform.domain.usecase.user.GetYourProfileUseCase
+import com.example.crowdfundingplatform.domain.usecase.auth.RefreshTokensUseCase
+import com.example.crowdfundingplatform.domain.usecase.file.UploadFileAndGetIdUseCase
 import com.example.crowdfundingplatform.presentation.common.ErrorCodes
 import com.example.crowdfundingplatform.presentation.uistate.AvatarUploadState
 import com.example.crowdfundingplatform.presentation.uistate.EditProfileInfoState

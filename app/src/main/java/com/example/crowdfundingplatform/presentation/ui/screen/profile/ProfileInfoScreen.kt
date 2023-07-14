@@ -42,11 +42,11 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.presentation.ui.common.ErrorScreen
-import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
-import com.example.crowdfundingplatform.presentation.ui.common.ProfileInfoItem
-import com.example.crowdfundingplatform.presentation.ui.common.TextButton
-import com.example.crowdfundingplatform.presentation.ui.common.WarningItem
+import com.example.crowdfundingplatform.presentation.ui.common.state.ErrorScreen
+import com.example.crowdfundingplatform.presentation.ui.common.state.LoadingProgress
+import com.example.crowdfundingplatform.presentation.ui.common.profile.ProfileInfoItem
+import com.example.crowdfundingplatform.presentation.ui.common.button.TextButton
+import com.example.crowdfundingplatform.presentation.ui.common.state.WarningItem
 import com.example.crowdfundingplatform.presentation.ui.extension.noRippleClickable
 import com.example.crowdfundingplatform.presentation.ui.theme.CardIconSize
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelRegularStyle

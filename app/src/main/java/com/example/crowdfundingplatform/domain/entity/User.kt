@@ -9,5 +9,6 @@ data class User(
     val email: String,
     val money: Int,
     val bio: String,
-    val emailIsConfirmed: Boolean
+    val emailIsConfirmed: Boolean,
+    val avatarId: String?
 )

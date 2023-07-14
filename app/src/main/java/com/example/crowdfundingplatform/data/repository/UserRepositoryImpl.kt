@@ -10,9 +10,9 @@ import com.example.crowdfundingplatform.domain.repository.UserRepository
 
 class UserRepositoryImpl(
     private val userApiService: UserApiService,
-    private val tokenDataSource: TokenDataSource
+    private val tokenDataSource: TokenDataSource,
+    private val userConverter: UserConverter
 ) : UserRepository {
-    private val userConverter = UserConverter()
 
     override suspend fun getYourProfile(): User {
         val accessToken = tokenDataSource.fetchToken(TokenType.ACCESS)!!

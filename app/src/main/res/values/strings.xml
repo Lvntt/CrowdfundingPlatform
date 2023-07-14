@@ -94,4 +94,8 @@
     <string name="activate">Activate</string>
     <string name="noSuchPromoCode">This promo code does not exist or it was already activated.</string>
     <string name="promoCodeSuccessfullyActivated">The promo code was successfully activated.</string>
+    <string name="uploadAvatar">Upload avatar</string>
+    <string name="deleteAvatar">Delete avatar</string>
+    <string name="avatarSuccess">Avatar was uploaded successfully</string>
+    <string name="uploadingAvatar">Uploading avatar...</string>
 </resources>

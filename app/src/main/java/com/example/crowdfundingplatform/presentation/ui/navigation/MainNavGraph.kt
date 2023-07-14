@@ -13,10 +13,10 @@ import com.example.crowdfundingplatform.presentation.ui.common.CreateProjectTopA
 import com.example.crowdfundingplatform.presentation.ui.common.CrowdfundingTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.common.DashboardTopAppBar
 import com.example.crowdfundingplatform.presentation.ui.screen.DashboardScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.EditEmailScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.EditPasswordScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.EditPersonalInfoScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.ProfileInfoScreen
+import com.example.crowdfundingplatform.presentation.ui.screen.profile.EditEmailScreen
+import com.example.crowdfundingplatform.presentation.ui.screen.profile.EditPasswordScreen
+import com.example.crowdfundingplatform.presentation.ui.screen.profile.EditPersonalInfoScreen
+import com.example.crowdfundingplatform.presentation.ui.screen.profile.ProfileInfoScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.balance.PaymentScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.creation.ProjectCreationScreen
 import com.example.crowdfundingplatform.presentation.uistate.CrowdfundingAppState
@@ -85,7 +85,6 @@ fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
     ) {
         composable(MainGraphDestinations.PROFILE) {
             ProfileInfoScreen(
-                photoId = R.drawable.cat_image,
                 onEditEmailClick = { appState.navController.navigate(MainGraphDestinations.EDIT_EMAIL) },
                 onEditPasswordClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PASSWORD) },
                 onEditPersonalInfoClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PERSONAL_INFO) },

@@ -45,7 +45,7 @@ fun providePresentationModule(): Module = module {
     
     viewModel {
         EditPersonalInfoViewModel(
-            get(), get(), get()
+            get(), get(), get(), get()
         )
     }
 

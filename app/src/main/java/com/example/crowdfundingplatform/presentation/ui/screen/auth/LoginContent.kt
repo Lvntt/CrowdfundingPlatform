@@ -33,7 +33,7 @@ import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonMediumSt
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 
 @Composable
-fun LoginBody(
+fun LoginContent(
     authViewModel: AuthViewModel,
     modifier: Modifier = Modifier
 ) {
@@ -48,13 +48,13 @@ fun LoginBody(
             modifier = Modifier.padding(horizontal = PaddingMedium)
         )
         LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.email),
+            icon = ImageVector.vectorResource(id = R.drawable.email_icon),
             label = stringResource(id = R.string.email),
             onValueChange = authViewModel::setLoginEmail,
             textFieldValue = loginState.email
         )
         LoginItem(
-            icon = ImageVector.vectorResource(id = R.drawable.lock),
+            icon = ImageVector.vectorResource(id = R.drawable.lock_icon),
             label = stringResource(id = R.string.password),
             onValueChange = authViewModel::setLoginPassword,
             textFieldValue = loginState.password

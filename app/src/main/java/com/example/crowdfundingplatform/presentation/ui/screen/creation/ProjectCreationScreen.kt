@@ -93,22 +93,22 @@ fun CreationBody(
     Crossfade(targetState = creationType) { type ->
         when (type) {
             CreationType.SUMMARY -> {
-                SummaryBody(projectCreationViewModel = projectCreationViewModel)
+                SummaryContent(projectCreationViewModel = projectCreationViewModel)
             }
             CreationType.AVATAR -> {
-                AvatarBody(projectCreationViewModel = projectCreationViewModel)
+                AvatarContent(projectCreationViewModel = projectCreationViewModel)
                 BackHandler {
                     projectCreationViewModel.setCreationType(CreationType.SUMMARY)
                 }
             }
             CreationType.CATEGORY -> {
-                CategoryBody(projectCreationViewModel = projectCreationViewModel)
+                CategoryContent(projectCreationViewModel = projectCreationViewModel)
                 BackHandler {
                     projectCreationViewModel.setCreationType(CreationType.AVATAR)
                 }
             }
             CreationType.DESCRIPTION -> {
-                DescriptionBody(projectCreationViewModel = projectCreationViewModel)
+                DescriptionContent(projectCreationViewModel = projectCreationViewModel)
                 BackHandler {
                     projectCreationViewModel.setCreationType(CreationType.CATEGORY)
                 }

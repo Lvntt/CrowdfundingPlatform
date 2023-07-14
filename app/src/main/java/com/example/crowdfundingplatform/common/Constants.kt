@@ -11,6 +11,7 @@ object Constants {
     const val LOGOUT_URL = "auth/logout"
     const val CREATE_PROJECT_URL = "projects"
     const val PROJECTS_SEARCH_URL = "projects/search"
+    const val FULL_PROJECT_INFO_URL = "projects/{projectId}"
     const val YOUR_PROFILE_URL = "profiles"
     const val TOKEN_PREFERENCES = "token_preferences"
     const val USER_ACCESS_TOKEN = "access_token"

@@ -13,9 +13,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.crowdfundingplatform.presentation.ui.navigation.BottomNavItems
-import com.example.crowdfundingplatform.presentation.ui.navigation.BottomNavigationBar
-import com.example.crowdfundingplatform.presentation.ui.navigation.CrowdfundingNavigation
+import com.example.crowdfundingplatform.presentation.ui.navigation.bottomnav.BottomNavItems
+import com.example.crowdfundingplatform.presentation.ui.navigation.bottomnav.BottomNavigationBar
+import com.example.crowdfundingplatform.presentation.ui.navigation.graph.CrowdfundingNavigation
 import com.example.crowdfundingplatform.presentation.ui.theme.CrowdfundingPlatformTheme
 import com.example.crowdfundingplatform.presentation.uistate.rememberCrowdfundingAppState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController

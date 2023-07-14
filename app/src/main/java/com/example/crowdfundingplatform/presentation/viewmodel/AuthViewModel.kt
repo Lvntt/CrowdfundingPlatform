@@ -6,14 +6,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.domain.entity.LoginRequest
-import com.example.crowdfundingplatform.domain.entity.RegisterRequest
-import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
-import com.example.crowdfundingplatform.domain.usecase.RegisterUserUseCase
-import com.example.crowdfundingplatform.presentation.uistate.AuthState
-import com.example.crowdfundingplatform.presentation.uistate.AuthType
-import com.example.crowdfundingplatform.presentation.uistate.LoginContent
-import com.example.crowdfundingplatform.presentation.uistate.RegistrationContent
+import com.example.crowdfundingplatform.domain.entity.auth.LoginRequest
+import com.example.crowdfundingplatform.domain.entity.auth.RegisterRequest
+import com.example.crowdfundingplatform.domain.usecase.auth.LoginUserUseCase
+import com.example.crowdfundingplatform.domain.usecase.auth.RegisterUserUseCase
+import com.example.crowdfundingplatform.presentation.common.ErrorCodes
+import com.example.crowdfundingplatform.presentation.uistate.auth.AuthState
+import com.example.crowdfundingplatform.presentation.uistate.auth.AuthType
+import com.example.crowdfundingplatform.presentation.uistate.auth.LoginContent
+import com.example.crowdfundingplatform.presentation.uistate.auth.RegistrationContent
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
@@ -49,8 +50,8 @@ class AuthViewModel(
     private val signupExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                400 -> _errorMessageFlow.tryEmit(R.string.invalidForm)
-                409 -> _errorMessageFlow.tryEmit(R.string.userExists)
+                ErrorCodes.BAD_REQUEST -> _errorMessageFlow.tryEmit(R.string.invalidForm)
+                ErrorCodes.CONFLICT -> _errorMessageFlow.tryEmit(R.string.userExists)
                 else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
 
@@ -62,7 +63,7 @@ class AuthViewModel(
     private val loginExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> _errorMessageFlow.tryEmit(R.string.invalidCredentials)
+                ErrorCodes.UNAUTHORIZED -> _errorMessageFlow.tryEmit(R.string.invalidCredentials)
                 else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
 

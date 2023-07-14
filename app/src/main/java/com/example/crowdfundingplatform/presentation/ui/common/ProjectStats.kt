@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
+import com.example.crowdfundingplatform.presentation.ui.common.button.TextButton
 import com.example.crowdfundingplatform.presentation.ui.theme.AdditionalTextColor
 import com.example.crowdfundingplatform.presentation.ui.theme.ExtraSmallLabelRegularStyleAlternative
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyleAlternative

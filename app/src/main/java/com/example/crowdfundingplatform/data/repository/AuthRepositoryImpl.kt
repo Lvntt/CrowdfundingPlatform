@@ -4,8 +4,8 @@ import com.example.crowdfundingplatform.data.remote.api.AuthApiService
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.remote.model.TokenType
 import com.example.crowdfundingplatform.data.remote.model.RefreshRequest
-import com.example.crowdfundingplatform.domain.entity.LoginRequest
-import com.example.crowdfundingplatform.domain.entity.RegisterRequest
+import com.example.crowdfundingplatform.domain.entity.auth.LoginRequest
+import com.example.crowdfundingplatform.domain.entity.auth.RegisterRequest
 import com.example.crowdfundingplatform.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(

@@ -1,5 +1,5 @@
 <resources>
-    <string name="appName">Crowdfunding Platform</string>
+    <string name="appName">DAIDENEG</string>
     <string name="backButton">Back</string>
     <string name="authTitle">Authorization</string>
     <string name="nameReq">Name*</string>
@@ -10,10 +10,10 @@
     <string name="signUp">Sign Up</string>
     <string name="signIn">Sign In</string>
     <string name="continueRegistration">Continue</string>
-    <string name="emailReq">Email*</string>
+    <string name="emailReq" translatable="false">Email*</string>
     <string name="passwordReq">Password*</string>
     <string name="confirmPasswordReq">Confirm password*</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="password">Password</string>
     <string name="welcomeBack">Welcome back!</string>
     <string name="noAccount">No account?</string>
@@ -25,7 +25,7 @@
     <string name="sameProjectExists">The same project already exists</string>
     <string name="unknownError">Unknown error</string>
     <string name="error">Error</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="profilePhoto">Profile photo</string>
     <string name="editField">Edit field</string>
     <string name="yourProfile">Your profile</string>
@@ -98,6 +98,8 @@
     <string name="deleteAvatar">Delete avatar</string>
     <string name="avatarSuccess">Avatar was uploaded successfully</string>
     <string name="uploadingAvatar">Uploading avatar...</string>
+    <string name="showPassword">Show password</string>
+    <string name="hidePassword">Hide password</string>
     <string name="projectInfo">Project info</string>
     <string name="projectNotFound">Project does not exist or it isn\'t approved yet</string>
     <string name="invalidFundAmount">You entered an invalid money amount</string>

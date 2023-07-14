@@ -1,6 +1,6 @@
 package com.example.crowdfundingplatform.data.datasource
 
-import com.example.crowdfundingplatform.domain.entity.ProjectCategory
+import com.example.crowdfundingplatform.domain.entity.project.ProjectCategory
 
 object AvailableCategories {
 

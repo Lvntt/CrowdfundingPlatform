@@ -3,10 +3,10 @@ package com.example.crowdfundingplatform.data.repository
 import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.remote.api.ProjectApiService
 import com.example.crowdfundingplatform.data.remote.model.TokenType
-import com.example.crowdfundingplatform.domain.entity.ProjectCreationRequest
-import com.example.crowdfundingplatform.domain.entity.ProjectInfo
-import com.example.crowdfundingplatform.domain.entity.SearchProjectsRequest
-import com.example.crowdfundingplatform.domain.entity.SearchProjectsResponse
+import com.example.crowdfundingplatform.domain.entity.project.ProjectCreationRequest
+import com.example.crowdfundingplatform.domain.entity.project.SearchProjectsRequest
+import com.example.crowdfundingplatform.domain.entity.project.SearchProjectsResponse
+import com.example.crowdfundingplatform.domain.entity.project.ProjectInfo
 import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import java.math.BigDecimal
 

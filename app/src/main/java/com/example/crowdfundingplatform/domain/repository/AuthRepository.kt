@@ -1,7 +1,7 @@
 package com.example.crowdfundingplatform.domain.repository
 
-import com.example.crowdfundingplatform.domain.entity.LoginRequest
-import com.example.crowdfundingplatform.domain.entity.RegisterRequest
+import com.example.crowdfundingplatform.domain.entity.auth.LoginRequest
+import com.example.crowdfundingplatform.domain.entity.auth.RegisterRequest
 
 interface AuthRepository {
 

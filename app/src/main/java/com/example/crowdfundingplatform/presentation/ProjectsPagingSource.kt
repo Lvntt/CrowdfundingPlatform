@@ -2,13 +2,13 @@ package com.example.crowdfundingplatform.presentation
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.crowdfundingplatform.domain.entity.SearchProjectsRequest
-import com.example.crowdfundingplatform.domain.entity.FilteringParams
-import com.example.crowdfundingplatform.domain.entity.PagingParams
-import com.example.crowdfundingplatform.domain.entity.ProjectSummary
-import com.example.crowdfundingplatform.domain.entity.SortingParams
-import com.example.crowdfundingplatform.domain.entity.SortingType
-import com.example.crowdfundingplatform.domain.usecase.GetAllProjectsUseCase
+import com.example.crowdfundingplatform.domain.entity.project.SearchProjectsRequest
+import com.example.crowdfundingplatform.domain.entity.project.FilteringParams
+import com.example.crowdfundingplatform.domain.entity.project.PagingParams
+import com.example.crowdfundingplatform.domain.entity.project.ProjectSummary
+import com.example.crowdfundingplatform.domain.entity.project.SortingParams
+import com.example.crowdfundingplatform.domain.entity.project.SortingType
+import com.example.crowdfundingplatform.domain.usecase.project.GetAllProjectsUseCase
 import retrofit2.HttpException
 import java.io.IOException
 

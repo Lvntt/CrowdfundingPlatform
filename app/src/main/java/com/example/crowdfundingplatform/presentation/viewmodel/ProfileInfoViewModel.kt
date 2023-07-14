@@ -6,9 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
-import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
-import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
-import com.example.crowdfundingplatform.presentation.uistate.ProfileInfoState
+import com.example.crowdfundingplatform.domain.usecase.user.GetYourProfileUseCase
+import com.example.crowdfundingplatform.domain.usecase.auth.RefreshTokensUseCase
+import com.example.crowdfundingplatform.presentation.common.ErrorCodes
+import com.example.crowdfundingplatform.presentation.uistate.profile.ProfileInfoState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ class ProfileInfoViewModel(
     private val fetchProfileExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when(exception) {
             is HttpException -> when(exception.code()) {
-                401 -> {
+                ErrorCodes.UNAUTHORIZED -> {
                     viewModelScope.launch(Dispatchers.IO + secondFetchAttemptExceptionHandler) {
                         refreshTokensUseCase()
                         val user = getYourProfileUseCase()
@@ -43,7 +44,7 @@ class ProfileInfoViewModel(
     private val secondFetchAttemptExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when(exception) {
             is HttpException -> when (exception.code()) {
-                401 -> {
+                ErrorCodes.UNAUTHORIZED -> {
                     _profileInfoState.value = ProfileInfoState.SignedOut
                 }
 

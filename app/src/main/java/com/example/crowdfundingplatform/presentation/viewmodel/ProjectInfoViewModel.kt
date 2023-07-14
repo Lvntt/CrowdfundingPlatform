@@ -7,12 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.domain.entity.ProjectInfo
-import com.example.crowdfundingplatform.domain.usecase.FundProjectUseCase
-import com.example.crowdfundingplatform.domain.usecase.GetProjectInfoUseCase
-import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
-import com.example.crowdfundingplatform.presentation.uistate.FundProjectState
-import com.example.crowdfundingplatform.presentation.uistate.ProjectInfoState
+import com.example.crowdfundingplatform.domain.entity.project.ProjectInfo
+import com.example.crowdfundingplatform.domain.usecase.project.FundProjectUseCase
+import com.example.crowdfundingplatform.domain.usecase.project.GetProjectInfoUseCase
+import com.example.crowdfundingplatform.domain.usecase.auth.RefreshTokensUseCase
+import com.example.crowdfundingplatform.presentation.common.ErrorCodes
+import com.example.crowdfundingplatform.presentation.uistate.project.FundProjectState
+import com.example.crowdfundingplatform.presentation.uistate.project.ProjectInfoState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,7 +42,7 @@ class ProjectInfoViewModel(
     private val fetchProjectExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                404 -> _projectInfoState.value = ProjectInfoState.Error(R.string.projectNotFound)
+                ErrorCodes.NOT_FOUND -> _projectInfoState.value = ProjectInfoState.Error(R.string.projectNotFound)
                 else -> _projectInfoState.value = ProjectInfoState.Error(R.string.unknownError)
             }
 
@@ -52,9 +53,9 @@ class ProjectInfoViewModel(
     private val secondFundAttemptExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                400 -> _projectFundState.value = FundProjectState.Error(R.string.insufficientMoney)
+                ErrorCodes.BAD_REQUEST -> _projectFundState.value = FundProjectState.Error(R.string.insufficientMoney)
 
-                401 -> _projectFundState.value = FundProjectState.SignedOut
+                ErrorCodes.UNAUTHORIZED -> _projectFundState.value = FundProjectState.SignedOut
 
                 else -> _projectFundState.value = FundProjectState.Error(R.string.unknownError)
             }
@@ -67,10 +68,10 @@ class ProjectInfoViewModel(
         CoroutineExceptionHandler { _, exception ->
             when (exception) {
                 is HttpException -> when (exception.code()) {
-                    400 -> _projectFundState.value =
+                    ErrorCodes.BAD_REQUEST -> _projectFundState.value =
                         FundProjectState.Error(R.string.insufficientMoney)
 
-                    401 -> viewModelScope.launch(Dispatchers.IO + secondFundAttemptExceptionHandler) {
+                    ErrorCodes.UNAUTHORIZED -> viewModelScope.launch(Dispatchers.IO + secondFundAttemptExceptionHandler) {
                         refreshTokensUseCase()
                         val project = fundProjectUseCase(projectId, moneyAmount).convertProjectTimeFields()
                         _projectFundState.value = FundProjectState.Success

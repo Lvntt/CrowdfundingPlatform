@@ -2,7 +2,7 @@ package com.example.crowdfundingplatform.data.remote.api
 
 import com.example.crowdfundingplatform.common.Constants
 import com.example.crowdfundingplatform.data.remote.model.UserModel
-import com.example.crowdfundingplatform.domain.entity.EditProfileRequest
+import com.example.crowdfundingplatform.domain.entity.user.EditProfileRequest
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header

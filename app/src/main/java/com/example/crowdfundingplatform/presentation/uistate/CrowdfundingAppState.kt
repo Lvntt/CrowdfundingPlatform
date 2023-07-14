@@ -6,10 +6,9 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.crowdfundingplatform.presentation.ui.navigation.bottomnav.BottomNavItems
+import com.example.crowdfundingplatform.presentation.ui.navigation.graph.CrowdfundingTopBarInfo
 import com.example.crowdfundingplatform.presentation.ui.extension.routeWithoutArguments
-import com.example.crowdfundingplatform.presentation.ui.navigation.BottomNavItems
-import com.example.crowdfundingplatform.presentation.ui.navigation.CrowdfundingTopBarInfo
-
 @Composable
 fun rememberCrowdfundingAppState(
     navController: NavHostController = rememberNavController()

@@ -1,7 +1,7 @@
 package com.example.crowdfundingplatform.presentation.uistate.creation
 
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.domain.entity.ProjectCategory
+import com.example.crowdfundingplatform.domain.entity.project.ProjectCategory
 
 data class Project(
     val title: String = Constants.EMPTY_STRING,

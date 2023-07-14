@@ -7,8 +7,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.domain.entity.ProjectSummary
-import com.example.crowdfundingplatform.domain.usecase.GetAllProjectsUseCase
+import com.example.crowdfundingplatform.domain.entity.project.ProjectSummary
+import com.example.crowdfundingplatform.domain.usecase.project.GetAllProjectsUseCase
 import com.example.crowdfundingplatform.presentation.ProjectsPagingSource
 import kotlinx.coroutines.flow.Flow
 

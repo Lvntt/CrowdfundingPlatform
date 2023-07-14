@@ -1,10 +1,10 @@
 package com.example.crowdfundingplatform.data.remote.api
 
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.domain.entity.ProjectInfo
-import com.example.crowdfundingplatform.domain.entity.ProjectCreationRequest
-import com.example.crowdfundingplatform.domain.entity.SearchProjectsRequest
-import com.example.crowdfundingplatform.domain.entity.SearchProjectsResponse
+import com.example.crowdfundingplatform.domain.entity.project.ProjectCreationRequest
+import com.example.crowdfundingplatform.domain.entity.project.SearchProjectsRequest
+import com.example.crowdfundingplatform.domain.entity.project.SearchProjectsResponse
+import com.example.crowdfundingplatform.domain.entity.project.ProjectInfo
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header

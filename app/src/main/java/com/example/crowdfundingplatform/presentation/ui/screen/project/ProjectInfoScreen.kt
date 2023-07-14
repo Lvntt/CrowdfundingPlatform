@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.ui.screen
+package com.example.crowdfundingplatform.presentation.ui.screen.project
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
@@ -34,11 +34,11 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.common.Constants
-import com.example.crowdfundingplatform.domain.entity.ProjectInfo
+import com.example.crowdfundingplatform.domain.entity.project.ProjectInfo
 import com.example.crowdfundingplatform.presentation.mapper.ProjectCategoryToDescriptionRes
 import com.example.crowdfundingplatform.presentation.ui.common.DescriptionItem
-import com.example.crowdfundingplatform.presentation.ui.common.InputTextDialog
-import com.example.crowdfundingplatform.presentation.ui.common.LoadingDialog
+import com.example.crowdfundingplatform.presentation.ui.common.dialog.InputTextDialog
+import com.example.crowdfundingplatform.presentation.ui.common.dialog.LoadingDialog
 import com.example.crowdfundingplatform.presentation.ui.common.ProjectStats
 import com.example.crowdfundingplatform.presentation.ui.common.dialog.TextAlertDialog
 import com.example.crowdfundingplatform.presentation.ui.common.state.ErrorScreen
@@ -51,8 +51,8 @@ import com.example.crowdfundingplatform.presentation.ui.theme.PaddingSmall
 import com.example.crowdfundingplatform.presentation.ui.theme.ProgressDialogSize
 import com.example.crowdfundingplatform.presentation.ui.theme.Subtitle
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonLargeCornerRadius
-import com.example.crowdfundingplatform.presentation.uistate.FundProjectState
-import com.example.crowdfundingplatform.presentation.uistate.ProjectInfoState
+import com.example.crowdfundingplatform.presentation.uistate.project.FundProjectState
+import com.example.crowdfundingplatform.presentation.uistate.project.ProjectInfoState
 import com.example.crowdfundingplatform.presentation.viewmodel.ProjectInfoViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf

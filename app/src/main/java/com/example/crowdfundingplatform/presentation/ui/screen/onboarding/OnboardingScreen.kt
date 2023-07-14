@@ -27,7 +27,7 @@ import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingLogoSize
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingLogoSpacing
 import com.example.crowdfundingplatform.presentation.ui.theme.OnboardingTitleWeight
 import com.example.crowdfundingplatform.presentation.ui.theme.Title
-import com.example.crowdfundingplatform.presentation.uistate.OnboardingState
+import com.example.crowdfundingplatform.presentation.uistate.auth.OnboardingState
 import com.example.crowdfundingplatform.presentation.viewmodel.OnboardingViewModel
 import org.koin.androidx.compose.koinViewModel
 

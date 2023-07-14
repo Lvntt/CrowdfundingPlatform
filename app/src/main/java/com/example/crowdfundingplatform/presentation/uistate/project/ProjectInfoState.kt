@@ -1,7 +1,7 @@
-package com.example.crowdfundingplatform.presentation.uistate
+package com.example.crowdfundingplatform.presentation.uistate.project
 
 import androidx.annotation.StringRes
-import com.example.crowdfundingplatform.domain.entity.ProjectInfo
+import com.example.crowdfundingplatform.domain.entity.project.ProjectInfo
 
 sealed interface ProjectInfoState {
 

@@ -9,7 +9,7 @@ import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.domain.usecase.user.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.auth.RefreshTokensUseCase
 import com.example.crowdfundingplatform.presentation.common.ErrorCodes
-import com.example.crowdfundingplatform.presentation.uistate.ProfileInfoState
+import com.example.crowdfundingplatform.presentation.uistate.profile.ProfileInfoState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

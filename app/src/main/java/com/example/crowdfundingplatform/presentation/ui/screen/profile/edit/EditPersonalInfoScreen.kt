@@ -35,8 +35,8 @@ import com.example.crowdfundingplatform.presentation.ui.common.button.UploadButt
 import com.example.crowdfundingplatform.presentation.ui.theme.ExtraSmallLabelRegularStyleAlternative
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.TextButtonSmallStyle
-import com.example.crowdfundingplatform.presentation.uistate.AvatarUploadState
-import com.example.crowdfundingplatform.presentation.uistate.EditProfileInfoState
+import com.example.crowdfundingplatform.presentation.uistate.profile.AvatarUploadState
+import com.example.crowdfundingplatform.presentation.uistate.profile.EditProfileInfoState
 import com.example.crowdfundingplatform.presentation.viewmodel.EditPersonalInfoViewModel
 import org.koin.androidx.compose.koinViewModel
 

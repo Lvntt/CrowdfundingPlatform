@@ -18,7 +18,7 @@ import com.example.crowdfundingplatform.presentation.ui.screen.dashboard.Dashboa
 import com.example.crowdfundingplatform.presentation.ui.screen.profile.edit.EditEmailScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.profile.edit.EditPasswordScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.profile.edit.EditPersonalInfoScreen
-import com.example.crowdfundingplatform.presentation.ui.screen.ProjectInfoScreen
+import com.example.crowdfundingplatform.presentation.ui.screen.project.ProjectInfoScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.profile.ProfileInfoScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.profile.balance.PaymentScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.creation.ProjectCreationScreen

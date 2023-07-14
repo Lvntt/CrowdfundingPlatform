@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.uistate
+package com.example.crowdfundingplatform.presentation.uistate.auth
 
 data class RegistrationContent(
     val name: String,

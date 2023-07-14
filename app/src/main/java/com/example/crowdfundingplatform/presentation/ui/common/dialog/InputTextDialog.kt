@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.ui.common
+package com.example.crowdfundingplatform.presentation.ui.common.dialog
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button

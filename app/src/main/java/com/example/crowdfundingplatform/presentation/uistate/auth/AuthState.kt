@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.uistate
+package com.example.crowdfundingplatform.presentation.uistate.auth
 
 sealed interface AuthState {
 

@@ -1,7 +1,5 @@
-package com.example.crowdfundingplatform.domain.entity
+package com.example.crowdfundingplatform.domain.entity.project
 
-import com.example.crowdfundingplatform.domain.entity.project.ProjectCategory
-import com.example.crowdfundingplatform.domain.entity.project.ProjectStatus
 import java.math.BigDecimal
 
 data class ProjectInfo(

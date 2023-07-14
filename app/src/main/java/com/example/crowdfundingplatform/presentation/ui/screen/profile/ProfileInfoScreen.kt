@@ -61,7 +61,7 @@ import com.example.crowdfundingplatform.presentation.ui.theme.ProfilePhotoBorder
 import com.example.crowdfundingplatform.presentation.ui.theme.ProfilePhotoSize
 import com.example.crowdfundingplatform.presentation.ui.theme.RoundedCornerShapePercentMedium
 import com.example.crowdfundingplatform.presentation.ui.theme.TopAppBarStyle
-import com.example.crowdfundingplatform.presentation.uistate.ProfileInfoState
+import com.example.crowdfundingplatform.presentation.uistate.profile.ProfileInfoState
 import com.example.crowdfundingplatform.presentation.viewmodel.ProfileInfoViewModel
 import org.koin.androidx.compose.koinViewModel
 

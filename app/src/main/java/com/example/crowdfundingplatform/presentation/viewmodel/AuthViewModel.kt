@@ -11,10 +11,10 @@ import com.example.crowdfundingplatform.domain.entity.auth.RegisterRequest
 import com.example.crowdfundingplatform.domain.usecase.auth.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.auth.RegisterUserUseCase
 import com.example.crowdfundingplatform.presentation.common.ErrorCodes
-import com.example.crowdfundingplatform.presentation.uistate.AuthState
-import com.example.crowdfundingplatform.presentation.uistate.AuthType
-import com.example.crowdfundingplatform.presentation.uistate.LoginContent
-import com.example.crowdfundingplatform.presentation.uistate.RegistrationContent
+import com.example.crowdfundingplatform.presentation.uistate.auth.AuthState
+import com.example.crowdfundingplatform.presentation.uistate.auth.AuthType
+import com.example.crowdfundingplatform.presentation.uistate.auth.LoginContent
+import com.example.crowdfundingplatform.presentation.uistate.auth.RegistrationContent
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow

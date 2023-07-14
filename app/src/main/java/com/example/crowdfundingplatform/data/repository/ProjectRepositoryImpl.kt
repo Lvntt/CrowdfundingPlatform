@@ -6,7 +6,7 @@ import com.example.crowdfundingplatform.data.remote.model.TokenType
 import com.example.crowdfundingplatform.domain.entity.project.ProjectCreationRequest
 import com.example.crowdfundingplatform.domain.entity.project.SearchProjectsRequest
 import com.example.crowdfundingplatform.domain.entity.project.SearchProjectsResponse
-import com.example.crowdfundingplatform.domain.entity.ProjectInfo
+import com.example.crowdfundingplatform.domain.entity.project.ProjectInfo
 import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import java.math.BigDecimal
 

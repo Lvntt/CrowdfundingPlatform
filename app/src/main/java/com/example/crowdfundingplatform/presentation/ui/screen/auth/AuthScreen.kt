@@ -19,8 +19,8 @@ import com.example.crowdfundingplatform.presentation.ui.common.dialog.TextAlertD
 import com.example.crowdfundingplatform.presentation.ui.screen.auth.login.LoginContent
 import com.example.crowdfundingplatform.presentation.ui.screen.auth.registration.RegistrationCredentialsContent
 import com.example.crowdfundingplatform.presentation.ui.screen.auth.registration.RegistrationPersonalInfoContent
-import com.example.crowdfundingplatform.presentation.uistate.AuthType
-import com.example.crowdfundingplatform.presentation.uistate.AuthState
+import com.example.crowdfundingplatform.presentation.uistate.auth.AuthType
+import com.example.crowdfundingplatform.presentation.uistate.auth.AuthState
 import com.example.crowdfundingplatform.presentation.viewmodel.AuthViewModel
 import org.koin.androidx.compose.koinViewModel
 

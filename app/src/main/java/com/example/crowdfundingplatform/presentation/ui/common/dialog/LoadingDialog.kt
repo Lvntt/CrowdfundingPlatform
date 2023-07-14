@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.presentation.ui.common
+package com.example.crowdfundingplatform.presentation.ui.common.dialog
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

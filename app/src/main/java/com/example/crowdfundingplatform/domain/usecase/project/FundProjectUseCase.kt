@@ -1,4 +1,4 @@
-package com.example.crowdfundingplatform.domain.usecase
+package com.example.crowdfundingplatform.domain.usecase.project
 
 import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import java.math.BigDecimal

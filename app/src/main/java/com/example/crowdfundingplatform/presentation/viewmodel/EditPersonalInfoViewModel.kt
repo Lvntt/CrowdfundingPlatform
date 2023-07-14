@@ -14,8 +14,8 @@ import com.example.crowdfundingplatform.domain.usecase.user.GetYourProfileUseCas
 import com.example.crowdfundingplatform.domain.usecase.auth.RefreshTokensUseCase
 import com.example.crowdfundingplatform.domain.usecase.file.UploadFileAndGetIdUseCase
 import com.example.crowdfundingplatform.presentation.common.ErrorCodes
-import com.example.crowdfundingplatform.presentation.uistate.AvatarUploadState
-import com.example.crowdfundingplatform.presentation.uistate.EditProfileInfoState
+import com.example.crowdfundingplatform.presentation.uistate.profile.AvatarUploadState
+import com.example.crowdfundingplatform.presentation.uistate.profile.EditProfileInfoState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,7 +46,8 @@ class EditPersonalInfoViewModel(
 
     val avatarUploadState: State<AvatarUploadState>
         get() = _avatarUploadState
-    private val _avatarUploadState: MutableState<AvatarUploadState> = mutableStateOf(AvatarUploadState.Initial)
+    private val _avatarUploadState: MutableState<AvatarUploadState> = mutableStateOf(
+        AvatarUploadState.Initial)
 
     private val fetchProfileExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {

@@ -15,6 +15,7 @@ import com.example.crowdfundingplatform.domain.usecase.CreateProjectUseCase
 import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
 import com.example.crowdfundingplatform.domain.usecase.UploadFileAndGetIdUseCase
 import com.example.crowdfundingplatform.presentation.ProjectCategoryToDescriptionRes
+import com.example.crowdfundingplatform.presentation.common.ErrorCodes
 import com.example.crowdfundingplatform.presentation.uistate.creation.CreationType
 import com.example.crowdfundingplatform.presentation.uistate.creation.ImageUploadState
 import com.example.crowdfundingplatform.presentation.uistate.creation.Project
@@ -64,7 +65,7 @@ class ProjectCreationViewModel(
     private val projectCreationExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> {
+                ErrorCodes.UNAUTHORIZED -> {
                     viewModelScope.launch(Dispatchers.IO + secondProjectCreationExceptionHandler) {
                         refreshTokensUseCase()
                         createProjectUseCase(
@@ -85,8 +86,8 @@ class ProjectCreationViewModel(
                     }
                 }
 
-                403 -> _errorMessageFlow.tryEmit(R.string.forbidden)
-                409 -> _errorMessageFlow.tryEmit(R.string.sameProjectExists)
+                ErrorCodes.FORBIDDEN -> _errorMessageFlow.tryEmit(R.string.forbidden)
+                ErrorCodes.CONFLICT -> _errorMessageFlow.tryEmit(R.string.sameProjectExists)
                 else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
 
@@ -98,9 +99,9 @@ class ProjectCreationViewModel(
     private val secondProjectCreationExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> _errorMessageFlow.tryEmit(R.string.unauthorized)
-                403 -> _errorMessageFlow.tryEmit(R.string.forbidden)
-                409 -> _errorMessageFlow.tryEmit(R.string.sameProjectExists)
+                ErrorCodes.UNAUTHORIZED -> _errorMessageFlow.tryEmit(R.string.unauthorized)
+                ErrorCodes.FORBIDDEN -> _errorMessageFlow.tryEmit(R.string.forbidden)
+                ErrorCodes.CONFLICT -> _errorMessageFlow.tryEmit(R.string.sameProjectExists)
                 else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
 

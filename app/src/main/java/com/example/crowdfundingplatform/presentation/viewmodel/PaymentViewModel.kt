@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.domain.usecase.ActivatePromoCodeUseCase
 import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
+import com.example.crowdfundingplatform.presentation.common.ErrorCodes
 import com.example.crowdfundingplatform.presentation.uistate.payment.PaymentState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -37,15 +38,15 @@ class PaymentViewModel(
     private val activationExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> {
+                ErrorCodes.UNAUTHORIZED -> {
                     viewModelScope.launch(Dispatchers.IO + secondActivationExceptionHandler) {
                         refreshTokensUseCase()
                         activatePromoCodeUseCase(_promoCode.value)
                         _paymentState.value = PaymentState.Success
                     }
                 }
-                403 -> _errorMessageFlow.tryEmit(R.string.forbidden)
-                404 -> _errorMessageFlow.tryEmit(R.string.noSuchPromoCode)
+                ErrorCodes.FORBIDDEN -> _errorMessageFlow.tryEmit(R.string.forbidden)
+                ErrorCodes.NOT_FOUND -> _errorMessageFlow.tryEmit(R.string.noSuchPromoCode)
                 else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
             else -> _errorMessageFlow.tryEmit(R.string.unknownError)
@@ -56,9 +57,9 @@ class PaymentViewModel(
     private val secondActivationExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> _errorMessageFlow.tryEmit(R.string.unauthorized)
-                403 -> _errorMessageFlow.tryEmit(R.string.forbidden)
-                404 -> _errorMessageFlow.tryEmit(R.string.noSuchPromoCode)
+                ErrorCodes.UNAUTHORIZED -> _errorMessageFlow.tryEmit(R.string.unauthorized)
+                ErrorCodes.FORBIDDEN -> _errorMessageFlow.tryEmit(R.string.forbidden)
+                ErrorCodes.NOT_FOUND -> _errorMessageFlow.tryEmit(R.string.noSuchPromoCode)
                 else -> _errorMessageFlow.tryEmit(R.string.unknownError)
             }
             else -> _errorMessageFlow.tryEmit(R.string.unknownError)

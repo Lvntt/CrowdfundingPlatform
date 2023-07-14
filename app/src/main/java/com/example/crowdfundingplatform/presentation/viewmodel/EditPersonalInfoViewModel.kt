@@ -13,6 +13,7 @@ import com.example.crowdfundingplatform.domain.usecase.EditYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
 import com.example.crowdfundingplatform.domain.usecase.UploadFileAndGetIdUseCase
+import com.example.crowdfundingplatform.presentation.common.ErrorCodes
 import com.example.crowdfundingplatform.presentation.uistate.AvatarUploadState
 import com.example.crowdfundingplatform.presentation.uistate.EditProfileInfoState
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -50,7 +51,7 @@ class EditPersonalInfoViewModel(
     private val fetchProfileExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> {
+                ErrorCodes.UNAUTHORIZED -> {
                     viewModelScope.launch(Dispatchers.IO + secondFetchAttemptExceptionHandler) {
                         refreshTokensUseCase()
                         val user = getYourProfileUseCase()
@@ -71,7 +72,7 @@ class EditPersonalInfoViewModel(
     private val secondFetchAttemptExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                401 -> {
+                ErrorCodes.UNAUTHORIZED -> {
                     _editInfoState.value = EditProfileInfoState.SignedOut
                 }
 
@@ -85,8 +86,8 @@ class EditPersonalInfoViewModel(
     private val editProfileExceptionHandler = CoroutineExceptionHandler { _, exception ->
         when (exception) {
             is HttpException -> when (exception.code()) {
-                400 -> _editInfoState.value = EditProfileInfoState.Error(R.string.invalidPersonalInfo)
-                401 -> {
+                ErrorCodes.BAD_REQUEST -> _editInfoState.value = EditProfileInfoState.Error(R.string.invalidPersonalInfo)
+                ErrorCodes.UNAUTHORIZED -> {
                     viewModelScope.launch(Dispatchers.IO + secondFetchAttemptExceptionHandler) {
                         refreshTokensUseCase()
                         editYourProfileUseCase(_editRequest.value)

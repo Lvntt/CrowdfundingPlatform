@@ -17,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -59,13 +60,15 @@ import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ProjectInfoScreen(
-    projectId: String, viewModel: ProjectInfoViewModel = koinViewModel { parametersOf(projectId) }
+    projectId: String,
+    viewModel: ProjectInfoViewModel = koinViewModel { parametersOf(projectId) },
+    onSignedOut: () -> Unit
 ) {
     val projectState by remember { viewModel.projectInfoState }
     Crossfade(targetState = projectState, label = "") {
         when (it) {
             is ProjectInfoState.Content -> ProjectInfoContent(
-                viewModel = viewModel, projectInfo = it.projectInfo
+                viewModel = viewModel, projectInfo = it.projectInfo, onSignedOut = onSignedOut
             )
 
             is ProjectInfoState.Error -> ErrorScreen(
@@ -78,9 +81,12 @@ fun ProjectInfoScreen(
 }
 
 @Composable
-fun ProjectInfoContent(viewModel: ProjectInfoViewModel, projectInfo: ProjectInfo) {
+fun ProjectInfoContent(
+    viewModel: ProjectInfoViewModel, projectInfo: ProjectInfo, onSignedOut: () -> Unit
+) {
     var shouldShowFundingDialog by remember { mutableStateOf(false) }
     val fundingState by remember { viewModel.projectFundState }
+
     if (fundingState is FundProjectState.Input && shouldShowFundingDialog) {
         InputTextDialog(
             title = stringResource(id = R.string.sponsorProject),
@@ -115,6 +121,11 @@ fun ProjectInfoContent(viewModel: ProjectInfoViewModel, projectInfo: ProjectInfo
     if (fundingState == FundProjectState.Success) {
         FundingSuccessDialog {
             viewModel.resetFundingState()
+        }
+    }
+    if (fundingState == FundProjectState.SignedOut) {
+        LaunchedEffect(Unit) {
+            onSignedOut()
         }
     }
     LazyColumn(

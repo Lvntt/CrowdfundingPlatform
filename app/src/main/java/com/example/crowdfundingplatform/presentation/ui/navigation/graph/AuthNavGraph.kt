@@ -1,5 +1,8 @@
 package com.example.crowdfundingplatform.presentation.ui.navigation.graph
 
+import android.app.Activity
+import android.content.Context
+import androidx.activity.compose.BackHandler
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -31,7 +34,7 @@ object AuthGraphTopBarInfo {
         })
 }
 
-fun NavGraphBuilder.authNavGraph(appState: CrowdfundingAppState) {
+fun NavGraphBuilder.authNavGraph(appState: CrowdfundingAppState, context: Context) {
     navigation(
         route = CrowdfundingGraphs.AUTH, startDestination = AuthGraphDestinations.ONBOARDING_ROUTE
     ) {
@@ -46,6 +49,10 @@ fun NavGraphBuilder.authNavGraph(appState: CrowdfundingAppState) {
             AuthScreen(onSignInSuccess = {
                 appState.navController.navigate(CrowdfundingGraphs.MAIN)
             })
+            BackHandler {
+                val activity = (context as? Activity)
+                activity?.finishAffinity()
+            }
         }
     }
 }

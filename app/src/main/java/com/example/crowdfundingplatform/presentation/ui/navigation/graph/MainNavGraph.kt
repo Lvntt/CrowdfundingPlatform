@@ -1,5 +1,7 @@
 package com.example.crowdfundingplatform.presentation.ui.navigation.graph
 
+import android.app.Activity
+import android.content.Context
 import androidx.activity.compose.BackHandler
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -91,7 +93,7 @@ object MainGraphTopBarInfo {
     )
 }
 
-fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
+fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState, context: Context) {
     navigation(
         route = CrowdfundingGraphs.MAIN, startDestination = MainGraphDestinations.DASHBOARD
     ) {
@@ -104,11 +106,19 @@ fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
                 onAddBalanceClick = { appState.navController.navigate(MainGraphDestinations.BALANCE) },
                 onSignOut = { appState.navController.navigate(AuthGraphDestinations.AUTHORIZATION_ROUTE) }
             )
+            BackHandler {
+                val activity = (context as? Activity)
+                activity?.finishAffinity()
+            }
         }
         composable(MainGraphDestinations.DASHBOARD) {
             DashboardScreen(
                 onNavigateToProject = { projectId -> appState.navController.navigate("${MainGraphDestinations.PROJECT_INFO}/$projectId") }
             )
+            BackHandler {
+                val activity = (context as? Activity)
+                activity?.finishAffinity()
+            }
         }
         composable(MainGraphDestinations.EDIT_EMAIL) {
             EditEmailScreen()
@@ -143,7 +153,9 @@ fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
         }
         composable("${MainGraphDestinations.PROJECT_INFO}/{projectId}", arguments = listOf(navArgument("projectId") { type = NavType.StringType })) { backStackEntry ->
             backStackEntry.arguments?.getString("projectId")
-                ?.let { ProjectInfoScreen(projectId = it) }
+                ?.let { ProjectInfoScreen(projectId = it, onSignedOut = {
+                    appState.navController.navigate(AuthGraphDestinations.AUTHORIZATION_ROUTE)
+                }) }
             BackHandler {
                 appState.navController.navigate(MainGraphDestinations.DASHBOARD)
             }

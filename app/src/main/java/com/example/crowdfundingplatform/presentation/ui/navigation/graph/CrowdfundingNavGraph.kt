@@ -1,6 +1,7 @@
 package com.example.crowdfundingplatform.presentation.ui.navigation.graph
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.crowdfundingplatform.presentation.uistate.CrowdfundingAppState
@@ -19,11 +20,12 @@ object CrowdfundingTopBarInfo {
 fun CrowdfundingNavigation(
     appState: CrowdfundingAppState
 ) {
+    val context = LocalContext.current
     NavHost(
         navController = appState.navController,
         startDestination = CrowdfundingGraphs.AUTH
     ) {
-        authNavGraph(appState)
-        mainNavGraph(appState)
+        authNavGraph(appState, context)
+        mainNavGraph(appState, context)
     }
 }

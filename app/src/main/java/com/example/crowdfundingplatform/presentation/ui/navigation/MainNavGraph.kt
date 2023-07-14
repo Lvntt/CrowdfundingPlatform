@@ -20,6 +20,7 @@ import com.example.crowdfundingplatform.presentation.ui.screen.profile.EditEmail
 import com.example.crowdfundingplatform.presentation.ui.screen.profile.EditPasswordScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.profile.EditPersonalInfoScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.profile.ProfileInfoScreen
+import com.example.crowdfundingplatform.presentation.ui.screen.balance.PaymentScreen
 import com.example.crowdfundingplatform.presentation.ui.screen.creation.ProjectCreationScreen
 import com.example.crowdfundingplatform.presentation.uistate.CrowdfundingAppState
 
@@ -31,6 +32,7 @@ object MainGraphDestinations {
     const val EDIT_PERSONAL_INFO = "edit_personal_info"
     const val CREATE_PROJECT = "create_project"
     const val PROJECT_INFO = "project_info"
+    const val BALANCE = "balance"
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,7 +43,8 @@ object MainGraphTopBarInfo {
         MainGraphDestinations.EDIT_PASSWORD,
         MainGraphDestinations.EDIT_PERSONAL_INFO,
         MainGraphDestinations.CREATE_PROJECT,
-        MainGraphDestinations.PROJECT_INFO
+        MainGraphDestinations.PROJECT_INFO,
+        MainGraphDestinations.BALANCE
     )
     val TOP_BAR_DATA = mapOf<String, @Composable (NavHostController) -> Unit>(
         MainGraphDestinations.DASHBOARD to @Composable {
@@ -77,6 +80,13 @@ object MainGraphTopBarInfo {
                 canNavigateBack = true,
                 onNavigateUp = { navController.navigate(MainGraphDestinations.DASHBOARD) }
             )
+        },
+        MainGraphDestinations.BALANCE to @Composable { navController ->
+            CrowdfundingTopAppBar(
+                title = stringResource(id = R.string.balance),
+                canNavigateBack = true,
+                onNavigateUp = { navController.navigate(MainGraphDestinations.PROFILE) }
+            )
         }
     )
 }
@@ -91,6 +101,7 @@ fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
                 onEditPasswordClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PASSWORD) },
                 onEditPersonalInfoClick = { appState.navController.navigate(MainGraphDestinations.EDIT_PERSONAL_INFO) },
                 onCreateProjectClick = { appState.navController.navigate(MainGraphDestinations.CREATE_PROJECT) },
+                onAddBalanceClick = { appState.navController.navigate(MainGraphDestinations.BALANCE) },
                 onSignOut = { appState.navController.navigate(AuthGraphDestinations.AUTHORIZATION_ROUTE) }
             )
         }
@@ -135,6 +146,16 @@ fun NavGraphBuilder.mainNavGraph(appState: CrowdfundingAppState) {
                 ?.let { ProjectInfoScreen(projectId = it) }
             BackHandler {
                 appState.navController.navigate(MainGraphDestinations.DASHBOARD)
+            }
+        }
+        composable(MainGraphDestinations.BALANCE) {
+            PaymentScreen(
+                onNavigateUp = {
+                    appState.navController.navigate(MainGraphDestinations.PROFILE)
+                }
+            )
+            BackHandler {
+                appState.navController.navigate(MainGraphDestinations.PROFILE)
             }
         }
     }

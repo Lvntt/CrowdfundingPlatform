@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,10 +16,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,10 +47,14 @@ import com.example.crowdfundingplatform.presentation.ui.common.LoadingProgress
 import com.example.crowdfundingplatform.presentation.ui.common.ProfileInfoItem
 import com.example.crowdfundingplatform.presentation.ui.common.TextButton
 import com.example.crowdfundingplatform.presentation.ui.common.WarningItem
+import com.example.crowdfundingplatform.presentation.ui.extension.noRippleClickable
+import com.example.crowdfundingplatform.presentation.ui.theme.CardIconSize
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelRegularStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.NextButtonHeight
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingLarge
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
+import com.example.crowdfundingplatform.presentation.ui.theme.PaddingSmall
+import com.example.crowdfundingplatform.presentation.ui.theme.PaddingTiny
 import com.example.crowdfundingplatform.presentation.ui.theme.PrimaryColorLight
 import com.example.crowdfundingplatform.presentation.ui.theme.ProfilePhotoBackgroundSize
 import com.example.crowdfundingplatform.presentation.ui.theme.ProfilePhotoBorderSize
@@ -65,6 +72,7 @@ fun ProfileInfoScreen(
     onEditPersonalInfoClick: () -> Unit,
     onCreateProjectClick: () -> Unit,
     onSignOut: () -> Unit,
+    onAddBalanceClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val viewModel: ProfileInfoViewModel = koinViewModel()
@@ -78,7 +86,8 @@ fun ProfileInfoScreen(
                     onEditEmailClick,
                     onEditPasswordClick,
                     onEditPersonalInfoClick,
-                    onCreateProjectClick
+                    onCreateProjectClick,
+                    onAddBalanceClick
                 )
 
             is ProfileInfoState.Error -> ErrorScreen(
@@ -101,7 +110,8 @@ private fun ProfileInfoContent(
     onEditEmailClick: () -> Unit,
     onEditPasswordClick: () -> Unit,
     onEditPersonalInfoClick: () -> Unit,
-    onCreateProjectClick: () -> Unit
+    onCreateProjectClick: () -> Unit,
+    onAddBalanceClick: () -> Unit
 ) {
     Box(
         modifier = modifier
@@ -172,11 +182,13 @@ private fun ProfileInfoContent(
                 surname = state.user.surname,
                 patronymic = state.user.patronymic,
                 bio = state.user.bio,
+                balance = state.user.money.toString(),
                 emailIsConfirmed = state.user.emailIsConfirmed,
                 onEditEmailClick = onEditEmailClick,
                 onEditPasswordClick = onEditPasswordClick,
                 onEditPersonalInfoClick = onEditPersonalInfoClick,
                 onCreateProjectClick = onCreateProjectClick,
+                onAddBalanceClick = onAddBalanceClick,
                 modifier = modifier
             )
         }
@@ -190,11 +202,13 @@ fun ProfileInfoBody(
     surname: String,
     patronymic: String,
     bio: String,
+    balance: String,
     emailIsConfirmed: Boolean,
     onEditEmailClick: () -> Unit,
     onEditPasswordClick: () -> Unit,
     onEditPersonalInfoClick: () -> Unit,
     onCreateProjectClick: () -> Unit,
+    onAddBalanceClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -215,6 +229,31 @@ fun ProfileInfoBody(
             style = LabelRegularStyle,
             textAlign = TextAlign.Center
         )
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .noRippleClickable {
+                    onAddBalanceClick()
+                },
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(id = R.string.yourBalance) + " $balance",
+                color = MaterialTheme.colorScheme.onBackground,
+                style = LabelRegularStyle
+            )
+
+            Spacer(modifier = Modifier.width(PaddingSmall))
+
+            Icon(
+                painter = painterResource(id = R.drawable.add_card),
+                contentDescription = stringResource(id = R.string.addBalance),
+                modifier = Modifier
+                    .size(CardIconSize)
+                    .padding(top = PaddingTiny)
+            )
+        }
         ProfileInfoItems(
             email = email,
             name = name,

@@ -6,16 +6,20 @@ import com.example.crowdfundingplatform.data.datasource.TokenDataSource
 import com.example.crowdfundingplatform.data.datasource.TokenDataSourceImpl
 import com.example.crowdfundingplatform.data.remote.api.AuthApiService
 import com.example.crowdfundingplatform.data.remote.api.FileApiService
+import com.example.crowdfundingplatform.data.remote.api.PaymentApiService
 import com.example.crowdfundingplatform.data.remote.api.ProjectApiService
 import com.example.crowdfundingplatform.data.remote.api.UserApiService
 import com.example.crowdfundingplatform.data.repository.AuthRepositoryImpl
 import com.example.crowdfundingplatform.data.repository.FileRepositoryImpl
+import com.example.crowdfundingplatform.data.repository.PaymentRepositoryImpl
 import com.example.crowdfundingplatform.data.repository.ProjectRepositoryImpl
 import com.example.crowdfundingplatform.data.repository.UserRepositoryImpl
 import com.example.crowdfundingplatform.domain.repository.AuthRepository
 import com.example.crowdfundingplatform.domain.repository.FileRepository
+import com.example.crowdfundingplatform.domain.repository.PaymentRepository
 import com.example.crowdfundingplatform.domain.repository.ProjectRepository
 import com.example.crowdfundingplatform.domain.repository.UserRepository
+import com.example.crowdfundingplatform.domain.usecase.ActivatePromoCodeUseCase
 import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
 import com.example.crowdfundingplatform.domain.usecase.CreateProjectUseCase
 import com.example.crowdfundingplatform.domain.usecase.EditYourProfileUseCase
@@ -57,6 +61,11 @@ private fun provideFileRepository(
     context: Context
 ): FileRepository = FileRepositoryImpl(fileApiService, context.contentResolver)
 
+private fun providePaymentRepository(
+    paymentApiService: PaymentApiService,
+    tokenDataSource: TokenDataSource
+) : PaymentRepository = PaymentRepositoryImpl(paymentApiService, tokenDataSource)
+
 fun provideDomainModule(): Module = module {
 
     single {
@@ -77,6 +86,10 @@ fun provideDomainModule(): Module = module {
 
     single {
         provideFileRepository(get(), androidContext().applicationContext)
+    }
+
+    single {
+        providePaymentRepository(get(), get())
     }
 
     factory {
@@ -125,6 +138,10 @@ fun provideDomainModule(): Module = module {
 
     factory {
         FundProjectUseCase(get())
+    }
+    
+    factory {
+        ActivatePromoCodeUseCase(get())
     }
 
 }

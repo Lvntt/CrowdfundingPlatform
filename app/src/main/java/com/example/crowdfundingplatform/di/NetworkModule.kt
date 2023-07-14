@@ -3,6 +3,7 @@ package com.example.crowdfundingplatform.di
 import com.example.crowdfundingplatform.common.Constants
 import com.example.crowdfundingplatform.data.remote.api.AuthApiService
 import com.example.crowdfundingplatform.data.remote.api.FileApiService
+import com.example.crowdfundingplatform.data.remote.api.PaymentApiService
 import com.example.crowdfundingplatform.data.remote.api.ProjectApiService
 import com.example.crowdfundingplatform.data.remote.api.UserApiService
 import org.koin.core.module.Module
@@ -29,6 +30,9 @@ private fun provideUserApiService(): UserApiService =
 private fun provideFileApiService(): FileApiService =
     provideRetrofit(Constants.BASE_URL).create(FileApiService::class.java)
 
+private fun providePaymentApiService(): PaymentApiService =
+    provideRetrofit(Constants.BASE_URL).create(PaymentApiService::class.java)
+
 fun provideNetworkModule(): Module = module {
 
     single {
@@ -45,6 +49,10 @@ fun provideNetworkModule(): Module = module {
 
     single {
         provideFileApiService()
+    }
+
+    single {
+        providePaymentApiService()
     }
 
 }

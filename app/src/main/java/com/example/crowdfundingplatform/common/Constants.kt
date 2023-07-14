@@ -14,6 +14,7 @@ object Constants {
     const val FULL_PROJECT_INFO_URL = "projects/{projectId}"
     const val FUND_PROJECT_URL = "projects/{projectId}/sponsorship"
     const val YOUR_PROFILE_URL = "profiles"
+    const val PROMOCODE_URL = "promo-codes"
     const val TOKEN_PREFERENCES = "token_preferences"
     const val USER_ACCESS_TOKEN = "access_token"
     const val USER_REFRESH_TOKEN = "refresh_token"

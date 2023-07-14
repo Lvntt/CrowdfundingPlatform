@@ -23,7 +23,9 @@ import com.example.crowdfundingplatform.domain.usecase.ActivatePromoCodeUseCase
 import com.example.crowdfundingplatform.domain.usecase.CheckTokenExistenceUseCase
 import com.example.crowdfundingplatform.domain.usecase.CreateProjectUseCase
 import com.example.crowdfundingplatform.domain.usecase.EditYourProfileUseCase
+import com.example.crowdfundingplatform.domain.usecase.FundProjectUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetAllProjectsUseCase
+import com.example.crowdfundingplatform.domain.usecase.GetProjectInfoUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetYourProfileUseCase
 import com.example.crowdfundingplatform.domain.usecase.LoginUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.LogoutUserUseCase
@@ -130,6 +132,14 @@ fun provideDomainModule(): Module = module {
         EditYourProfileUseCase(get())
     }
 
+    factory {
+        GetProjectInfoUseCase(get())
+    }
+
+    factory {
+        FundProjectUseCase(get())
+    }
+    
     factory {
         ActivatePromoCodeUseCase(get())
     }

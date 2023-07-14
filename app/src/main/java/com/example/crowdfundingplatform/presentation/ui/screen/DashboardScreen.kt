@@ -68,6 +68,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun DashboardScreen(
     modifier: Modifier = Modifier,
+    onNavigateToProject: (String) -> Unit,
     dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val projects = dashboardViewModel.projects.collectAsLazyPagingItems()
@@ -84,7 +85,9 @@ fun DashboardScreen(
         ) { index ->
             val project = projects[index]
             project?.let {
-                ProjectCard(project = project)
+                ProjectCard(
+                    project = project,
+                    onNavigateToProject = { onNavigateToProject(project.id) })
             }
         }
 
@@ -101,6 +104,7 @@ fun DashboardScreen(
                 projects.refresh()
             }
         )
+
         is LoadState.Loading -> LoadingScreen()
         is LoadState.NotLoading -> Unit
     }
@@ -109,6 +113,7 @@ fun DashboardScreen(
 @Composable
 private fun ProjectCard(
     project: ProjectSummary,
+    onNavigateToProject: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -129,7 +134,8 @@ private fun ProjectCard(
             Divider(color = DividerColor)
             ProjectStats(
                 collectedAmount = project.collectedAmount.toLong(),
-                targetAmount = project.targetAmount.toLong()
+                targetAmount = project.targetAmount.toLong(),
+                onNavigateToProject = onNavigateToProject
             )
         }
     }
@@ -186,7 +192,8 @@ private fun ProjectContent(
 @Composable
 private fun ProjectStats(
     collectedAmount: Long,
-    targetAmount: Long
+    targetAmount: Long,
+    onNavigateToProject: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -254,6 +261,7 @@ private fun ProjectStats(
             buttonContentPadding = PaddingValues(horizontal = PaddingMedium),
             buttonShape = RoundedCornerShape(RoundedCornerShapePercentLarge),
             buttonIconSize = TextButtonIconSizeMedium,
+            onClick = onNavigateToProject,
             modifier = Modifier
                 .height(ProjectStatsButtonHeight)
                 .align(Alignment.CenterVertically)

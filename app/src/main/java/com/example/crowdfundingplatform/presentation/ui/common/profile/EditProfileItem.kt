@@ -3,6 +3,7 @@ package com.example.crowdfundingplatform.presentation.ui.common.profile
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -24,7 +25,8 @@ fun EditFieldItem(
     label: String,
     textFieldValue: String = Constants.EMPTY_STRING,
     onValueChange: (String) -> Unit,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
     OutlinedTextField(
         value = textFieldValue,
@@ -48,6 +50,7 @@ fun EditFieldItem(
             .padding(horizontal = PaddingMedium),
         shape = RoundedCornerShape(percent = RoundedCornerShapePercentMedium),
         enabled = enabled,
-        singleLine = true
+        singleLine = true,
+        keyboardOptions = keyboardOptions
     )
 }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -28,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -101,7 +103,8 @@ fun ProjectInfoContent(
             onDismiss = {
                 shouldShowFundingDialog = false
             },
-            dismissText = stringResource(id = R.string.cancel)
+            dismissText = stringResource(id = R.string.cancel),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
     }
     if (fundingState == FundProjectState.Loading) {

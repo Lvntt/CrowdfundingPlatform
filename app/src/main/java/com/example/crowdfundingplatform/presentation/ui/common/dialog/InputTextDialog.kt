@@ -1,5 +1,6 @@
 package com.example.crowdfundingplatform.presentation.ui.common.dialog
 
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -19,12 +20,16 @@ fun InputTextDialog(
     confirmText: String,
     onDismiss: () -> Unit,
     dismissText: String,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
     AlertDialog(onDismissRequest = onDismiss, title = {
         Text(text = title, style = Subtitle, color = MaterialTheme.colorScheme.onBackground)
     }, text = {
         EditFieldItem(
-            label = editFieldLabel, onValueChange = onTextValueChange, textFieldValue = text
+            label = editFieldLabel,
+            onValueChange = onTextValueChange,
+            textFieldValue = text,
+            keyboardOptions = keyboardOptions
         )
     }, confirmButton = {
         Button(

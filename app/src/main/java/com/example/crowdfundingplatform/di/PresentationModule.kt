@@ -7,6 +7,7 @@ import com.example.crowdfundingplatform.presentation.viewmodel.EditPersonalInfoV
 import com.example.crowdfundingplatform.presentation.viewmodel.OnboardingViewModel
 import com.example.crowdfundingplatform.presentation.viewmodel.ProfileInfoViewModel
 import com.example.crowdfundingplatform.presentation.viewmodel.ProjectCreationViewModel
+import com.example.crowdfundingplatform.presentation.viewmodel.ProjectInfoViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -49,6 +50,10 @@ fun providePresentationModule(): Module = module {
         )
     }
 
+    viewModel { (projectId: String) ->
+        ProjectInfoViewModel(projectId, get(), get(), get())
+    }
+    
     viewModel {
         PaymentViewModel(
             get(), get()

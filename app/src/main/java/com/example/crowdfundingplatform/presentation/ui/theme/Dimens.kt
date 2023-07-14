@@ -24,6 +24,7 @@ val OnboardingLogoSpacing = 10.dp
 val TextButtonLargeCornerRadius = 25.dp
 val TextButtonContentPadding = 25.dp
 val ProgressIndicatorSize = 150.dp
+val ProgressDialogSize = 200.dp
 val ProfilePhotoSize = 250.dp
 val ProfilePhotoBorderSize = 12.dp
 val ProfilePhotoBackgroundSize = ProfilePhotoSize * 8 / 9

@@ -100,4 +100,18 @@
     <string name="uploadingAvatar">Uploading avatar...</string>
     <string name="showPassword">Show password</string>
     <string name="hidePassword">Hide password</string>
+    <string name="projectInfo">Project info</string>
+    <string name="projectNotFound">Project does not exist or it isn\'t approved yet</string>
+    <string name="invalidFundAmount">You entered an invalid money amount</string>
+    <string name="insufficientMoney">Insufficient money</string>
+    <string name="fund">Fund</string>
+    <string name="aboutProject">About project</string>
+    <string name="categoryTemplate">Category: %1$s</string>
+    <string name="descriptionWithSemicolon">Description:</string>
+    <string name="finishDate">Finish date: %1$s</string>
+    <string name="attachments">Attachments:</string>
+    <string name="sponsorProject">Fund project</string>
+    <string name="moneyAmount">Money amount</string>
+    <string name="cancel">Cancel</string>
+    <string name="fundingSuccessful">Funding successful!</string>
 </resources>

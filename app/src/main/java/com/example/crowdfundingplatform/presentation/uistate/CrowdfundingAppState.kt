@@ -8,7 +8,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.crowdfundingplatform.presentation.ui.navigation.bottomnav.BottomNavItems
 import com.example.crowdfundingplatform.presentation.ui.navigation.graph.CrowdfundingTopBarInfo
-
+import com.example.crowdfundingplatform.presentation.ui.extension.routeWithoutArguments
 @Composable
 fun rememberCrowdfundingAppState(
     navController: NavHostController = rememberNavController()
@@ -24,11 +24,11 @@ class CrowdfundingAppState(
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination?.route in BottomNavItems.bottomNavItems.map { it.route }
 
     val shouldShowTopBar: Boolean
-        @Composable get() = navController.currentBackStackEntryAsState().value?.destination?.route in CrowdfundingTopBarInfo.TOP_BAR_DESTINATIONS
+        @Composable get() = navController.currentBackStackEntryAsState().value?.destination?.routeWithoutArguments() in CrowdfundingTopBarInfo.TOP_BAR_DESTINATIONS
 
     val topBarData: @Composable (NavHostController) -> Unit
         get() {
-            val topBarData: (@Composable (NavHostController) -> Unit)? = CrowdfundingTopBarInfo.TOP_BAR_DATA[navController.currentDestination?.route]
+            val topBarData: (@Composable (NavHostController) -> Unit)? = CrowdfundingTopBarInfo.TOP_BAR_DATA[navController.currentDestination?.routeWithoutArguments()]
             if (topBarData != null) {
                 prevTopBarData = topBarData
             }

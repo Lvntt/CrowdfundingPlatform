@@ -30,6 +30,8 @@ import com.example.crowdfundingplatform.domain.usecase.auth.LogoutUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.auth.RefreshTokensUseCase
 import com.example.crowdfundingplatform.domain.usecase.auth.RegisterUserUseCase
 import com.example.crowdfundingplatform.domain.usecase.file.UploadFileAndGetIdUseCase
+import com.example.crowdfundingplatform.domain.usecase.FundProjectUseCase
+import com.example.crowdfundingplatform.domain.usecase.GetProjectInfoUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -130,6 +132,14 @@ fun provideDomainModule(): Module = module {
         EditYourProfileUseCase(get())
     }
 
+    factory {
+        GetProjectInfoUseCase(get())
+    }
+
+    factory {
+        FundProjectUseCase(get())
+    }
+    
     factory {
         ActivatePromoCodeUseCase(get())
     }

@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.crowdfundingplatform"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -56,6 +56,9 @@ dependencies {
     def gson_version = "2.10.1"
     def gson_converter_version = "2.9.0"
     def security_crypto_version = "1.1.0-alpha06"
+    def coil_version = "2.4.0"
+    def paging_version = "3.1.1"
+    def paging_compose_version = "3.2.0-rc01"
 
     def accompanist = "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
     def navigation = "androidx.navigation:navigation-compose:$nav_version"
@@ -66,6 +69,9 @@ dependencies {
     def gson = "com.google.code.gson:gson:$gson_version"
     def gsonConverter = "com.squareup.retrofit2:converter-gson:$gson_converter_version"
     def securityCrypto = "androidx.security:security-crypto:$security_crypto_version"
+    def coil = "io.coil-kt:coil-compose:$coil_version"
+    def paging = "androidx.paging:paging-runtime-ktx:$paging_version"
+    def pagingCompose = "androidx.paging:paging-compose:$paging_compose_version"
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
@@ -86,6 +92,9 @@ dependencies {
     implementation(gson)
     implementation(gsonConverter)
     implementation(securityCrypto)
+    implementation(coil)
+    implementation(paging)
+    implementation(pagingCompose)
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

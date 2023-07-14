@@ -16,3 +16,14 @@ val Ubuntu = FontFamily(
     Font(R.font.ubuntu_medium, FontWeight.Medium, FontStyle.Normal),
     Font(R.font.ubuntu_medium_italic, FontWeight.Medium, FontStyle.Italic)
 )
+
+val Roboto = FontFamily(
+    Font(R.font.roboto_regular, FontWeight.Normal, FontStyle.Normal),
+    Font(R.font.roboto_italic, FontWeight.Normal, FontStyle.Italic),
+    Font(R.font.roboto_bold, FontWeight.Bold, FontStyle.Normal),
+    Font(R.font.roboto_bold_italic, FontWeight.Bold, FontStyle.Italic),
+    Font(R.font.roboto_light, FontWeight.Light, FontStyle.Normal),
+    Font(R.font.roboto_light_italic, FontWeight.Light, FontStyle.Italic),
+    Font(R.font.roboto_medium, FontWeight.Medium, FontStyle.Normal),
+    Font(R.font.roboto_medium_italic, FontWeight.Medium, FontStyle.Italic)
+)

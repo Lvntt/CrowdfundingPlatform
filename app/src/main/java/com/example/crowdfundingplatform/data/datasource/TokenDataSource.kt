@@ -1,6 +1,6 @@
 package com.example.crowdfundingplatform.data.datasource
 
-import com.example.crowdfundingplatform.data.model.TokenType
+import com.example.crowdfundingplatform.data.remote.model.TokenType
 
 interface TokenDataSource {
 

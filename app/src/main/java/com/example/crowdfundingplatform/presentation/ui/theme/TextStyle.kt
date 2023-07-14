@@ -1,6 +1,7 @@
 package com.example.crowdfundingplatform.presentation.ui.theme
 
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
@@ -17,6 +18,18 @@ val Subtitle = TextStyle(
     fontFamily = Ubuntu,
     fontWeight = FontWeight.Bold,
     fontSize = 24.sp
+)
+
+val TextButtonSmallStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 14.sp
+)
+  
+val Headline = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 21.sp
 )
 
 val TextButtonMediumStyle = TextStyle(
@@ -49,8 +62,39 @@ val LabelRegularStyle = TextStyle(
     fontSize = 16.sp
 )
 
+val LabelItalicStyle = TextStyle(
+    fontFamily = Ubuntu,
+    fontWeight = FontWeight.Normal,
+    fontStyle = FontStyle.Italic,
+    fontSize = 16.sp
+)
+
 val LabelBoldStyle = TextStyle(
     fontFamily = Ubuntu,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp
+)
+
+val ExtraSmallLabelRegularStyleAlternative = TextStyle(
+    fontFamily = Roboto,
+    fontWeight = FontWeight.Normal,
+    fontSize = 12.sp
+)
+
+val SmallLabelRegularStyleAlternative = TextStyle(
+    fontFamily = Roboto,
+    fontWeight = FontWeight.Normal,
+    fontSize = 14.sp
+)
+
+val LabelRegularStyleAlternative = TextStyle(
+    fontFamily = Roboto,
+    fontWeight = FontWeight.Normal,
+    fontSize = 16.sp
+)
+
+val LabelBoldStyleAlternative = TextStyle(
+    fontFamily = Roboto,
     fontWeight = FontWeight.Bold,
     fontSize = 16.sp
 )

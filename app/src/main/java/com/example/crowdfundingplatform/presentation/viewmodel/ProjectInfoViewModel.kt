@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.common.Constants
+import com.example.crowdfundingplatform.domain.entity.ProjectInfo
 import com.example.crowdfundingplatform.domain.usecase.FundProjectUseCase
 import com.example.crowdfundingplatform.domain.usecase.GetProjectInfoUseCase
 import com.example.crowdfundingplatform.domain.usecase.RefreshTokensUseCase
@@ -17,6 +18,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.math.BigDecimal
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ProjectInfoViewModel(
     private val projectId: String,
@@ -69,7 +72,7 @@ class ProjectInfoViewModel(
 
                     401 -> viewModelScope.launch(Dispatchers.IO + secondFundAttemptExceptionHandler) {
                         refreshTokensUseCase()
-                        val project = fundProjectUseCase(projectId, moneyAmount)
+                        val project = fundProjectUseCase(projectId, moneyAmount).convertProjectTimeFields()
                         _projectFundState.value = FundProjectState.Success
                         _projectInfoState.value = ProjectInfoState.Content(project)
                     }
@@ -81,12 +84,27 @@ class ProjectInfoViewModel(
             }
         }
 
+    init {
+        getProject()
+    }
+
     fun getProject() {
         _projectInfoState.value = ProjectInfoState.Loading
         viewModelScope.launch(Dispatchers.IO + fetchProjectExceptionHandler) {
-            val project = getProjectInfoUseCase(projectId)
+            val project = getProjectInfoUseCase(projectId).convertProjectTimeFields()
             _projectInfoState.value = ProjectInfoState.Content(project)
         }
+    }
+
+    private fun ProjectInfo.convertProjectTimeFields(): ProjectInfo {
+        val inputTimeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+        val finishDate = inputTimeFormat.parse(finishDate)
+        val startDate = inputTimeFormat.parse(creationDate)
+        val outputTimeFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        return copy(
+            creationDate = outputTimeFormat.format(startDate),
+            finishDate = outputTimeFormat.format(finishDate)
+        )
     }
 
     fun setFundMoneyAmount(amount: String) {
@@ -111,7 +129,7 @@ class ProjectInfoViewModel(
                     moneyAmount, projectId
                 )
             ) {
-                val project = fundProjectUseCase(projectId, moneyAmount)
+                val project = fundProjectUseCase(projectId, moneyAmount).convertProjectTimeFields()
                 _projectFundState.value = FundProjectState.Success
                 _projectInfoState.value = ProjectInfoState.Content(project)
             }

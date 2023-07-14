@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import com.example.crowdfundingplatform.R
 import com.example.crowdfundingplatform.presentation.ui.theme.LabelBoldStyle
 import com.example.crowdfundingplatform.presentation.ui.theme.PaddingMedium
@@ -38,7 +37,7 @@ fun WarningItem(
         Icon(
             painter = painterResource(id = R.drawable.warning_icon),
             tint = MaterialTheme.colorScheme.onBackground,
-            contentDescription = stringResource(id = R.string.editField)
+            contentDescription = null
         )
         Text(
             text = warningText,

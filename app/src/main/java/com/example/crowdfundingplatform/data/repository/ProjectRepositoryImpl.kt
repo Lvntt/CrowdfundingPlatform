@@ -8,6 +8,7 @@ import com.example.crowdfundingplatform.domain.entity.ProjectInfo
 import com.example.crowdfundingplatform.domain.entity.SearchProjectsRequest
 import com.example.crowdfundingplatform.domain.entity.SearchProjectsResponse
 import com.example.crowdfundingplatform.domain.repository.ProjectRepository
+import java.math.BigDecimal
 
 class ProjectRepositoryImpl(
     private val projectApiService: ProjectApiService,
@@ -26,4 +27,10 @@ class ProjectRepositoryImpl(
     override suspend fun getProjectInfo(projectId: String): ProjectInfo {
         return projectApiService.getFullProjectInfo(projectId)
     }
+
+    override suspend fun fundProject(projectId: String, moneyAmount: BigDecimal): ProjectInfo {
+        val accessToken = tokenDataSource.fetchToken(TokenType.ACCESS)!!
+        return projectApiService.fundProject("Bearer $accessToken", projectId, moneyAmount)
+    }
+
 }
